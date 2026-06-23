@@ -1,0 +1,254 @@
+/* ============================================================
+   HERO — Page d'accueil
+   Desktop base: 1920×1080px | Background: #ffffff
+   Layout: flex column — center occupe l'espace dispo, chapters en bas
+   ============================================================ */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Center wrapper (story + title + dates) ──────────────── */
+
+.hero__center {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Story subtitle ──────────────────────────────────────── */
+
+.hero__story {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.hero__diamond {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.hero__story-br { display: none; }
+
+.hero__story-text {
+  font-family: var(--font-primary);
+  font-size: clamp(24px, 1.5625vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ── Main title ──────────────────────────────────────────── */
+
+.hero__title {
+  width: 100vw;
+  font-family: var(--font-primary);
+  font-size: clamp(60px, 15.625vw, 500px);
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-bottom: 30px;
+}
+
+/* ── Dates ───────────────────────────────────────────────── */
+
+.hero__dates {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.hero__dates-paren {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 600;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.hero__dates-text,
+.hero__dates-text p {
+  font-family: var(--font-secondary);
+  font-size: clamp(12px, 1.04vw, 20px);
+  font-weight: 600;
+  line-height: 1;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hero__dates-text p + p {
+  margin-top: 0;
+}
+
+/* ── Chapters strip ──────────────────────────────────────── */
+
+.hero__chapters {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  padding-top: 20px;    /* espace pour le translateY(-20px) du hover */
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: clamp(10px, 1.85vh, 20px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero__chapters::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Chapter card ────────────────────────────────────────── */
+
+.hero__chapter {
+  position: relative;
+  flex: 1;
+  min-width: 120px;
+  display: block;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-expo-out);
+}
+
+.hero__chapter-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.hero__chapter-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__chapter:hover {
+  transform: translateY(-20px);
+}
+
+.hero__chapter-gradient {
+  position: absolute;
+  inset: auto 0 0;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+.hero__chapter-label {
+  position: absolute;
+  bottom: clamp(8px, 1.3vh, 14px);
+  left: 0;
+  right: 0;
+  font-family: var(--font-secondary);
+  font-size: clamp(12px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ── Mobile (≤ 768px) ────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Story subtitle : 2 lignes */
+  .hero__story {
+    gap: 10px;
+    white-space: normal;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .hero__story-text {
+    text-align: center;
+  }
+
+  .hero__story-br { display: block; }
+
+  /* Title */
+  .hero__title {
+    font-size: clamp(60px, 22.9vw, 90px);
+    width: clamp(260px, 89.8vw, 353px);
+    white-space: normal;
+    margin-bottom: 30px;
+  }
+
+  /* Dates */
+  .hero__dates {
+    gap: 10px;
+  }
+
+  .hero__dates-paren {
+    font-size: 16px;
+  }
+
+  .hero__dates-text {
+    font-size: 14px;
+  }
+
+  .hero__chapters {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    gap: 20px;
+  }
+
+  /* 3 cartes + 10px de la 4ème visible */
+  .hero__chapter {
+    flex: 0 0 calc((100vw - 110px) / 3);
+  }
+
+  .hero__chapter-label {
+    font-size: 14px;
+    bottom: 8px;
+  }
+
+  .hero__diamond {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* ── ≤ 440px — gap réduit à 10px ────────────────────────── */
+@media (max-width: 440px) {
+  .hero__chapters {
+    gap: 10px;
+  }
+
+  /* (100vw - 40px padding - 30px gaps - 10px visible) / 3 */
+  .hero__chapter {
+    flex: 0 0 calc((100vw - 80px) / 3);
+  }
+}
