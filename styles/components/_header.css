@@ -1,0 +1,71 @@
+/* ============================================================
+   HEADER — Fixed, présent sur toute la page
+   Desktop: padding 40px | Mobile: padding 20px
+   ============================================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px;
+  pointer-events: none; /* laisse passer les clics sauf sur les éléments interactifs */
+}
+
+.site-header__mj-logo,
+.site-header__menu,
+.site-header__kop-logo {
+  pointer-events: all;
+}
+
+/* ── MJ Logo (top-left) ──────────────────────────────────── */
+
+.site-header__mj-logo {
+  width: clamp(40px, 3.02vw, 58px);
+}
+
+.site-header__mj-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Menu Icon (center) ──────────────────────────────────── */
+
+.site-header__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75px;
+  cursor: pointer;
+}
+
+.site-header__menu span {
+  display: block;
+  height: 1.5px;
+  width: clamp(80px, 5.21vw, 100px);
+  background-color: #000;
+}
+
+/* ── King of Pop Logo (top-right) ────────────────────────── */
+
+.site-header__kop-logo {
+  width: clamp(56px, 4.43vw, 85px);
+}
+
+.site-header__kop-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 20px;
+  }
+}
