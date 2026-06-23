@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Michael Jackson — Vie et carrière du Roi de la Pop" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Michael Jackson" />
+  <meta property="og:description" content="Vie et carrière du Roi de la Pop" />
+  <meta property="og:type" content="website" />
+
+  <!-- Chemin relatif depuis index.html → fonctionne en file:// -->
+  <link rel="stylesheet" href="src/styles/main.css" />
+
+  <title>Michael Jackson</title>
+</head>
+<body>
+
+  <!-- ======================================================
+    HEADER / NAV — à intégrer depuis maquette Figma
+  ======================================================= -->
+  <header id="header">
+  </header>
+
+  <!-- ======================================================
+    MAIN — Sections ajoutées progressivement
+  ======================================================= -->
+  <main id="main">
+
+    <!-- ======================================================
+      CHAPTER 1 — Introduction
+    ======================================================= -->
+    <section class="c1" id="chapter-1">
+      <div class="c1__layout">
+
+        <!-- Left column -->
+        <div class="c1__left">
+          <figure class="c1__photo c1__photo--1">
+            <img
+              src="src/assets/images/chapter-1/chapt1-image-1.png"
+              alt="Michael Jackson enfant au téléphone"
+              width="302"
+              height="405"
+            />
+          </figure>
+          <h2 class="c1__title">Known as the&nbsp;"King of Pop," Michael Jackson, american singer, songwriter, and dancer, was the most popular entertainer in the world in the early and mid&#8209;1980s.</h2>
+        </div>
+
+        <!-- Right column -->
+        <div class="c1__right">
+
+          <!-- Drop cap intro -->
+          <div class="c1__intro">
+            <p class="c1__body">
+              <span class="c1__intro-body">
+                <span class="c1__dropcap">A</span>
+                s a child, Michael became the lead singer of his family's popular <em class="c1__em">Motown</em> group, the <em class="c1__em">Jackson&nbsp;5</em>. He went on to a solo career of astonishing worldwide success, delivering No.&nbsp;1 hits from the albums <em class="c1__em">Off the Wall</em>, <em class="c1__em">Thriller</em>, and <em class="c1__em">Bad</em>.
+              </span>
+              Thriller remains one of the best-selling albums in history. In his later years, Michael was dogged by allegations of child molestation. The 13-time Grammy Award winner died in 2009 at age 50 of a drug overdose just before launching a comeback tour.
+            </p>
+          </div>
+
+
+          <p class="c1__body">Michael Joseph Jackson was born on August 29, 1958, in Gary, Indiana. He was the eighth of 10 children born to <em class="c1__em">Joseph Jackson</em>, a crane operator, and <em class="c1__em">Katherine Jackson</em>, a homemaker and a devout Jehovah's Witness. Both of Jackson's parents <em class="c1__em">previously had musical aspirations</em> themselves: Katherine played clarinet and piano and had aspired to be a country singer, while Joseph was a guitarist who performed in local R&amp;B bands. They encouraged their children to pursue musical ambitions, and Michael's career in music began at the age of 5 under his father's encouragement.</p>
+
+          <figure class="c1__photo c1__photo--2">
+            <img
+              src="src/assets/images/chapter-1/chapt1-image-2.png"
+              alt="Michael Jackson adolescent"
+              width="473"
+              height="589"
+            />
+          </figure>
+
+          <p class="c1__body">Almost all of Jackson's siblings made marks in the music industry, including <em class="c1__em">Rebbie</em>, <em class="c1__em">Jackie</em>, <em class="c1__em">Tito</em>, <em class="c1__em">Jermaine</em>, <em class="c1__em">La Toya</em>, <em class="c1__em">Marlon</em>, <em class="c1__em">Randy</em>, and <em class="c1__em">Janet Jackson</em>. His brother <em class="c1__em">Brandon</em>, Marlon's twin, <em class="c1__em">died shortly after birth</em>. Joseph pushed his children hard to succeed, making them rehearse five hours a day after school, and was <em class="c1__em">reportedly known to become violent with them</em>. He was said to beat them with a belt buckle or electric kettle cord and to order them to break a branch off a tree if they got a dance step wrong so he could hit them with it.</p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+    FOOTER — à intégrer depuis maquette Figma
+  ======================================================= -->
+  <footer id="footer">
+  </footer>
+
+  <!-- JS inline — pas de type="module" pour compatibilité file:// -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elements = document.querySelectorAll('[data-animate]');
+      if (!elements.length) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var delay = el.dataset.delay || 0;
+            setTimeout(function () { el.classList.add('is-visible'); }, Number(delay));
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+      elements.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
+</body>
+</html>

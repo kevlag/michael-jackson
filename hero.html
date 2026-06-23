@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Michael Jackson — Hero" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="stylesheet" href="src/styles/main.css" />
+
+  <title>Michael Jackson — Hero</title>
+</head>
+<body>
+
+  <header class="site-header" id="header">
+    <div class="site-header__mj-logo">
+      <img src="src/assets/icons/michael-jackson-logo.svg" alt="Michael Jackson" />
+    </div>
+    <div class="site-header__menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="site-header__kop-logo">
+      <img src="src/assets/icons/the-king-of-the-pop-logo.svg" alt="The King of Pop" />
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" id="hero">
+
+      <!-- Story + Title + Dates — wrapper flex column -->
+      <div class="hero__center">
+
+        <!-- Story subtitle -->
+        <div class="hero__story">
+          <span class="hero__diamond"></span>
+          <p class="hero__story-text">The story of<br class="hero__story-br"> the King of Pop</p>
+          <span class="hero__diamond"></span>
+        </div>
+
+        <!-- Main title -->
+        <h1 class="hero__title">
+          <span>Michael</span><br>
+          <span>Jackson</span>
+        </h1>
+
+        <!-- Dates -->
+        <div class="hero__dates">
+          <span class="hero__dates-paren">(</span>
+          <div class="hero__dates-text">
+            <p>Born August 29, 1958, Gary, Indiana,</p>
+            <p>Died June 25, 2009, Los Angeles, California</p>
+          </div>
+          <span class="hero__dates-paren">)</span>
+        </div>
+
+      </div>
+
+      <!-- Chapters navigation -->
+      <nav class="hero__chapters" aria-label="Chapitres">
+
+        <a class="hero__chapter" href="#chapter-1">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt1.png" alt="Chapitre 1" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 01</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-2">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt2.png" alt="Chapitre 2" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 02</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-3">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt3.png" alt="Chapitre 3" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 03</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-4">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt4.png" alt="Chapitre 4" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 04</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-5">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt5.png" alt="Chapitre 5" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 05</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-6">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt6.png" alt="Chapitre 6" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 06</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-7">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt7.png" alt="Chapitre 7" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 07</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-8">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt8.png" alt="Chapitre 8" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 08</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-9">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt9.png" alt="Chapitre 9" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 09</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-10">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt10.png" alt="Chapitre 10" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 10</span>
+        </a>
+
+        <a class="hero__chapter" href="#chapter-11">
+          <div class="hero__chapter-img">
+            <img src="src/assets/images/hero/hero-image-chapt11.png" alt="Chapitre 11" />
+            <div class="hero__chapter-gradient"></div>
+          </div>
+          <span class="hero__chapter-label">Chapter 11</span>
+        </a>
+
+      </nav>
+    </section>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elements = document.querySelectorAll('[data-animate]');
+      if (!elements.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var delay = el.dataset.delay || 0;
+            setTimeout(function () { el.classList.add('is-visible'); }, Number(delay));
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+      elements.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
+</body>
+</html>
