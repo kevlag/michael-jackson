@@ -1,0 +1,27 @@
+/* ============================================================
+   BREAKPOINT TOKENS
+   Mobile-first — min-width queries
+   ============================================================
+   Usage in CSS:
+     @media (min-width: 768px) { ... }
+
+   Usage as reference (not native CSS variables in @media):
+     xs:  393px   — Mobile Figma baseline
+     sm:  640px   — Mobile landscape
+     md:  768px   — Tablet
+     lg:  1024px  — Laptop (small)
+     xl:  1280px  — Laptop
+     2xl: 1440px  — Desktop
+     3xl: 1920px  — Desktop Large (Figma baseline)
+   ============================================================ */
+
+:root {
+  /* Exposés comme custom props pour usage JS */
+  --bp-xs:  393px;
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1440px;
+  --bp-3xl: 1920px;
+}
