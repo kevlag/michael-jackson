@@ -153,6 +153,40 @@
     display: block;
   }
 
+  /* ── Curseur custom son ──────────────────────────────────── */
+  .c4__sound-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    pointer-events: none;
+    translate: 20px 0%;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
+  }
+
+  .c4__sound-cursor.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .c4__sound-cursor img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 2s ease;
+  }
+
+  .c4__sound-cursor-on  { opacity: 0; }
+  .c4__sound-cursor-off { opacity: 1; }
+
+  .c4__sound-cursor.is-sound-on .c4__sound-cursor-on  { opacity: 1; }
+  .c4__sound-cursor.is-sound-on .c4__sound-cursor-off { opacity: 0; }
+
   .c4__caption-group {
     position: absolute;
     inset: 0; /* même hauteur que le video-container */
