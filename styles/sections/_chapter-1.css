@@ -57,8 +57,9 @@
 
 .c1__right {
   max-width: 475px;
-  padding-top: clamp(60px, 16.15vw, 270px);
-  padding-bottom: clamp(60px, 6vw, 110px);
+  padding-top: clamp(80px, 16.15vw, 270px);
+  padding-bottom: clamp(80px, 16.15vw, 270px);
+  padding-right:40px;
 }
 
 /* ── Drop cap ────────────────────────────────────────────── */
@@ -137,7 +138,7 @@
 /* ── Tablet portrait & Mobile (≤ 768px) ─────────────────── */
 @media (max-width: 768px) {
   .c1 {
-    padding: 40px;
+    padding: 40px 40px 80px 40px;
   }
   .c1__layout {
     grid-template-columns: 1fr;
@@ -165,7 +166,8 @@
   .c1__right {
     max-width: none;
     padding-top: clamp(40px, 15.3vw, 60px);
-    padding-bottom: clamp(48px, 12vw, 80px);
+    padding-bottom: 0;
+    padding-right:0;
   }
 
   .c1__dropcap {
@@ -182,19 +184,19 @@
 
   .c1__intro + .c1__body,
   .c1__body + .c1__body {
-    margin-top: clamp(20px, 5vw, 40px);
+    margin-top: 20px;
   }
 
   .c1__photo--2 {
     aspect-ratio: 353 / 440;
-    margin-top: clamp(20px, 5vw, 40px);
-    margin-bottom: clamp(20px, 5vw, 40px);
+    margin-top: clamp(30px, 5vw, 40px);
+    margin-bottom: clamp(30px, 5vw, 40px);
   }
 }
 
 /* ── Mobile (≤ 440px) ───────────────────────────────────── */
 @media (max-width: 440px) {
   .c1 {
-    padding: 20px;
+    padding: 20px 20px 80px 20px;
   }
 }

@@ -254,7 +254,7 @@
 
 .c4__body {
   font-family: var(--font-secondary);
-  font-size: clamp(13px, 1.04vw, 20px);
+  font-size: clamp(16px, 1.04vw, 20px);
   font-weight: 400;
   line-height: 1.6;
   color: #000;
@@ -299,12 +299,12 @@
 
   .c4__b1-images {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 80px;
   }
 
   .c4__b1-img {
-    width: calc((100% - 20px) / 2);
+    width: calc((100% - 10px) / 2);
     aspect-ratio: 226.5 / 300;
     overflow: hidden;
     position: relative;
@@ -339,17 +339,10 @@
   }
 
   .c4__body {
-    font-size: clamp(14px, 4.07vw, 16px); /* 16/393 */
+    font-size: 16px; /* 16/393 */
   }
 
   /* ── BLOC VIDEO mobile ───────────────────────────────────── */
-
-  .c4__video-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    margin: 0;
-  }
 
   .c4__bloc-video {
     background: var(--c4-green);
@@ -361,8 +354,8 @@
   .c4__video-container {
     position: absolute;
     inset: 0;
-    margin: 0;
     overflow: hidden;
+    margin: 0;
   }
 
   .c4__video-container video {
@@ -461,8 +454,8 @@
 
 } /* end @media (max-width: 1024px) */
 
-/* ── Mobile large (441px – 768px) — padding 40px ────────────── */
-@media (min-width: 441px) and (max-width: 768px) {
+/* ── Mobile large (441px – 1024px) — padding 40px ───────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
   .c4__bloc-1 { padding-left: 40px; padding-right: 40px; }
   .c4__bloc-2 { padding-left: 40px; padding-right: 40px; }
   .c4__b2-image {
@@ -475,7 +468,7 @@
 /* ── Mobile strict (≤ 440px) ────────────────────────────────── */
 @media (max-width: 440px) {
   .c4__b1-title  { margin-bottom: 40px; }
-  .c4__b1-images { gap: 10px; margin-bottom: 80px; }
+  .c4__b1-images { gap: 10px; margin-bottom: 60px; }
   .c4__b1-img    { width: calc((100% - 10px) / 2); }
   .c4__b1-text   { padding-left: 40px; padding-right: 40px; }
   .c4__b2-title  { margin-bottom: 40px; }
@@ -484,13 +477,3 @@
   .c4__video-caption  { margin-right: 20px; }
 }
 
-/* ── Tablette 769–1024px : padding lateral ───────────────── */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .c4__bloc-1  { padding-left: 40px; padding-right: 40px; }
-  .c4__bloc-2  { padding-left: 40px; padding-right: 40px; }
-  .c4__b2-image {
-    width: calc(100% + 80px);
-    margin-left: -40px;
-    margin-right: -40px;
-  }
-}

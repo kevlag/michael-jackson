@@ -244,7 +244,7 @@
     padding-right: 0;
     transform: none;
     text-align: center;
-    font-size: clamp(36px, 4.69vw, 48px);
+    font-size: clamp(32px, 4.69vw, 48px);
     bottom: clamp(16px, 4vw, 40px);
   }
 
@@ -252,6 +252,8 @@
   .c2__bloc--image5 .c2__bloc-img {
     object-position: 80% center;
   }
+
+  .c2__bloc--inline:last-child { margin-bottom: 40px; }
 
   .c2__right { display: none; }
 }
@@ -264,8 +266,8 @@
   }
 
   .c2__bloc--inline .c2__bloc-caption {
-    left: 40px;
-    right: 40px;
+    left: 20px;
+    right: 20px;
   }
 }
 
@@ -283,6 +285,8 @@
   .c2__bloc--inline .c2__bloc-caption {
     left: 20px;
     right: 20px;
-    font-size: clamp(18px, 6.1vw, 24px);
+    font-size: clamp(24px, 6.1vw, 32px);
   }
+
+  .c2__bloc--inline:last-child { margin-bottom: 20px; }
 }

@@ -103,7 +103,7 @@
 .c3__intro,
 .c3__body {
   font-family: var(--font-secondary);
-  font-size: clamp(13px, 1.04vw, 20px); /* 20/1920 */
+  font-size: clamp(16px, 1.04vw, 20px); /* 20/1920 */
   font-weight: 400;
   line-height: 1.6;
   color: #000;
@@ -239,7 +239,7 @@
 
   /* Part 1 */
   .c3__part1 {
-    padding: 140px 20px clamp(80px, 6.1vw, 140px);
+    padding: 140px 20px 80px;
   }
 
   /* Titre */
@@ -284,7 +284,7 @@
   /* Corps mobile */
   .c3__intro,
   .c3__body {
-    font-size: clamp(14px, 4.07vw, 16px); /* 16/393 */
+    font-size: 16px; /* 16/393 */
     margin-bottom: 20px;
   }
 
@@ -296,7 +296,7 @@
   }
 
   .c3__album {
-    padding: 260px 20px 30px;
+    padding: 140px 20px 40px;
     gap: 0;
     min-height: clamp(760px, 100vh, 1080px);
     box-sizing: border-box;
@@ -341,8 +341,8 @@
   }
 }
 
-/* ── Mobile large (441px – 768px) — padding 40px ────────────── */
-@media (min-width: 441px) and (max-width: 768px) {
+/* ── Mobile large (441px – 1024px) — padding 40px ───────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
   .c3__part1 { padding-left: 40px; padding-right: 40px; }
   .c3__album  { padding-left: 40px; padding-right: 40px; }
 }
@@ -355,19 +355,10 @@
 }
 
 /* ── Écran court (hauteur ≤ 1080px) ─────────────────────── */
-@media (max-height: 1080px) and (min-width: 1025px) {
+@media (max-height: 1080px) {
   .c3__album { padding-bottom: 40px; }
 }
 
-@media (max-height: 1080px) and (max-width: 1024px) {
-  .c3__album { padding-bottom: 30px; }
-}
-
-/* ── Tablette (769px – 1024px) ───────────────────────────── */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .c3__part1 { padding-left: 40px; padding-right: 40px; }
-  .c3__album { padding-left: 40px; padding-right: 40px; }
-}
 
 /* ── Large (> 1920px) ────────────────────────────────────── */
 @media (min-width: 1921px) {
@@ -382,4 +373,8 @@
   }
   .c3__col-left  { grid-column: 4; max-width: none; }
   .c3__col-right { grid-column: 6; max-width: 475px; }
+}
+
+@media (max-width: 440px) {
+  .c3__album { padding-bottom: 20px; }
 }
