@@ -96,6 +96,10 @@
               loop
               playsinline
             ></video>
+            <div class="c4__sound-cursor" aria-hidden="true">
+              <img class="c4__sound-cursor-off" src="images/chapter-4/SoundOff.svg" alt="" />
+              <img class="c4__sound-cursor-on"  src="images/chapter-4/SoundOn.svg"  alt="" />
+            </div>
           </figure>
 
           <div class="c4__caption-group">
@@ -173,6 +177,7 @@
       var wrapper        = document.querySelector('.c4__pin-wrapper');
       var track          = document.querySelector('.c4__track');
       var videoContainer = document.querySelector('.c4__video-container');
+      var videoEl        = videoContainer ? videoContainer.querySelector('video') : null;
       var captionEl      = document.querySelector('.c4__video-caption');
       var bloc2El        = document.querySelector('.c4__bloc-2');
       if (!wrapper || !track) return;
@@ -180,6 +185,59 @@
       var phase1Distance = 0;
       var phase2Distance = 0;
       var scrollDistance = 0;
+
+      var cursorEl = videoContainer ? videoContainer.querySelector('.c4__sound-cursor') : null;
+
+      function fadeVolume(targetVolume, duration) {
+        if (!videoEl) return;
+        var start     = null;
+        var fromVolume = videoEl.volume;
+        videoEl.muted  = false;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          videoEl.volume = fromVolume + (targetVolume - fromVolume) * p;
+          if (p < 1) {
+            requestAnimationFrame(step);
+          } else if (targetVolume === 0) {
+            videoEl.muted = true;
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      var soundEnabled = false;
+
+      function updateCursorState() {
+        if (!cursorEl) return;
+        cursorEl.classList.toggle('is-sound-on', soundEnabled);
+      }
+
+      if (videoEl && cursorEl) {
+        videoEl.addEventListener('click', function () {
+          soundEnabled = !soundEnabled;
+          if (soundEnabled) {
+            videoEl.volume = 0;
+            fadeVolume(1, 1000);
+          } else {
+            fadeVolume(0, 1000);
+          }
+          updateCursorState();
+        });
+
+        videoContainer.addEventListener('mouseenter', function () {
+          if (window.innerWidth > 1024) cursorEl.classList.add('is-visible');
+        });
+        videoContainer.addEventListener('mouseleave', function () {
+          cursorEl.classList.remove('is-visible');
+        });
+        videoContainer.addEventListener('mousemove', function (e) {
+          if (window.innerWidth > 1024) {
+            cursorEl.style.left = e.clientX + 'px';
+            cursorEl.style.top  = e.clientY + 'px';
+          }
+        });
+      }
 
       function setup() {
         if (window.innerWidth <= 1024) {
