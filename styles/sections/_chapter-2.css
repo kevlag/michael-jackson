@@ -1,0 +1,292 @@
+/* ============================================================
+   CHAPTER 2 — Les Jackson 5
+   Desktop base: 1920px | Background: #ffffff
+   Layout: 2-column grid (min(calc(27.27% + 29.36px), 555px) / 1fr)
+   Gauche : texte | Droite : 3 blocs images avec légendes
+   ============================================================ */
+
+.c2 {
+  background-color: #fff;
+  width: 100%;
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+
+.c2__layout {
+  display: grid;
+  grid-template-columns: min(calc(27.27% + 29.36px), 555px) 1fr;
+}
+
+/* ── Left column ─────────────────────────────────────────── */
+
+.c2__left {
+  max-width: 555px;
+  padding-top: clamp(60px, 11.04vw, 212px);
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: clamp(60px, 6vw, 120px);
+}
+
+/* ── Drop cap ────────────────────────────────────────────── */
+
+.c2__intro::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.c2__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(80px, 10.42vw, 200px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000;
+  margin-top: -80px;
+  margin-left: 64px;
+  margin-right: 40px;
+}
+
+/* ── Body text ───────────────────────────────────────────── */
+
+.c2__intro-body,
+.c2__body {
+  max-width: 473px;
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+}
+
+.c2__body--first,
+.c2__body + .c2__body {
+  margin-top: 30px;
+}
+
+.c2__em {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Thumbnails ──────────────────────────────────────────── */
+
+.c2__thumbnails {
+  display: flex;
+  gap: clamp(10px, 1.04vw, 20px);
+  max-width: 473px;
+  margin-top: 30px;
+}
+
+.c2__thumb {
+  flex: 1;
+  overflow: hidden;
+}
+
+.c2__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop : thumb--3 masquée */
+.c2__thumb--3 { display: none; }
+
+.c2__thumb--1,
+.c2__thumb--2 { aspect-ratio: 226.5 / 330; }
+
+.c2__thumbnails + .c2__body {
+  margin-top: 30px;
+}
+
+/* ── Image intermédiaire ─────────────────────────────────── */
+
+.c2__image-mid {
+  max-width: 473px;
+  aspect-ratio: 473 / 355;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.c2__image-mid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c2__image-mid + .c2__body,
+.c2__image-solo + .c2__body {
+  margin-top: 30px;
+}
+
+/* Image solo (desktop : masquée) */
+.c2__image-solo { display: none; }
+
+/* Blocs inline (desktop : masqués) */
+.c2__bloc--inline { display: none; }
+
+/* ── Blocs images (colonne droite) ───────────────────────── */
+
+.c2__right {
+  display: flex;
+  flex-direction: column;
+}
+
+.c2__bloc {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.c2__bloc-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c2__bloc-gradient {
+  position: absolute;
+  inset: auto 0 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+.c2__bloc-caption {
+  position: absolute;
+  bottom: 24px;
+  left: clamp(20px, 2.08vw, 40px);
+  max-width: min(985px, 72%);
+  padding-right: clamp(20px, 2.08vw, 40px);
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ── Tablet & Mobile (≤ 1024px) — colonne unique, padding 40px ── */
+@media (max-width: 1024px) {
+  .c2__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .c2__left {
+    max-width: none;
+    padding-top: 148px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 0;
+  }
+
+  .c2__dropcap {
+    font-size: clamp(80px, 30.5vw, 120px);
+    line-height: 1.2;
+    margin-top: -30px;
+    margin-left: 120px;
+    margin-right: 20px;
+  }
+
+  .c2__intro-body,
+  .c2__body {
+    max-width: none;
+    font-size: 16px;
+  }
+
+  .c2__thumbnails {
+    max-width: none;
+    gap: 10px;
+  }
+
+  .c2__thumb--1,
+  .c2__thumb--2 { aspect-ratio: 171.5 / 250; }
+
+  .c2__image-mid { display: none; }
+
+  .c2__image-solo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 356 / 267;
+    overflow: hidden;
+    margin-top: 30px;
+  }
+
+  .c2__image-solo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .c2__image-solo + .c2__body {
+    margin-top: 30px;
+  }
+
+  .c2__bloc--inline {
+    display: block;
+    position: relative;
+    height: auto;
+    aspect-ratio: 353 / 530;
+    overflow: hidden;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .c2__bloc--inline .c2__bloc-caption {
+    left: 40px;
+    right: 40px;
+    max-width: none;
+    padding-right: 0;
+    transform: none;
+    text-align: center;
+    font-size: clamp(32px, 4.69vw, 48px);
+    bottom: clamp(16px, 4vw, 40px);
+  }
+
+  /* Recadrage image 5 pour voir le visage */
+  .c2__bloc--image5 .c2__bloc-img {
+    object-position: 80% center;
+  }
+
+  .c2__bloc--inline:last-child { margin-bottom: 40px; }
+
+  .c2__right { display: none; }
+}
+
+/* ── Mobile large (441px – 768px) — padding 40px ────────────── */
+@media (min-width: 441px) and (max-width: 768px) {
+  .c2__left {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .c2__bloc--inline .c2__bloc-caption {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+/* ── Mobile strict (≤ 440px) — padding 20px ─────────────────── */
+@media (max-width: 440px) {
+  .c2__left {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .c2__dropcap {
+    margin-left: 64px;
+  }
+
+  .c2__bloc--inline .c2__bloc-caption {
+    left: 20px;
+    right: 20px;
+    font-size: clamp(24px, 6.1vw, 32px);
+  }
+
+  .c2__bloc--inline:last-child { margin-bottom: 20px; }
+}

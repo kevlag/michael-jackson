@@ -1,0 +1,513 @@
+/* ============================================================
+   CHAPTER 4 — It's Close to Midnight / Thriller
+   Desktop base : 1920×1080px — navigation horizontale
+   Bloc 1 : fond rouge  #f00a14 — Thriller intro
+   Bloc 2 : fond vert   #1f9000 — vidéo
+   Bloc 3 : fond rouge  #f00a14 — portrait moonwalk
+   ============================================================ */
+
+.c4 {
+  --c4-red:   #f00a14;
+  --c4-green: #000000;
+}
+
+/* ============================================================
+   DESKTOP (> 1024px) — scroll horizontal
+   ============================================================ */
+
+@media (min-width: 1025px) {
+
+  /* Wrapper tall : crée le budget de scroll vertical */
+  .c4__pin-wrapper {
+    /* height calculée par JS = 100vh + scrollDistance */
+  }
+
+  /* Section : sticky, colle en haut pendant tout le défilement */
+  .c4 {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Piste : flex-row, pleine hauteur, déplacée via translateX */
+  .c4__track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .c4__bloc-1,
+  .c4__bloc-video {
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+  }
+
+  .c4__bloc-1 { z-index: 2; }
+  .c4__bloc-video { z-index: 1; }
+
+  /* bloc-2 : overlay absolu, caché sous le viewport, glisse vers le haut en phase 2 */
+  .c4__bloc-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(100%);
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: var(--c4-red);
+  }
+
+  /* ── BLOC 1 — Thriller intro ─────────────────────────────── */
+
+  .c4__bloc-1 {
+    width: 73.28vw;   /* 1407/1920 */
+    background: var(--c4-red);
+  }
+
+  .c4__b1-title {
+    position: absolute;
+    top: 17.5vh;
+    left: 40px;
+    width: 42.34vw;   /* 813/1920 */
+    font-family: var(--font-primary);
+    font-size: clamp(36px, 3.33vw, 64px); /* 64/1920 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+    text-indent: 3em;
+    margin: 0;
+  }
+
+  .c4__b1-images {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    display: flex;
+    gap: 1.04vw;      /* 20/1920  */
+  }
+
+  .c4__b1-img {
+    flex-shrink: 0;
+    width: 11.8vw;          /* 226.5/1920 */
+    aspect-ratio: 226.5 / 300;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+  }
+
+  .c4__b1-img--1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+  }
+
+  .c4__b1-img--2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .c4__b1-text {
+    position: absolute;
+    right: 40px;
+    top: calc(50% + 143px);
+    transform: translateY(-50%);
+    width: 15.73vw;   /* 302/1920  */
+    max-width: 305px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.56vw;      /* 30/1920   */
+  }
+
+  /* ── BLOC VIDEO ──────────────────────────────────────────── */
+
+  .c4__bloc-video {
+    width: 227.55vw;  /* 4369/1920 */
+    /* pas de background : la vidéo derrière est visible */
+  }
+
+  .c4__video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    z-index: 0; /* derrière les blocs (z-index: 1) */
+  }
+
+  .c4__video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── Curseur custom son ──────────────────────────────────── */
+  .c4__sound-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    pointer-events: none;
+    translate: 20px 0%;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
+  }
+
+  .c4__sound-cursor.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .c4__sound-cursor img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 2s ease;
+  }
+
+  .c4__sound-cursor-on  { opacity: 0; }
+  .c4__sound-cursor-off { opacity: 1; }
+
+  .c4__sound-cursor.is-sound-on .c4__sound-cursor-on  { opacity: 1; }
+  .c4__sound-cursor.is-sound-on .c4__sound-cursor-off { opacity: 0; }
+
+  .c4__caption-group {
+    position: absolute;
+    inset: 0; /* même hauteur que le video-container */
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .c4__video-caption {
+    margin-top: 17.5vh;                  /* 189/1080 */
+    margin-left: calc(100vw - 40px - 15.73vw); /* right:40px dans le viewport */
+    width: 15.73vw;                      /* 302/1920 */
+    min-width: 305px;
+    font-family: var(--font-primary);
+    font-size: max(20px, 1.56vw); /* 30/1920 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #fff;
+    text-indent: 3em;
+    margin-bottom: 0;
+    pointer-events: auto;
+  }
+
+  .c4__lyrics {
+    margin-top: auto;   /* pousse les lyrics vers le bas */
+    margin-bottom: 40px;
+    margin-left: 17.81vw; /* 342/1920 */
+    pointer-events: none;
+  }
+
+  .c4__lyrics img {
+    width: 191.93vw;  /* 3685/1920 */
+    height: auto;
+    display: block;
+  }
+
+  /* ── BLOC 2 — Portrait + moonwalk ───────────────────────── */
+
+  /* Zone texte : ancre la largeur gauche du bloc */
+  /* width = marge-gauche + max-width-texte + marge-droite */
+  /* 10.9375vw = 210px à 1920px */
+  .c4__b2-content {
+    flex-shrink: 0;
+    width: calc(10.9375vw + 650px + 10.9375vw); /* 210 + 650 + 210 */
+    display: flex;
+    flex-direction: column;
+    padding-top: 24.72vh;  /* aligne le titre */
+    padding-bottom: 7.41vh; /* 80px à 1080px de hauteur */
+    box-sizing: border-box;
+  }
+
+  .c4__b2-title {
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 840px;
+    font-family: var(--font-primary);
+    font-size: clamp(36px, 3.33vw, 64px); /* 64/1920 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+    text-indent: 3em;
+    margin: auto 0 0; /* 100px à 1080px de hauteur */
+  }
+
+  .c4__b2-text {
+    margin-top: 9.26vh; /* pousse le texte vers le bas */
+    padding-left: 10.9375vw;  /* 210/1920 */
+    padding-right: 10.9375vw; /* 210/1920 */
+    display: flex;
+    gap: 40px;
+  }
+
+  .c4__b2-text .c4__body {
+    width: calc((100% - 40px) / 2);
+  }
+
+  /* Portrait : flex-item, remplit l'espace restant */
+  .c4__b2-image {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .c4__b2-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+} /* end @media (min-width: 1025px) */
+
+/* ── Texte — commun desktop + mobile ────────────────────── */
+
+.c4__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  margin: 0;
+}
+
+.c4__em {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ============================================================
+   MOBILE / TABLETTE (≤ 1024px) — scroll vertical
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+  .c4__track {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── BLOC 1 mobile ───────────────────────────────────────── */
+
+  .c4__bloc-1 {
+    background: var(--c4-red);
+    padding: 140px 20px 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c4__b1-title {
+    font-family: var(--font-primary);
+    font-size: clamp(30px, 9.16vw, 36px); /* 36/393 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+    text-indent: 3em;
+    margin: 0 0 60px;
+  }
+
+  .c4__b1-images {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 80px;
+  }
+
+  .c4__b1-img {
+    width: calc((100% - 10px) / 2);
+    aspect-ratio: 226.5 / 300;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .c4__b1-img--1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+  }
+
+  .c4__b1-img--2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .c4__b1-text {
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .c4__body {
+    font-size: 16px; /* 16/393 */
+  }
+
+  /* ── BLOC VIDEO mobile ───────────────────────────────────── */
+
+  .c4__bloc-video {
+    background: var(--c4-green);
+    aspect-ratio: 9 / 16;
+    position: relative;
+    overflow: visible;
+  }
+
+  .c4__video-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .c4__video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .c4__caption-group {
+    position: absolute;
+    inset: 0; /* même hauteur que le video-container */
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .c4__video-caption {
+    margin-top: 110px;
+    margin-left: auto;
+    margin-right: 40px;
+    width: clamp(180px, 58.3vw, 229px); /* 229/393 */
+    font-family: var(--font-primary);
+    font-size: clamp(20px, 6.1vw, 24px); /* 24/393 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #fff;
+    text-indent: 3em;
+    margin-bottom: 0;
+    pointer-events: auto;
+  }
+
+  .c4__lyrics {
+    margin-top: auto;    /* pousse vers le bas */
+    margin-bottom: 40px;
+    margin-left: 30.5px;
+    pointer-events: none;
+  }
+
+  .c4__lyrics img {
+    width: 200vw;
+    max-width: none;
+    height: auto;
+    display: block;
+  }
+
+  /* ── BLOC 2 mobile ───────────────────────────────────────── */
+
+  .c4__bloc-2 {
+    background: var(--c4-red);
+    padding: 140px 20px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c4__b2-title {
+    font-family: var(--font-primary);
+    font-size: clamp(30px, 9.16vw, 36px); /* 36/393 */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+    text-indent: 3em;
+    margin: 0 0 60px;
+  }
+
+  .c4__b2-text {
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .c4__b2-text .c4__body {
+    width: auto;
+  }
+
+  .c4__b2-image {
+    width: calc(100% + 40px); /* sort du padding 20px de chaque côté */
+    margin-left: -20px;
+    margin-right: -20px;
+    aspect-ratio: 400 / 500;
+    overflow: hidden;
+  }
+
+  .c4__b2-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* montre le visage */
+    display: block;
+  }
+
+} /* end @media (max-width: 1024px) */
+
+/* ── Mobile large (441px – 1024px) — padding 40px ───────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c4__bloc-1 { padding-left: 40px; padding-right: 40px; }
+  .c4__bloc-2 { padding-left: 40px; padding-right: 40px; }
+  .c4__b2-image {
+    width: calc(100% + 80px);
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+/* ── Mobile strict (≤ 440px) ────────────────────────────────── */
+@media (max-width: 440px) {
+  .c4__b1-title  { margin-bottom: 40px; }
+  .c4__b1-images { gap: 10px; margin-bottom: 60px; }
+  .c4__b1-img    { width: calc((100% - 10px) / 2); }
+  .c4__b1-text   { padding-left: 40px; padding-right: 40px; }
+  .c4__b2-title  { margin-bottom: 40px; }
+  .c4__b2-text   { padding-left: 40px; padding-right: 40px; }
+  .c4__lyrics         { margin-bottom: 20px; }
+  .c4__video-caption  { margin-right: 20px; }
+}
+
