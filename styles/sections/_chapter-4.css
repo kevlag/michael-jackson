@@ -264,12 +264,11 @@
     width: calc((100% - 40px) / 2);
   }
 
-  /* Portrait : flex-item, largeur par ratio depuis la hauteur */
+  /* Portrait : flex-item, remplit l'espace restant */
   .c4__b2-image {
-    flex-shrink: 0;
+    flex: 1 1 0;
+    min-width: 0;
     height: 100%;
-    width: auto;
-    aspect-ratio: 855 / 1080;
     overflow: hidden;
     margin: 0;
   }
@@ -382,7 +381,7 @@
     background: var(--c4-green);
     aspect-ratio: 9 / 16;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .c4__video-container {
@@ -431,7 +430,8 @@
   }
 
   .c4__lyrics img {
-    width: 316.5vw;   /* 1244/393 */
+    width: 200vw;
+    max-width: none;
     height: auto;
     display: block;
   }

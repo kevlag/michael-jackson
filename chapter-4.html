@@ -215,6 +215,7 @@
 
       if (videoEl && cursorEl) {
         videoEl.addEventListener('click', function () {
+          if (window.innerWidth <= 1024) return;
           soundEnabled = !soundEnabled;
           if (soundEnabled) {
             videoEl.volume = 0;
@@ -294,10 +295,30 @@
         }
       }
 
+      var blocVideoEl = document.querySelector('.c4__bloc-video');
+      var lyricsEl    = document.querySelector('.c4__lyrics');
+
+      function updateLyricsMobile() {
+        if (window.innerWidth > 1024 || !blocVideoEl || !lyricsEl) return;
+        var margin      = window.innerWidth <= 440 ? 20 : 40;
+        var lyricsW     = 2 * window.innerWidth;
+        var initialLeft = 30.5;
+        var targetX     = window.innerWidth - margin - initialLeft - lyricsW;
+
+        var rect        = blocVideoEl.getBoundingClientRect();
+        var vh          = window.innerHeight;
+        var rawProgress = (vh - rect.top) / (rect.height + vh);
+        var delay       = 0.5;
+        var progress    = Math.max(0, Math.min(1, (rawProgress - delay) / (1 - delay)));
+
+        lyricsEl.style.transform = 'translateX(' + (targetX * progress) + 'px)';
+      }
+
       setup();
       update();
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', function () { setup(); update(); }, { passive: true });
+      updateLyricsMobile();
+      window.addEventListener('scroll', function () { update(); updateLyricsMobile(); }, { passive: true });
+      window.addEventListener('resize', function () { setup(); update(); updateLyricsMobile(); }, { passive: true });
     })();
   </script>
 
