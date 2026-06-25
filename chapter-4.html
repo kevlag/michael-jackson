@@ -310,6 +310,7 @@
         var rawProgress = (vh - rect.top) / (rect.height + vh);
         var delay       = 0.5;
         var progress    = Math.max(0, Math.min(1, (rawProgress - delay) / (1 - delay)));
+        progress = progress * progress; /* ease-in */
 
         lyricsEl.style.transform = 'translateX(' + (targetX * progress) + 'px)';
       }
