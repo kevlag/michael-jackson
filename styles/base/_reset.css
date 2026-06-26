@@ -20,6 +20,10 @@ html {
   html { scroll-behavior: auto; }
 }
 
+@media (max-width: 1024px) {
+  html { overflow-x: hidden; }
+}
+
 body {
   min-height: 100dvh;
   line-height: var(--leading-normal);
