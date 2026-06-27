@@ -95,7 +95,6 @@
               muted
               loop
               playsinline
-              webkit-playsinline
             ></video>
             <div class="c4__sound-cursor" aria-hidden="true">
               <img class="c4__sound-cursor-off" src="images/chapter-4/SoundOff.svg" alt="" />
@@ -315,10 +314,6 @@
         progress = progress * progress * (3 - 2 * progress); /* smoothstep */
 
         lyricsEl.style.transform = 'translateX(' + (targetX * progress) + 'px)';
-      }
-
-      if (videoEl) {
-        videoEl.play().catch(function () {});
       }
 
       setup();
