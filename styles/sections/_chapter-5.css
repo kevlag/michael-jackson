@@ -1,0 +1,357 @@
+/* ============================================================
+   CHAPTER 5 — Bad / Neverland
+   Desktop base : 1920×1080px — Background: #ffffff
+   ============================================================ */
+
+.c5 {
+  background-color: #fff;
+  /* 211px padding top/left/right à 1920px = 10.99vw — fond blanc visible */
+  padding: clamp(60px, 10.99vw, 211px) clamp(60px, 10.99vw, 211px) 0;
+}
+
+/* ── Hero image ──────────────────────────────────────────── */
+
+.c5__hero {
+  position: relative;
+  /* ratio Figma : 1498 × 1873 */
+  aspect-ratio: 1498 / 1873;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c5__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── Quote (superposée à 60px du bas de l'image) ─────────── */
+
+.c5__quote {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  padding: 0 clamp(20px, 2.08vw, 40px);
+  font-family: var(--font-primary);
+  font-size: clamp(24px, 3.33vw, 64px); /* 64px à 1920px, 24px min mobile */
+  font-weight: 400;
+  line-height: 1.3;
+  color: #fff;
+  text-align: center;
+}
+
+/* ── Desktop uniquement ──────────────────────────────────── */
+@media (min-width: 1025px) {
+  .c5__dropcap {
+    margin-left:  -2.08vw; /* -40px à 1920px */
+    margin-top:   -4.17vw; /* -80px à 1920px */
+    margin-right:  1.04vw; /*  20px à 1920px */
+  }
+}
+
+/* ── 3-column content grid ───────────────────────────────── */
+
+.c5__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(30px, 3.13vw, 60px);
+  padding: 0 0 150px;
+  margin-top: 150px;
+  max-width: 1538px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Body text ───────────────────────────────────────────── */
+
+.c5__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  margin-bottom: 1.5625vw; /* 30px à 1920px */
+}
+
+.c5__body:last-child { margin-bottom: 0; }
+
+.c5__body strong { font-weight: 600; }
+.c5__body em { font-style: italic; }
+
+/* ── Drop cap ────────────────────────────────────────────── */
+
+.c5__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(134px, calc(116px + 4.12vw), 195px);
+  font-weight: 400;
+  line-height: 0.78;
+  margin-right: 40px;
+  margin-top: -20px;
+  color: #000;
+}
+
+/* ── Small portrait images (2 side-by-side) ─────────────── */
+
+.c5__small-images {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5625vw;
+  margin-bottom: 1.5625vw;
+}
+
+.c5__small-img {
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c5__small-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── Column images (full column width) ───────────────────── */
+
+.c5__col-img {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 0 1.5625vw; /* 30px à 1920px */
+}
+
+.c5__col-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ── Mobile / Tablette (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+
+  .c5__hero {
+    aspect-ratio: 3 / 4;
+  }
+
+  .c5 {
+    padding: 140px 20px 0;
+  }
+
+  .c5__quote {
+    padding: 0 20px;
+    bottom: 40px;
+  }
+
+  .c5__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 0 80px;
+    margin-top: 60px;
+  }
+
+  .c5__body {
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+.c5__small-images {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .c5__col-center { margin-bottom: 20px; }
+
+  .c5__small-images + .c5__body { margin-top: 40px; }
+
+  .c5__col-img {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+}
+
+/* ── Mobile large (441px – 1024px) ──────────────────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c5 { padding-left: 40px; padding-right: 40px; }
+  .c5__quote { padding: 0 40px; }
+}
+
+/* ── Mobile strict (≤ 440px) ────────────────────────────── */
+@media (max-width: 440px) {
+  .c5__content { padding-bottom: 60px; }
+}
+
+/* ── Retire les sauts de ligne de la quote en dessous de 768px ── */
+@media (max-width: 768px) {
+  .c5__quote br { display: none; }
+}
+
+/* ============================================================
+   CHAPTER 5 — PART 2 : fond noir — album Bad
+   ============================================================ */
+
+.c5__part2 {
+  --c5-red: #F00A14;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #000;
+}
+
+@media (min-width: 1025px) {
+  .c5__part2 { min-height: 100vh; }
+}
+
+/* ── Colonne gauche : infos album ────────────────────────── */
+
+.c5__album {
+  display: flex;
+  flex-direction: column;
+  padding:
+    clamp(40px, 8.96vw, 172px)
+    clamp(20px, 2.08vw, 40px)
+    clamp(40px, 7.71vw, 80px);
+}
+
+.c5__album-title {
+  font-family: var(--font-primary);
+  font-size: max(80px, 20.83vw); /* 400px à 1920px */
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c5-red);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.c5__album-date {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.52vw, 10px);
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+.c5__album-cover {
+  width: clamp(80px, 10.42vw, 200px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: auto auto 40px;
+  align-self: center;
+}
+
+.c5__album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c5__album-desc {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  align-self: center;
+  max-width: clamp(280px, 41.67vw, 800px);
+}
+
+/* ── Colonne droite : portrait ───────────────────────────── */
+
+.c5__portrait {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c5__portrait img {
+  position: absolute;
+  width: 100%;
+  height: 135.63%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ── Responsive part 2 ───────────────────────────────────── */
+
+@media (max-width: 1024px) {
+
+  .c5__part2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c5__album {
+    order: 1;
+    padding: 140px 20px 40px;
+    min-height: clamp(760px, 100vh, 1080px);
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .c5__portrait {
+    order: 2;
+    width: 100%;
+    aspect-ratio: 400 / 500;
+    min-height: 300px;
+  }
+
+  .c5__portrait img {
+    height: 121.88%;
+    top: 0%;
+  }
+
+  .c5__album-title {
+    font-size: max(90px, 22.9vw);
+    margin-bottom: 20px;
+  }
+
+  .c5__album-date {
+    font-size: clamp(11px, 3.56vw, 14px);
+    gap: 8px;
+  }
+
+  .c5__album-cover {
+    width: clamp(100px, 38.17vw, 150px);
+    align-self: flex-start;
+    margin: auto auto 0;
+  }
+
+  .c5__album-desc {
+    font-size: clamp(20px, 3.91vw, 30px);
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c5__album { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (max-width: 440px) {
+  .c5__album { padding-bottom: 20px; }
+}

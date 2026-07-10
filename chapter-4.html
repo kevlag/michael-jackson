@@ -168,6 +168,44 @@
     </section>
     </div><!-- /.c4__pin-wrapper -->
 
+    <!-- ─── CHAPTER 4 PART 2 : fond noir — album Thriller ─── -->
+    <div class="c4__part2">
+
+      <!-- Colonne gauche : portrait -->
+      <figure class="c4__portrait">
+        <img
+          src="images/chapter-4/chapt4-image-4.png"
+          alt="Michael Jackson, Thriller era, 1982"
+        />
+      </figure>
+
+      <!-- Colonne droite : titre album + infos -->
+      <div class="c4__album">
+
+        <div class="c4__album-title">
+          <p>Thriller</p>
+          <p><em>( album )</em></p>
+        </div>
+
+        <div class="c4__album-date">
+          <span>(</span>
+          <span>November 29, 1982</span>
+          <span>)</span>
+        </div>
+
+        <figure class="c4__album-cover">
+          <img
+            src="images/chapter-4/chapt4-image-5.png"
+            alt="Thriller — Album Cover"
+          />
+        </figure>
+
+        <p class="c4__album-desc">With the ongoing backlash against disco music at the time, Michael moved in a new musical direction, resulting in a mix of pop, post-disco, rock, funk, and R&amp;B sounds.</p>
+
+      </div>
+
+    </div>
+
   </main>
 
   <footer id="footer"></footer>
@@ -185,6 +223,8 @@
       var phase1Distance = 0;
       var phase2Distance = 0;
       var scrollDistance = 0;
+      var wrapperTop     = 0;
+      var rafPending     = false;
 
       var cursorEl = videoContainer ? videoContainer.querySelector('.c4__sound-cursor') : null;
 
@@ -257,12 +297,12 @@
         phase2Distance = window.innerHeight;
         scrollDistance = phase1Distance + phase2Distance;
         wrapper.style.height = (window.innerHeight + scrollDistance) + 'px';
+        wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
       }
 
       function update() {
         if (window.innerWidth <= 1024) return;
-        var wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
-        var scrolled   = Math.max(0, window.scrollY - wrapperTop);
+        var scrolled = Math.max(0, window.scrollY - wrapperTop);
         var bloc1W     = 0.7328 * window.innerWidth;
 
         if (scrolled <= phase1Distance) {
@@ -319,7 +359,16 @@
       setup();
       update();
       updateLyricsMobile();
-      window.addEventListener('scroll', function () { update(); updateLyricsMobile(); }, { passive: true });
+      window.addEventListener('scroll', function () {
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(function () {
+            update();
+            updateLyricsMobile();
+            rafPending = false;
+          });
+        }
+      }, { passive: true });
       window.addEventListener('resize', function () { setup(); update(); updateLyricsMobile(); }, { passive: true });
     })();
   </script>

@@ -1,0 +1,268 @@
+/* ============================================================
+   CHAPTER 7 — HIStory / Invincible
+   Référence desktop : 1920px
+   Section height    : 2191px = 114.11vw
+   ============================================================ */
+
+.c7 {
+  background-image: url('../../images/chapter-7/chapt7-image-1.png');
+  background-size: 100% auto;       /* image à 100% de largeur, hauteur proportionnelle */
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: min(114.11vw, 2191px); /* cap à 2191px (valeur 1920px) pour les grands écrans */
+  overflow: hidden;
+}
+
+/* ── Header : titre centré ───────────────────────────────── */
+
+.c7__header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  /* "I'M TIRED OF" commence à top: 321px dans le design */
+  padding-top: clamp(80px, 16.72vw, 321px);
+}
+
+.c7__subtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(24px, 7.71vw, 148px); /* 148px à 1920px — tient dans 830px */
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 830px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.c7__title {
+  font-family: var(--font-primary);
+  font-size: clamp(50px, 24.69vw, 474px); /* 474px à 1920px — tient dans 1920px */
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 70px;
+}
+
+/* ── Grid 3 colonnes (left | gap | right) ────────────────── */
+/* 473px | 552px | 473px à 1498px                            */
+
+.c7__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 31.57% 1fr 31.57%; /* 473px | 552px | 473px à 1498px */
+  max-width: 1498px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: clamp(10px, 1.04vw, 20px);
+  padding-bottom: 0;
+}
+
+/* ── Body text ───────────────────────────────────────────── */
+
+.c7__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px); /* 20px à 1920px, min 16px */
+  font-weight: 400;
+  line-height: 1.6;
+  color: #fff;
+  text-align: justify;
+}
+
+.c7__body strong { font-weight: 600; }
+.c7__body em     { font-style: italic; }
+
+/* ── Drop cap ────────────────────────────────────────────── */
+
+.c7__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(100px, 13.02vw, 250px); /* 250px à 1920px */
+  font-weight: 400;
+  line-height: 0.78;
+  color: #fff;
+  margin-left: -65px;
+  margin-right: 35px;
+  margin-top: -20px;
+}
+
+/* ── Photo MJ ────────────────────────────────────────────── */
+/*   left: 237px (12.34vw), width: 1709px (88.49vw)          */
+/*   height: 1365px (71.09vw), bottom: 0                     */
+
+.c7__photo {
+  position: absolute;
+  bottom: 10px;
+  left: min(13.28vw, 255px); /* 255px à 1920px, freezé au-delà */
+  width: 88.91vw;        /* 1709px à 1920px */
+  max-width: 1709px;
+  aspect-ratio: 1709 / 1365; /* hauteur proportionnelle quand max-width s'applique */
+  overflow: hidden;
+  margin: 0;
+  z-index: 3;            /* devant le texte (z-index 2) */
+  pointer-events: none;
+}
+
+.c7__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── Intermédiaire (1501px – 1680px) : dropcap débordant + grid padding ── */
+@media (min-width: 1501px) and (max-width: 1680px) {
+  .c7__grid {
+    max-width: none;
+    grid-template-columns: 24% 1fr 24%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .c7__dropcap {
+    margin-left: 0;
+    margin-right: 35px;
+  }
+  .c7__photo {
+    width: 78vw;
+  }
+}
+
+/* ── Intermédiaire (1025px – 1500px) : dropcap aligné avec le body ── */
+@media (min-width: 1025px) and (max-width: 1500px) {
+  .c7__grid {
+    max-width: none;
+    grid-template-columns: 25% 1fr 25%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .c7__dropcap {
+    margin-left: 0;
+    margin-right: 35px;
+  }
+  .c7__photo {
+    width: 68vw;
+  }
+}
+
+/* ── Intermédiaire serré (1025px – 1280px) : texte gauche, photo droite ── */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .c7__grid {
+    grid-template-columns: 1fr 50%;
+    grid-template-areas:
+      "left gap"
+      "right gap";
+    gap: 30px 0;
+  }
+  .c7__col--left  { grid-area: left; max-width: 450px; }
+  .c7__col--gap   { grid-area: gap; }
+  .c7__col--right { grid-area: right; max-width: 450px; }
+  .c7__grid {
+    padding-bottom: 180px;
+  }
+  .c7__photo {
+    left: auto;
+    right: -270px;
+    width: 90vw;
+    bottom: 0;
+  }
+}
+
+/* ── Grand écran (> 1920px) : photo ancrée sur contenu centré ── */
+@media (min-width: 1921px) {
+  .c7__photo {
+    left: calc(50vw - 705px); /* équivalent à 255px à 1920px, suit le centre */
+  }
+}
+
+/* ── Sauts de ligne desktop (cachés sur mobile) ──────────── */
+
+.c7__br { display: inline; }
+
+@media (max-width: 1500px) {
+  .c7__br { display: none; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ── Mobile / Tablette (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+
+  .c7 {
+    min-height: auto;
+    overflow: visible;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .c7__header {
+    padding-top: 138px;
+  }
+
+  .c7__subtitle {
+    font-size: 32px;
+  }
+
+  .c7__title {
+    font-size: max(55px, 22.9vw); /* 90px à 393px */
+  }
+
+  .c7__grid {
+    grid-template-columns: 1fr; /* colonne unique */
+    padding: 40px 20px 0;
+    gap: 30px;
+  }
+  .c7__col--gap { display: none; }
+
+  .c7__dropcap {
+    font-size: clamp(100px, 39.7vw, 156px); /* 156px à 393px */
+    margin-left: 0;
+    margin-right: 15px;
+    margin-top: 0;
+  }
+
+  .c7__body {
+    font-size: 16px;
+  }
+
+  /* Photo : large décentrée vers la droite comme dans le design */
+  .c7__photo {
+    position: static;
+    width: 208vw;                /* 817/393 ≈ 208vw */
+    height: auto;
+    overflow: visible;
+    margin-top: 60px;
+    margin-left: calc(-54vw + 16vw); /* centré + décalage 63px ≈ 16vw */
+  }
+
+  .c7__photo img {
+    width: 100%;
+    height: auto;
+    object-fit: unset;
+    object-position: unset;
+  }
+
+}
+
+/* ── Mobile large (441px – 1024px) ──────────────────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c7__grid  { padding-left: 40px; padding-right: 40px; }
+  .c7__header { padding-left: 40px; padding-right: 40px; }
+}
+
+/* ── Mobile strict (≤ 440px) ────────────────────────────── */
+@media (max-width: 440px) {
+  .c7__header { padding-top: 100px; }
+  .c7__grid { gap: 20px; }
+}

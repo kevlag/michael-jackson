@@ -1,0 +1,362 @@
+/* ============================================================
+   CHAPTER 6 — Dangerous / Controversy
+   Desktop base : 1920×1080px — Background: #f5cdd5
+   Layout : 2 colonnes — image sticky gauche / contenu droite
+   Photo : 644×1000px, 40px bord gauche et 40px bord haut
+   ============================================================ */
+
+.c6 {
+  --c6-bg: #FADCF5;
+  background-color: var(--c6-bg);
+}
+
+/* ── Layout 2 colonnes ───────────────────────────────────── */
+
+.c6__layout {
+  display: grid;
+  /* colonne gauche = photo (33.54vw) + marge gauche (40px) */
+  grid-template-columns: calc(33.54vw + 40px) 1fr;
+  align-items: start;
+}
+
+/* ── Colonne gauche : wrapper sticky ─────────────────────── */
+
+.c6__left {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 40px 40px 0 40px; /* 40px haut, 40px gauche */
+  box-sizing: border-box;
+}
+
+/* ── Photo ───────────────────────────────────────────────── */
+
+.c6__photo {
+  width: 100%;           /* 644px à 1920px (colonne - padding) */
+  aspect-ratio: 644 / 1000;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c6__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── Colonne droite : contenu ─────────────────────────────── */
+
+.c6__content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:
+    clamp(80px, 12.5vw, 240px)
+    clamp(40px, 5.21vw, 100px)
+    clamp(80px, 8.33vw, 160px);
+}
+
+/* ── Intro (grande typo) ─────────────────────────────────── */
+
+.c6__intro {
+  font-family: var(--font-primary);
+  font-size: clamp(36px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-indent: 3em;
+  max-width: clamp(500px, 42.4vw, 814px); /* 814px à 1920px */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+/* ── Drop cap ────────────────────────────────────────────── */
+
+.c6__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(132px, calc(113px + 4.26vw), 195px);
+  font-weight: 400;
+  line-height: 0.78;
+  color: #000;
+  margin-right: 40px;
+  margin-top: -15px;
+  margin-left: 56px;
+}
+
+/* ── Body text ───────────────────────────────────────────── */
+
+.c6__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  max-width: clamp(300px, 24.74vw, 475px); /* 475px à 1920px */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.c6__intro + .c6__body { margin-top: 150px; }
+
+.c6__body + .c6__body,
+.c6__small-images + .c6__body { margin-top: 30px; }
+
+.c6__body strong { font-weight: 600; }
+.c6__body em { font-style: italic; }
+
+/* ── Petites images côte à côte ──────────────────────────── */
+
+.c6__small-images {
+  display: flex;
+  gap: 20px;
+  max-width: clamp(300px, 24.74vw, 475px); /* 475px à 1920px */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5625vw;
+}
+
+.c6__small-img {
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c6__small-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ── Mobile / Tablette (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+
+  .c6__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .c6__left {
+    position: static;
+    height: auto;
+    padding: 140px 20px 0;
+  }
+
+  .c6__photo {
+    aspect-ratio: 644 / 1000;
+  }
+
+  .c6__content {
+    min-height: unset;
+    display: block;
+    padding: 60px 20px 80px;
+  }
+
+  .c6__intro {
+    font-size: clamp(30px, 9.16vw, 36px);
+    text-indent: 2.7em;
+    margin-bottom: 0;
+  }
+
+  .c6__intro + .c6__body { margin-top: 40px; }
+
+  .c6__dropcap {
+    font-size: clamp(80px, 25.4vw, 100px);
+    margin-top: 0;
+    margin-right: 15px;
+  }
+
+  .c6__body {
+    font-size: 16px;
+    text-align: left;
+    max-width: none;
+    margin-bottom: 20px;
+  }
+
+  .c6__small-images {
+    gap: 10px;
+    max-width: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+}
+
+/* ── Mobile large (441px – 1024px) ──────────────────────── */
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c6__left    { padding-left: 40px; padding-right: 40px; }
+  .c6__content { padding-left: 40px; padding-right: 40px; }
+}
+
+/* ── Mobile strict (≤ 440px) ────────────────────────────── */
+@media (max-width: 440px) {
+  .c6__content { padding-top: 40px; padding-bottom: 60px; }
+}
+
+/* ============================================================
+   CHAPTER 6 — PART 2 : fond noir — album Dangerous
+   ============================================================ */
+
+.c6__part2 {
+  --c6-gold: #C7945D;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #000;
+}
+
+@media (min-width: 1025px) {
+  .c6__part2 { min-height: 100vh; }
+}
+
+/* ── Colonne gauche : portrait ───────────────────────────── */
+
+.c6__portrait {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c6__portrait img {
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  top: -10%;
+  left: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ── Colonne droite : infos album ────────────────────────── */
+
+.c6__album {
+  display: flex;
+  flex-direction: column;
+  padding:
+    clamp(40px, 8.96vw, 172px)
+    clamp(20px, 2.08vw, 40px)
+    clamp(40px, 7.71vw, 80px);
+}
+
+.c6__album-title {
+  font-family: var(--font-primary);
+  font-size: max(48px, 10.42vw);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c6-gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.c6__album-date {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.52vw, 10px);
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+.c6__album-cover {
+  width: clamp(80px, 10.42vw, 200px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: auto auto 40px;
+  align-self: center;
+}
+
+.c6__album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c6__album-desc {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  align-self: center;
+  max-width: clamp(280px, 41.67vw, 800px);
+}
+
+/* ── Responsive part 2 ───────────────────────────────────── */
+
+@media (max-width: 1024px) {
+
+  .c6__part2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c6__album {
+    order: 1;
+    padding: 140px 20px 40px;
+    min-height: clamp(760px, 100vh, 1080px);
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .c6__portrait {
+    order: 2;
+    width: 100%;
+    aspect-ratio: 400 / 500;
+    min-height: 300px;
+  }
+
+  .c6__portrait img {
+    height: 115%;
+    top: -5%;
+  }
+
+  .c6__album-title {
+    font-size: max(90px, 22.9vw);
+    margin-bottom: 20px;
+  }
+
+  .c6__album-date {
+    font-size: clamp(11px, 3.56vw, 14px);
+    gap: 8px;
+  }
+
+  .c6__album-cover {
+    width: clamp(100px, 38.17vw, 150px);
+    align-self: flex-start;
+    margin: auto auto 0;
+  }
+
+  .c6__album-desc {
+    font-size: clamp(20px, 3.91vw, 30px);
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c6__album { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (max-width: 440px) {
+  .c6__album { padding-bottom: 20px; }
+}

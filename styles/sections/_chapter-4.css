@@ -283,6 +283,118 @@
 
 } /* end @media (min-width: 1025px) */
 
+/* ============================================================
+   CHAPTER 4 — PART 2 : fond noir — album Thriller
+   ============================================================ */
+
+.c4__part2 {
+  --c4-gold: #F0D7A0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #000;
+}
+
+@media (min-width: 1025px) {
+  .c4__part2 { min-height: 100vh; }
+}
+
+/* ── Colonne gauche : portrait ───────────────────────────── */
+
+.c4__portrait {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c4__portrait img {
+  position: absolute;
+  width: 100%;
+  height: 135.63%;
+  top: -35.15%;
+  left: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ── Colonne droite : infos album ────────────────────────── */
+
+.c4__album {
+  display: flex;
+  flex-direction: column;
+  padding:
+    clamp(40px, 8.96vw, 172px)
+    clamp(20px, 2.08vw, 40px)
+    clamp(40px, 7.71vw, 80px);
+}
+
+.c4__album-title {
+  font-family: var(--font-primary);
+  font-size: max(48px, 10.42vw);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c4-gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.c4__album-title p {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1;
+}
+
+.c4__album-title p:last-child {
+  font-size: 0.6em;
+  text-transform: none;
+}
+
+.c4__album-title em {
+  font-style: italic;
+}
+
+.c4__album-date {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.52vw, 10px);
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+.c4__album-cover {
+  width: clamp(80px, 10.42vw, 200px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: auto auto 40px;
+  align-self: center;
+}
+
+.c4__album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c4__album-desc {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  align-self: center;
+  max-width: clamp(280px, 41.67vw, 800px);
+}
+
 /* ── Texte — commun desktop + mobile ────────────────────── */
 
 .c4__body {
@@ -486,6 +598,59 @@
     display: block;
   }
 
+  /* ── PART 2 mobile ──────────────────────────────────────── */
+
+  .c4__part2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c4__album {
+    order: 1;
+    padding: 140px 20px 40px;
+    min-height: clamp(760px, 100vh, 1080px);
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .c4__portrait {
+    order: 2;
+    width: 100%;
+    aspect-ratio: 400 / 500;
+    min-height: 300px;
+  }
+
+  .c4__portrait img {
+    height: 121.88%;
+    top: -21.79%;
+  }
+
+  .c4__album-title {
+    font-size: max(90px, 22.9vw);
+    margin-bottom: 20px;
+  }
+
+  .c4__album-title p:last-child {
+    font-size: 0.6em;
+  }
+
+  .c4__album-date {
+    font-size: clamp(11px, 3.56vw, 14px);
+    gap: 8px;
+  }
+
+  .c4__album-cover {
+    width: clamp(100px, 38.17vw, 150px);
+    align-self: flex-start;
+    margin: auto auto 0;
+  }
+
+  .c4__album-desc {
+    font-size: clamp(20px, 3.91vw, 30px);
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
 } /* end @media (max-width: 1024px) */
 
 /* ── Mobile large (441px – 1024px) — padding 40px ───────────── */
@@ -497,6 +662,7 @@
     margin-left: -40px;
     margin-right: -40px;
   }
+  .c4__album { padding-left: 40px; padding-right: 40px; }
 }
 
 /* ── Mobile strict (≤ 440px) ────────────────────────────────── */
@@ -509,5 +675,6 @@
   .c4__b2-text   { padding-left: 40px; padding-right: 40px; }
   .c4__lyrics         { margin-bottom: 20px; }
   .c4__video-caption  { margin-right: 20px; }
+  .c4__album     { padding-bottom: 20px; }
 }
 
