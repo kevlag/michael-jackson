@@ -1,0 +1,348 @@
+/* ============================================================
+   CHAPTER 11 — This Is It / Legacy
+   Référence desktop : 1920 × 3790px
+   ============================================================ */
+
+.c11 {
+  background: #fff;
+  overflow: hidden;
+  padding-top: clamp(140px, 12.97vw, 250px);
+  padding-bottom: clamp(100px, 10.42vw, 200px);
+}
+
+/* ── "THIS" hero typographique ───────────────────────────── */
+
+.c11__hero {
+  font-family: var(--font-primary);
+  font-size: 20vw; /* valeur initiale, ajustée par JS pour remplir 100% de la largeur */
+  font-weight: 400;
+  line-height: 0.9;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0 auto;
+  max-width: 1840px;
+  display: block;
+}
+
+/* ── Sous-titre ──────────────────────────────────────────── */
+
+.c11__subtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(36px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-align: center;
+  max-width: clamp(353px, 60.2vw, 1156px);
+  margin: 0 auto clamp(40px, 5.21vw, 100px);
+  padding: 0 clamp(20px, 2.08vw, 40px);
+}
+
+.c11__subtitle-upper {
+  text-transform: uppercase;
+}
+
+/* ── Grille 3 colonnes ───────────────────────────────────── */
+
+.c11__content {
+  display: grid;
+  grid-template-columns:
+    clamp(280px, 24.64vw, 473px)
+    clamp(280px, 24.58vw, 472px)
+    clamp(280px, 24.64vw, 473px);
+  gap: clamp(20px, 2.08vw, 40px);
+  justify-content: center;
+  align-items: start;
+  max-width: 1840px;
+  margin: 0 auto;
+}
+
+/* Colonnes fixées explicitement pour éviter le re-layout quand
+   c11__col--images passe en position:fixed et quitte le flux */
+@media (min-width: 1025px) {
+  .c11__col--left   { grid-column: 1; }
+  .c11__col--images { grid-column: 2; }
+  .c11__col--right  { grid-column: 3; }
+}
+
+/* ── Grande lettrine "T" ─────────────────────────────────── */
+
+.c11__t-cap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(160px, 13.02vw, 250px);
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  margin-right: clamp(6px, 0.52vw, 10px);
+  margin-top: 0;
+}
+
+/* ── Décalage du premier paragraphe sous le T ───────────── */
+
+.c11__col--left .c11__body:first-of-type {
+  padding-top: clamp(50px, 6.25vw, 80px);
+}
+
+/* ── Corps de texte ──────────────────────────────────────── */
+
+.c11__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  margin: 0 0 clamp(20px, 2.08vw, 40px);
+}
+
+.c11__body:last-child {
+  margin-bottom: 0;
+}
+
+.c11__body strong {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Colonne images ──────────────────────────────────────── */
+
+.c11__col--images {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  aspect-ratio: 944 / 1344; /* masque images 2 et 3 — seule image 1 visible */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Track animé par translateY lors du scroll-sticky */
+.c11__images-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* État sticky — position et dimensions setés via JS */
+.c11__col--images.is-sticky {
+  position: fixed;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.c11__img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 944 / 1344;
+  flex-shrink: 0;
+}
+
+.c11__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: translateZ(0);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER SITE — "IS IT" + crédits
+   ══════════════════════════════════════════════════════════ */
+
+.site-footer {
+  background: #000;
+  min-height: max(100vh, 750px);
+  position: relative;
+}
+
+/* Wrapper sticky plein-écran — contient IS/IT + bottom section */
+.site-footer__isit-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  height: 100vh;
+  /* position:sticky crée un containing block pour les enfants position:absolute */
+}
+
+/* Conteneur "IS" / "IT" — remplit le wrapper, IS/IT centrés verticalement */
+.site-footer__isit {
+  position: relative;
+  height: 100%;
+  max-width: 1840px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Spacer — hauteur calculée par JS */
+.c11__images-spacer {
+  width: 100%;
+}
+
+.site-footer__is,
+.site-footer__it {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-primary);
+  /* Plafond vh : IS/IT ne déborde jamais sur site-footer__bottom.
+     (100vh - 380px) / 0.9 garantit ≥16px de marge avec la zone basse à 1920×1080. */
+  font-size: min(clamp(225px, 44.17vw, 848px), calc((100vh - 380px) / 0.9));
+  font-weight: 400;
+  line-height: 0.9;
+  color: #fff;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.site-footer__is {
+  left: 0;
+}
+
+.site-footer__it {
+  right: clamp(10px, 0.52vw, 10px);
+  text-align: right;
+}
+
+/* Bloc bas de page — ancré en bas du footer */
+.site-footer__bottom {
+  position: absolute;
+  bottom: clamp(20px, 2.08vw, 40px);
+  left: 0;
+  right: 0;
+  z-index: 6;
+}
+
+/* Texte de remerciement */
+.site-footer__thank-you {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto clamp(15px, 1.56vw, 30px);
+  padding: 0 clamp(20px, 2.08vw, 40px);
+}
+
+/* Crédits */
+.site-footer__credits {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 clamp(20px, 2.08vw, 40px);
+  font-family: var(--font-secondary);
+  font-size: clamp(14px, 0.83vw, 16px);
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.site-footer__credits > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer__credits > div span:last-child {
+  font-weight: 400;
+  text-transform: none;
+}
+
+.site-footer__credits-center {
+  text-align: center;
+}
+
+.site-footer__credits-right {
+  text-align: right;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile ≤ 1024px
+   ══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+
+  .site-footer {
+    min-height: 0;
+  }
+
+  .site-footer__isit-wrapper {
+    position: static;
+    height: auto;
+    /* padding-top = H/2 + 40px de marge */
+    padding-top: calc((100vw - 40px) * 672 / 944 + 40px);
+    padding-bottom: clamp(30px, 8vw, 60px);
+  }
+
+  .site-footer__isit {
+    position: static;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 clamp(10px, 2.67vw, 20px);
+  }
+
+  .site-footer__is,
+  .site-footer__it {
+    position: static;
+    transform: none;
+    font-size: clamp(225px, 44.17vw, 848px);
+  }
+
+  .site-footer__bottom {
+    position: static;
+    padding: clamp(20px, 5.33vw, 40px) 0 0;
+  }
+
+  /* Permet à la colonne images de déborder dans le footer */
+  .c11 {
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .c11__content {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 20px 0;
+  }
+
+  /* Ordre mobile : col gauche → col droite → images */
+  .c11__col--left  { order: 1; }
+  .c11__col--right { order: 2; margin-top: 20px; }
+  .c11__col--images {
+    order: 3;
+    margin-top: 30px;
+    /* margin-bottom négatif = −H/2 (H = largeur × 1344/944)
+       en % du conteneur : 672/944 × 100% ≈ 71.19% */
+    margin-bottom: calc(-100% * 672 / 944);
+    position: relative;
+    z-index: 10;
+    /* overflow:hidden et aspect-ratio:944/1344 conservés depuis les règles desktop */
+  }
+
+  .c11__body {
+    text-align: justify;
+    text-align-last: center;
+  }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c11__content {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .c11__col--right  { margin-top: 40px; }
+  .c11__col--images { margin-top: 60px; }
+  /* padding-top footer = H/2 + 40px de marge, colonnes à 80px de padding total */
+  .site-footer__isit-wrapper {
+    padding-top: calc((100vw - 80px) * 672 / 944 + 40px);
+  }
+}

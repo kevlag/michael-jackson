@@ -1,0 +1,351 @@
+/* ============================================================
+   CHAPTER 10 — Michael's Legacy / Memorial (2009)
+   Référence desktop : 1920 × 1080px
+   ============================================================ */
+
+.c10 {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  min-height: 100vh;
+}
+
+/* ── Image (gauche) ──────────────────────────────────────── */
+
+.c10__image {
+  position: relative;
+  overflow: hidden;
+}
+
+.c10__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── Fond navy + texte (droite) ──────────────────────────── */
+
+.c10__content {
+  background: #03122f;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* padding-right = 50vw - text_wrap_width - O_half_width - 35px gap constant */
+  padding: clamp(40px, 4.17vw, 80px) calc(50vw - clamp(280px, 21.35vw, 410px) - clamp(300px, 30.78vw, 591px) / 2 - 35px) clamp(40px, 4.17vw, 80px) clamp(40px, 4.17vw, 80px);
+}
+
+/* Wrapper : largeur max 410px + décalage vertical pour aligner
+   le centre du texte sur le centre du "O" */
+.c10__text-wrap {
+  width: clamp(280px, 21.35vw, 410px);
+  margin-top: calc(max(80px, 9.53vw) + clamp(215px, 22.135vw, 425.5px) - 50vh);
+}
+
+/* Float gauche + shape-outside : simule le runaround autour du "O".
+   La hauteur est initialisée en CSS et ajustée dynamiquement par JS
+   (height = body.offsetHeight) pour couvrir toutes les lignes. */
+.c10__o-indent {
+  float: left;
+  width: clamp(28px, 3.65vw, 70px);
+  height: clamp(280px, 28.33vw, 544px);
+  shape-outside: ellipse(100% 55% at 0 50%);
+}
+
+.c10__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #fff;
+  text-align: justify;
+  margin: 0;
+}
+
+.c10__body strong {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Décoration "O" (lettrine géante SVG) ────────────────── */
+
+.c10__deco-o {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: max(80px, 9.53vw);
+  width: clamp(300px, 30.78vw, 591px);
+  height: clamp(430px, 44.27vw, 851px);
+  display: flex;
+  pointer-events: none;
+  margin: 0;
+}
+
+.c10__o-desktop-left,
+.c10__o-desktop-right {
+  width: 50%;
+  height: 100%;
+  display: block;
+}
+
+.c10__clip-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.c10__o-desktop-left {
+  clip-path: url(#c10-desktop-left-arc);
+  backdrop-filter: brightness(5);
+  opacity: 0.4;
+}
+
+.c10__o-mobile-top,
+.c10__o-mobile-bottom {
+  display: none;
+}
+
+.c10__o-mobile-top {
+  clip-path: url(#c10-mobile-top-arc);
+  backdrop-filter: brightness(5);
+  opacity: 0.4;
+}
+
+/* ── Écrans très hauts (> 1080px) — centrer le "O" et le texte ── */
+
+@media (min-width: 1025px) and (min-height: 1081px) {
+  .c10__deco-o {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .c10__text-wrap {
+    margin-top: 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile ≤ 1024px
+   ══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+
+  .c10 {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .c10__image {
+    width: 100%;
+    aspect-ratio: 393 / 492;
+    flex-shrink: 0;
+  }
+
+  .c10__content {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: clamp(185px, 46.6vw, 205px) clamp(20px, 5.33vw, 40px) clamp(40px, 10.67vw, 60px);
+  }
+
+  .c10__text-wrap {
+    width: auto;
+    margin-top: 0;
+  }
+
+  .c10__o-indent {
+    display: none;
+  }
+
+  .c10__body {
+    font-size: 16px;
+    text-align-last: center;
+  }
+
+  .c10__o-desktop-left,
+  .c10__o-desktop-right {
+    display: none;
+  }
+
+  .c10__deco-o {
+    top: calc(100vw * (492 / 393) - clamp(132px, 42vw, 165px));
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(160px, 58.3vw, 229px);
+    height: calc(clamp(132px, 42vw, 165px) * 2);
+    flex-direction: column;
+  }
+
+  .c10__o-mobile-top,
+  .c10__o-mobile-bottom {
+    display: block;
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c10__content {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION AWARDS (Grammy)
+   Référence desktop : 1920 × 1430px
+   ══════════════════════════════════════════════════════════ */
+
+.c10__awards {
+  background: #03122f;
+  padding: clamp(60px, 12.97vw, 250px) 0 clamp(60px, 9.69vw, 186px);
+}
+
+.c10__awards-title {
+  font-family: var(--font-primary);
+  font-size: clamp(36px, 5.21vw, 100px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 auto clamp(30px, 3.125vw, 60px);
+  padding: 0 clamp(20px, 2.08vw, 40px);
+  max-width: clamp(353px, 95.83vw, 1840px);
+}
+
+.c10__awards-title__highlight {
+  color: #c2854b;
+  white-space: nowrap;
+}
+
+/* Slider : déborde à droite, 1ère image centrée sur la page */
+.c10__awards-slider-wrap {
+  overflow: hidden;
+  padding-left: calc(50% - clamp(140px, 12.29vw, 236px));
+  margin-bottom: clamp(30px, 3.125vw, 60px);
+}
+
+.c10__awards-slider {
+  display: flex;
+  gap: clamp(10px, 2.08vw, 40px);
+  will-change: transform;
+}
+
+.c10__awards-slide {
+  flex-shrink: 0;
+  width: clamp(280px, 24.58vw, 472px);
+  height: clamp(160px, 15.36vw, 295px);
+  overflow: hidden;
+  position: relative;
+}
+
+.c10__awards-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Image 2 — alignement bas */
+.c10__awards-slide--2 img {
+  object-position: bottom center;
+}
+
+/* Texte sous le slider — centré sur la page, justifié */
+.c10__awards-body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #fff;
+  text-align: justify;
+  text-align-last: center;
+  width: clamp(280px, 24.58vw, 472px);
+  margin: 0 auto;
+}
+
+.c10__awards-body strong {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Awards mobile ≤ 1024px ───────────────────────────── */
+
+@media (max-width: 1024px) {
+  .c10__awards {
+    padding-top: 0;
+  }
+
+  .c10__awards-slider-wrap {
+    padding-left: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .c10__awards-slider-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .c10__awards-slider {
+    will-change: auto;
+  }
+
+  .c10__awards-slide {
+    width: calc(100vw - 40px);
+    height: auto;
+    aspect-ratio: 944 / 590;
+    scroll-snap-align: start;
+  }
+
+  .c10__awards-slider-wrap {
+    scroll-padding-left: 20px;
+  }
+
+  .c10__awards-slide--1 {
+    margin-left: 20px;
+  }
+
+  /* spacer après la dernière slide — margin-right sur flex item ignoré par Safari */
+  .c10__awards-slider::after {
+    content: '';
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .c10__awards-body {
+    width: auto;
+    padding-left: 0;
+    margin: 0 20px;
+  }
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c10__awards-slider-wrap {
+    scroll-padding-left: 40px;
+  }
+
+  .c10__awards-slide {
+    width: calc(100vw - 80px);
+  }
+
+  .c10__awards-slide--1 {
+    margin-left: 40px;
+  }
+
+  .c10__awards-slider::after {
+    width: 40px;
+  }
+
+  .c10__awards-body {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}

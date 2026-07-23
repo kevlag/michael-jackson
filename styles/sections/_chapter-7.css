@@ -1,77 +1,65 @@
 /* ============================================================
    CHAPTER 7 — HIStory / Invincible
-   Référence desktop : 1920px
-   Section height    : 2191px = 114.11vw
    ============================================================ */
+
+/* ══════════════════════════════════════════════════════════════
+   PART 1 — Injustice
+   ══════════════════════════════════════════════════════════════ */
 
 .c7 {
   background-image: url('../../images/chapter-7/chapt7-image-1.png');
-  background-size: 100% auto;       /* image à 100% de largeur, hauteur proportionnelle */
+  background-size: 100% auto;
   background-position: bottom center;
   background-repeat: no-repeat;
   position: relative;
-  min-height: min(114.11vw, 2191px); /* cap à 2191px (valeur 1920px) pour les grands écrans */
+  min-height: min(114.11vw, 2191px);
   overflow: hidden;
 }
-
-/* ── Header : titre centré ───────────────────────────────── */
 
 .c7__header {
   position: relative;
   z-index: 2;
   text-align: center;
-  /* "I'M TIRED OF" commence à top: 321px dans le design */
   padding-top: clamp(80px, 16.72vw, 321px);
 }
 
 .c7__subtitle {
   font-family: var(--font-primary);
-  font-size: clamp(24px, 7.71vw, 148px); /* 148px à 1920px — tient dans 830px */
+  font-size: clamp(24px, 7.71vw, 148px);
   font-weight: 400;
   line-height: 1;
   color: #fff;
   text-transform: uppercase;
   white-space: nowrap;
   max-width: 830px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
+  margin: 0 auto;
 }
 
 .c7__title {
   font-family: var(--font-primary);
-  font-size: clamp(50px, 24.69vw, 474px); /* 474px à 1920px — tient dans 1920px */
+  font-size: clamp(50px, 24.69vw, 474px);
   font-weight: 400;
   line-height: 1;
   color: #fff;
   text-transform: uppercase;
   white-space: nowrap;
   max-width: 1920px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 70px;
+  margin: 0 auto 70px;
 }
-
-/* ── Grid 3 colonnes (left | gap | right) ────────────────── */
-/* 473px | 552px | 473px à 1498px                            */
 
 .c7__grid {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 31.57% 1fr 31.57%; /* 473px | 552px | 473px à 1498px */
+  grid-template-columns: 31.57% 1fr 31.57%;
   max-width: 1498px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding-top: clamp(10px, 1.04vw, 20px);
-  padding-bottom: 0;
 }
-
-/* ── Body text ───────────────────────────────────────────── */
 
 .c7__body {
   font-family: var(--font-secondary);
-  font-size: clamp(16px, 1.04vw, 20px); /* 20px à 1920px, min 16px */
+  font-size: clamp(16px, 1.04vw, 20px);
   font-weight: 400;
   line-height: 1.6;
   color: #fff;
@@ -81,12 +69,10 @@
 .c7__body strong { font-weight: 600; }
 .c7__body em     { font-style: italic; }
 
-/* ── Drop cap ────────────────────────────────────────────── */
-
 .c7__dropcap {
   float: left;
   font-family: var(--font-primary);
-  font-size: clamp(100px, 13.02vw, 250px); /* 250px à 1920px */
+  font-size: clamp(100px, 13.02vw, 250px);
   font-weight: 400;
   line-height: 0.78;
   color: #fff;
@@ -95,20 +81,16 @@
   margin-top: -20px;
 }
 
-/* ── Photo MJ ────────────────────────────────────────────── */
-/*   left: 237px (12.34vw), width: 1709px (88.49vw)          */
-/*   height: 1365px (71.09vw), bottom: 0                     */
-
 .c7__photo {
   position: absolute;
   bottom: 10px;
-  left: min(13.28vw, 255px); /* 255px à 1920px, freezé au-delà */
-  width: 88.91vw;        /* 1709px à 1920px */
+  left: min(13.28vw, 255px);
+  width: 88.91vw;
   max-width: 1709px;
-  aspect-ratio: 1709 / 1365; /* hauteur proportionnelle quand max-width s'applique */
+  aspect-ratio: 1709 / 1365;
   overflow: hidden;
   margin: 0;
-  z-index: 3;            /* devant le texte (z-index 2) */
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -120,7 +102,229 @@
   display: block;
 }
 
-/* ── Intermédiaire (1501px – 1680px) : dropcap débordant + grid padding ── */
+.c7__br { display: inline; }
+
+/* ══════════════════════════════════════════════════════════════
+   PART 2 — Stop pressurin' me
+   ══════════════════════════════════════════════════════════════ */
+
+.c7b {
+  background: #fff;
+  color: #000;
+  position: relative;
+  min-height: min(116.93vw, 2245px);
+  overflow: hidden;
+}
+
+.c7b__quote {
+  position: absolute;
+  top: clamp(40px, 17.45vw, 335px);
+  left: clamp(16px, 16.98vw, 326px);
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 8.85vw, 170px);
+  font-weight: 500;
+  line-height: 1;
+  color: #000;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.c7b__header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: clamp(40px, 17.45vw, 335px);
+}
+
+.c7b__title-line {
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 8.85vw, 170px);
+  font-weight: 500;
+  line-height: 1;
+  color: #000;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.c7b__accent {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-style: italic;
+  color: #f00a14;
+}
+
+.c7b__photo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: clamp(300px, 62.29vw, 1196px);
+  aspect-ratio: 1196 / 1480;
+  margin: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.c7b__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c7b__content {
+  position: absolute;
+  top: calc(clamp(40px, 17.45vw, 335px) + clamp(84px, 26.55vw, 510px));
+  left: 0;
+  z-index: 2;
+  max-width: clamp(300px, calc(37.71vw - 40px), 684px);
+  padding-left: clamp(16px, 10.99vw, 211px);
+  padding-top: clamp(80px, 4.79vw, 150px);
+  padding-bottom: clamp(80px, 4.79vw, 150px);
+}
+
+.c7b__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  margin: 0 0 clamp(20px, 1.56vw, 30px);
+}
+
+.c7b__body strong { font-weight: 600; font-style: italic; }
+
+.c7b__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(80px, 13.54vw, 260px);
+  font-weight: 400;
+  line-height: 0.78;
+  color: #000;
+  margin-right: 30px;
+  margin-top: clamp(-20px, -3.02vw, -58px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PART 3 — HIStory album
+   ══════════════════════════════════════════════════════════════ */
+
+.c7c {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #000;
+}
+
+.c7c__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(20px, 2.08vw, 40px);
+}
+
+.c7c__subtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #be7d82;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 auto;
+}
+
+.c7c__title {
+  font-family: var(--font-primary);
+  font-size: max(48px, 10.42vw);
+  font-weight: 400;
+  line-height: 1;
+  color: #be7d82;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 clamp(10px, 1.04vw, 20px);
+}
+
+.c7c__title em {
+  font-style: italic;
+  text-transform: none;
+}
+
+.c7c__date {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.52vw, 10px);
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 0 auto;
+}
+
+.c7c__cover {
+  width: clamp(100px, 10.42vw, 200px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: auto 0 clamp(20px, 2.08vw, 40px);
+}
+
+.c7c__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c7c__desc {
+  font-family: var(--font-primary);
+  font-size: clamp(16px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  max-width: clamp(240px, 41.67vw, 800px);
+  margin: 0;
+}
+
+.c7c__photo {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c7c__photo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Desktop large (> 1920px) ──────────────────────────────── */
+
+@media (min-width: 1921px) {
+  .c7__photo { left: calc(50vw - 705px); }
+
+  .c7b { min-height: calc(765px + 77.10vw); }
+  .c7b__photo { width: 62.29vw; }
+  .c7b__quote { left: calc(50vw - 635px); }
+  .c7b__content {
+    margin-left: calc(50vw - 960px);
+    max-width: 686px;
+    padding-left: 211px;
+  }
+  .c7b__body { max-width: 475px; }
+}
+
+/* ── Desktop intermédiaire (1501px – 1680px) ───────────────── */
+
 @media (min-width: 1501px) and (max-width: 1680px) {
   .c7__grid {
     max-width: none;
@@ -128,16 +332,12 @@
     padding-left: 40px;
     padding-right: 40px;
   }
-  .c7__dropcap {
-    margin-left: 0;
-    margin-right: 35px;
-  }
-  .c7__photo {
-    width: 78vw;
-  }
+  .c7__dropcap { margin-left: 0; }
+  .c7__photo { width: 78vw; }
 }
 
-/* ── Intermédiaire (1025px – 1500px) : dropcap aligné avec le body ── */
+/* ── Desktop intermédiaire (1025px – 1500px) ───────────────── */
+
 @media (min-width: 1025px) and (max-width: 1500px) {
   .c7__grid {
     max-width: none;
@@ -145,124 +345,139 @@
     padding-left: 40px;
     padding-right: 40px;
   }
-  .c7__dropcap {
-    margin-left: 0;
-    margin-right: 35px;
-  }
-  .c7__photo {
-    width: 68vw;
-  }
+  .c7__dropcap { margin-left: 0; }
+  .c7__photo { width: 68vw; }
 }
 
-/* ── Intermédiaire serré (1025px – 1280px) : texte gauche, photo droite ── */
+/* ── Desktop étroit (1025px – 1280px) ──────────────────────── */
+
 @media (min-width: 1025px) and (max-width: 1280px) {
   .c7__grid {
     grid-template-columns: 1fr 50%;
-    grid-template-areas:
-      "left gap"
-      "right gap";
+    grid-template-areas: "left gap" "right gap";
     gap: 30px 0;
+    padding-bottom: 180px;
   }
   .c7__col--left  { grid-area: left; max-width: 450px; }
   .c7__col--gap   { grid-area: gap; }
   .c7__col--right { grid-area: right; max-width: 450px; }
-  .c7__grid {
-    padding-bottom: 180px;
-  }
-  .c7__photo {
-    left: auto;
-    right: -270px;
-    width: 90vw;
-    bottom: 0;
-  }
+  .c7__photo { left: auto; right: -270px; width: 90vw; bottom: 0; }
+
+  .c7b__content { padding-left: 40px; }
 }
 
-/* ── Grand écran (> 1920px) : photo ancrée sur contenu centré ── */
-@media (min-width: 1921px) {
-  .c7__photo {
-    left: calc(50vw - 705px); /* équivalent à 255px à 1920px, suit le centre */
-  }
+/* ── Desktop (> 1024px) ─────────────────────────────────────── */
+
+@media (min-width: 1025px) {
+  .c7c { min-height: 100vh; }
 }
 
-/* ── Sauts de ligne desktop (cachés sur mobile) ──────────── */
+/* ── Mobile / Tablette (≤ 1024px) ──────────────────────────── */
 
-.c7__br { display: inline; }
-
-@media (max-width: 1500px) {
-  .c7__br { display: none; }
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-/* ── Mobile / Tablette (≤ 1024px) ───────────────────────── */
 @media (max-width: 1024px) {
 
+  /* Part 1 */
   .c7 {
     min-height: auto;
     overflow: visible;
     background-size: cover;
     background-position: top center;
   }
-
-  .c7__header {
-    padding-top: 138px;
-  }
-
-  .c7__subtitle {
-    font-size: 32px;
-  }
-
-  .c7__title {
-    font-size: max(55px, 22.9vw); /* 90px à 393px */
-  }
-
+  .c7__header { padding-top: 138px; }
+  .c7__subtitle { font-size: 32px; }
+  .c7__title { font-size: max(55px, 22.9vw); }
   .c7__grid {
-    grid-template-columns: 1fr; /* colonne unique */
+    grid-template-columns: 1fr;
     padding: 40px 20px 0;
     gap: 30px;
   }
   .c7__col--gap { display: none; }
-
   .c7__dropcap {
-    font-size: clamp(100px, 39.7vw, 156px); /* 156px à 393px */
+    font-size: clamp(100px, 39.7vw, 156px);
     margin-left: 0;
     margin-right: 15px;
     margin-top: 0;
   }
-
-  .c7__body {
-    font-size: 16px;
-  }
-
-  /* Photo : large décentrée vers la droite comme dans le design */
+  .c7__body { font-size: 16px; }
   .c7__photo {
     position: static;
-    width: 208vw;                /* 817/393 ≈ 208vw */
+    width: 208vw;
     height: auto;
     overflow: visible;
     margin-top: 60px;
-    margin-left: calc(-54vw + 16vw); /* centré + décalage 63px ≈ 16vw */
+    margin-left: calc(-54vw + 16vw);
   }
+  .c7__photo img { width: 100%; height: auto; object-fit: unset; object-position: unset; }
+  .c7__br { display: none; }
 
-  .c7__photo img {
+  /* Part 2 */
+  .c7b { min-height: auto; overflow: visible; }
+  .c7b__quote { font-size: max(28px, 10.18vw); top: 110px; left: calc(50% - 36.9vw); }
+  .c7b__header { padding-top: 110px; padding-left: 20px; padding-right: 20px; }
+  .c7b__title-line { font-size: max(28px, 10.18vw); white-space: normal; }
+  .c7b__photo {
+    position: relative;
+    width: 85.75vw;
+    aspect-ratio: 337 / 461;
+    margin: -30px 0 0 14.25vw;
+  }
+  .c7b__photo img { object-fit: cover; }
+  .c7b__content {
+    position: relative;
+    top: auto;
+    left: auto;
+    max-width: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 68px;
+  }
+  .c7b__dropcap {
+    font-size: clamp(100px, 40.2vw, 158px);
+    margin-left: 0;
+    margin-right: 10px;
+    margin-top: 0;
+  }
+  .c7b__body { font-size: 16px; }
+
+  /* Part 3 */
+  .c7c { display: flex; flex-direction: column; }
+  .c7c__content {
+    order: 1;
+    padding: 110px 20px 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  .c7c__subtitle { font-size: clamp(28px, 9.16vw, 36px); margin-bottom: auto; }
+  .c7c__title { font-size: max(70px, 22.9vw); margin-bottom: 8px; }
+  .c7c__date { font-size: clamp(12px, 3.56vw, 14px); margin-bottom: auto; }
+  .c7c__cover { width: clamp(120px, 38.2vw, 150px); margin: auto 0 clamp(20px, 5.1vw, 20px); }
+  .c7c__desc { font-size: clamp(20px, 3.91vw, 30px); max-width: 100%; }
+  .c7c__photo {
+    order: 2;
+    position: relative;
     width: 100%;
-    height: auto;
-    object-fit: unset;
-    object-position: unset;
+    aspect-ratio: 400 / 500;
+    min-height: 300px;
   }
+  .c7c__photo img { position: absolute; width: 100%; height: 115%; top: -5%; left: 0; object-fit: cover; object-position: center top; }
 
 }
 
-/* ── Mobile large (441px – 1024px) ──────────────────────── */
+/* ── Mobile large (441px – 1024px) ─────────────────────────── */
+
 @media (min-width: 441px) and (max-width: 1024px) {
-  .c7__grid  { padding-left: 40px; padding-right: 40px; }
-  .c7__header { padding-left: 40px; padding-right: 40px; }
+  .c7__grid    { padding-left: 40px; padding-right: 40px; }
+  .c7__header  { padding-left: 40px; padding-right: 40px; }
+  .c7b__header { padding-left: 40px; padding-right: 40px; }
+  .c7b__content { padding-left: 40px; padding-right: 40px; }
+  .c7c__content { padding-left: 40px; padding-right: 40px; }
+  .c7c__desc    { max-width: none; }
 }
 
-/* ── Mobile strict (≤ 440px) ────────────────────────────── */
+/* ── Mobile strict (≤ 440px) ────────────────────────────────── */
+
 @media (max-width: 440px) {
-  .c7__header { padding-top: 100px; }
-  .c7__grid { gap: 20px; }
+  .c7__header  { padding-top: 100px; }
+  .c7__grid    { gap: 20px; }
+  .c7b__header { padding-top: 100px; }
 }

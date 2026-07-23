@@ -1,0 +1,331 @@
+/* ============================================================
+   CHAPTER 8 — Lisa Marie Presley
+   Référence desktop : 1920 × 1758px
+   ============================================================ */
+
+.c8 {
+  background: #b9d7fa;
+  position: relative;
+  padding-bottom: clamp(60px, 7.81vw, 150px);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.c8__header {
+  text-align: center;
+  padding-top: clamp(80px, 12.97vw, 249px);
+  padding-left: clamp(20px, 10.99vw, 211px);
+  padding-right: clamp(20px, 10.99vw, 211px);
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.c8__tagline {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Groupe LISA / PRESLEY / MARIE — centré, name-row calé sur les bords du lastname */
+.c8__presley-group {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: calc(-1.2 * clamp(20px, 3.33vw, 64px));
+}
+
+.c8__name-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c8__firstname {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 3.33vw, 64px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.c8__lastname {
+  font-family: var(--font-primary);
+  font-size: max(80px, 23.44vw);
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ── Colonnes texte ──────────────────────────────────────── */
+
+.c8__col {
+  max-width: 475px;
+}
+
+/* ── Grille 3 colonnes : texte | photo | texte ───────────── */
+
+.c8__grid {
+  display: grid;
+  grid-template-columns: 1fr clamp(200px, 27.08vw, 520px) 1fr;
+  gap: 40px;
+  padding: clamp(16px, 1.3vw, 25px) clamp(20px, 10.99vw, 211px) 0;
+  align-items: start;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* ── Body text ───────────────────────────────────────────── */
+
+.c8__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  text-align-last: center;
+  margin: 0 0 30px;
+}
+
+.c8__body:last-child { margin-bottom: 0; }
+
+.c8__body strong {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Photo ───────────────────────────────────────────────── */
+
+.c8__photo {
+  margin: 0;
+  overflow: hidden;
+}
+
+.c8__photo img {
+  width: 100%;
+  aspect-ratio: 472 / 637;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Line break desktop uniquement ──────────────────────── */
+
+.c8__br { display: inline; }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+
+  .c8__header {
+    padding-top: 110px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .c8__tagline {
+    font-size: max(36px, 9.16vw);
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 30px;
+  }
+  .c8__firstname { font-size: max(36px, 9.16vw); }
+
+  /* Sur mobile, le groupe LISA/PRESLEY/MARIE revient en flux naturel */
+  .c8__presley-group { margin-top: 0; }
+
+  .c8__lastname { font-size: max(70px, 26.72vw); } /* 105px à 393px */
+
+  .c8__body { margin-bottom: 20px; }
+
+  .c8__col { max-width: none; }
+
+  .c8__grid {
+    grid-template-columns: 1fr;
+    padding: 30px 20px 0;
+    gap: 30px;
+    justify-items: center;
+  }
+
+  .c8__col:first-child { order: 1; }
+  .c8__photo           { order: 2; }
+  .c8__col:last-child  { order: 3; }
+
+  .c8__body { font-size: 16px; }
+  .c8__br   { display: none; }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c8__header { padding-left: 40px; padding-right: 40px; }
+  .c8__grid   { padding-left: 40px; padding-right: 40px; }
+  .c8__tagline { margin-left: -40px; margin-right: -40px; }
+}
+
+@media (max-width: 768px) {
+  .c8__body { text-align: center; text-align-last: center; }
+}
+
+@media (max-width: 440px) {
+  .c8__header { padding-top: 100px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PART 2 — Invincible album
+   ══════════════════════════════════════════════════════════ */
+
+.c8b {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #000;
+}
+
+.c8b__photo {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.c8b__photo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.c8b__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:
+    clamp(40px, 8.96vw, 172px)
+    clamp(20px, 2.08vw, 40px)
+    clamp(40px, 7.71vw, 80px);
+}
+
+.c8b__title {
+  font-family: var(--font-primary);
+  font-size: max(48px, 10.42vw);
+  font-weight: 400;
+  line-height: 1;
+  color: #b9d7fa;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.c8b__date {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.52vw, 10px);
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+.c8b__cover {
+  width: clamp(100px, 10.42vw, 200px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: auto auto 40px;
+  align-self: center;
+}
+
+.c8b__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c8b__desc {
+  font-family: var(--font-primary);
+  font-size: clamp(16px, 1.56vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  max-width: clamp(240px, 41.67vw, 800px);
+  margin: 0;
+}
+
+/* ── Desktop (> 1024px) ─────────────────────────────────── */
+
+@media (min-width: 1025px) {
+  .c8b { min-height: 100vh; }
+}
+
+/* ── Mobile / Tablette (≤ 1024px) ──────────────────────── */
+
+@media (max-width: 1024px) {
+
+  .c8b { display: flex; flex-direction: column; }
+
+  .c8b__content {
+    order: 1;
+    padding: clamp(100px, 66vw, 260px) 20px 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .c8b__title {
+    font-size: max(70px, 22.9vw);
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
+
+  .c8b__date { font-size: clamp(12px, 3.56vw, 14px); margin-bottom: auto; }
+
+  .c8b__cover {
+    width: clamp(120px, 38.2vw, 150px);
+    margin: auto 0 clamp(20px, 5.1vw, 20px);
+  }
+
+  .c8b__desc { font-size: clamp(20px, 3.91vw, 30px); max-width: 100%; }
+
+  .c8b__photo {
+    order: 2;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 393 / 492;
+    min-height: 300px;
+  }
+
+  .c8b__photo img {
+    position: absolute;
+    width: 100%;
+    height: 115%;
+    top: -5%;
+    left: 0;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c8b__content { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (max-width: 440px) {
+  .c8b__content { padding-top: 100px; }
+}

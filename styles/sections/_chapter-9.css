@@ -1,0 +1,390 @@
+/* ============================================================
+   CHAPTER 9 — Michael's Death (2009)
+   Référence desktop : 1920 × 2026px
+   ============================================================ */
+
+.c9 {
+  position: relative;
+  background: #dccdc3;
+  min-height: min(100.31vw, 1926px);
+}
+
+/* ── Background ──────────────────────────────────────────── */
+
+.c9__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.c9__bg img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: max(100%, 100vh);
+  object-fit: cover;
+  object-position: bottom center;
+  display: block;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+
+.c9__hero {
+  position: relative;
+}
+
+/* ── Titre desktop ───────────────────────────────────────── */
+
+.c9__title-block {
+  text-align: center;
+  padding-top: clamp(140px, 12.97vw, 250px);
+}
+
+.c9__title {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1;
+  color: #ff4d00;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.c9__title--michael {
+  font-size: clamp(100px, 15.63vw, 300px);
+  position: relative;
+  z-index: 3;
+}
+
+.c9__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-left: clamp(20px, 2.083vw, 40px);
+  padding-right: clamp(65px, 6.771vw, 130px);
+}
+
+.c9__title--died,
+.c9__title--june  { font-size: clamp(60px, 13.02vw, 250px); }
+.c9__title--age   { font-size: clamp(60px, 13.02vw, 250px); position: relative; z-index: 3; }
+
+/* ── Titre mobile ────────────────────────────────────────── */
+
+.c9__title-mobile {
+  display: none;
+  font-family: var(--font-primary);
+  font-size: clamp(48px, 14.45vw, 148px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ff4d00;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+
+/* ── Date ─────────────────────────────────────────────────── */
+
+.c9__date {
+  position: absolute;
+  right: clamp(20px, 2.083vw, 40px);
+  top: clamp(200px, 29.64vw, 569px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-secondary);
+  font-size: clamp(11px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+  z-index: 3;
+}
+
+/* ── Portrait MJ ─────────────────────────────────────────── */
+
+.c9__portrait {
+  position: absolute;
+  left: 30.94vw;
+  bottom: 0;
+  width: clamp(300px, 37.45vw, 719px);
+  z-index: 2;
+  margin: 0;
+  pointer-events: none;
+}
+
+.c9__portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Photos décoratives ──────────────────────────────────── */
+
+.c9__deco {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+.c9__deco img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.c9__deco::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #dccdc3;
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+.c9__deco--1 {
+  width: clamp(60px, 8.91vw, 171px);
+  aspect-ratio: 1;
+  right: clamp(20px, 17.81vw, 342px);
+  top: clamp(40px, 9.84vw, 189px);
+  z-index: 4;
+}
+
+.c9__deco--2 {
+  width: clamp(60px, 8.91vw, 171px);
+  aspect-ratio: 171 / 214;
+  left: clamp(20px, 10.99vw, 211px);
+  top: clamp(200px, 35.31vw, 678px);
+}
+
+.c9__deco--3 {
+  position: relative;
+  width: clamp(150px, 15.73vw, 302px);
+  aspect-ratio: 302 / 189;
+  left: clamp(50px, 5.208vw, 100px);
+  top: clamp(-75px, -7.813vw, -50px);
+}
+
+.c9__deco--4 {
+  left: clamp(200px, 28.80vw, 553px);
+  bottom: clamp(20px, 10.99vw, 211px);
+  width: clamp(80px, 8.91vw, 171px);
+  aspect-ratio: 1;
+}
+
+/* ── Zone de contenu (grille texte) ─────────────────────── */
+
+.c9__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: clamp(200px, 24.64vw, 473px) 1fr clamp(200px, 24.64vw, 473px);
+  padding: clamp(40px, 4.17vw, 80px) max(40px, 2.08vw) clamp(150px, 15.63vw, 300px);
+  align-items: center;
+}
+
+.c9__col--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(10px, 2.08vw, 40px);
+  align-self: stretch;
+}
+
+/* ── Corps de texte ───────────────────────────────────────── */
+
+.c9__body {
+  font-family: var(--font-secondary);
+  font-size: clamp(16px, 1.04vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  text-align: justify;
+  margin: 0 0 clamp(20px, 2.08vw, 40px);
+}
+
+.c9__body:last-child { margin-bottom: 0; }
+
+.c9__body strong {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ── Lettrine ─────────────────────────────────────────────── */
+
+.c9__dropcap {
+  float: left;
+  font-family: var(--font-primary);
+  font-size: clamp(100px, 10.42vw, 200px);
+  font-weight: 400;
+  line-height: 0.78;
+  color: #000;
+  margin-left: clamp(30px, 3.125vw, 60px);
+  margin-right: clamp(17px, 1.823vw, 35px);
+  margin-top: clamp(-25px, -2.604vw, -10px);
+  margin-bottom: clamp(22px, 2.344vw, 45px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Très grands écrans (> 1920px) ──────────────────────── */
+
+@media (min-width: 1921px) {
+  .c9 {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+
+  /* c9__bg déborde du conteneur pour couvrir tout l'écran */
+  .c9__bg {
+    left: calc((100vw - 1920px) / -2);
+    right: calc((100vw - 1920px) / -2);
+    width: 100vw;
+  }
+
+  /* Figer les positions vw non cappées par clamp() */
+  .c9__portrait {
+    left: 594px; /* 30.94vw × 1920 */
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .c9 {
+    min-height: auto;
+    background: #dccdc3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Fond : couvre toute la hauteur de la section */
+  .c9__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Hero : flux normal, hauteur auto (le titre seul détermine la hauteur) */
+  .c9__hero {
+    position: relative;
+    z-index: 1;
+    order: 1;
+    margin-top: 0;
+    padding: 140px 20px 60px;
+    box-sizing: border-box;
+  }
+
+  .c9__title-block  { display: none; }
+  .c9__title-mobile { display: block; }
+  .c9__date         { display: none; }
+
+  /* Decos dans le hero */
+  .c9__deco--1 {
+    width: clamp(44px, 11.73vw, 90px);
+    aspect-ratio: 1;
+    right: auto;
+    left: 54%;
+    top: calc(140px - clamp(44px, 11.73vw, 90px) - 2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    z-index: 4;
+  }
+
+  .c9__deco--2 {
+    width: clamp(74px, 19.73vw, 152px);
+    aspect-ratio: 104 / 130;
+    left: 20px;
+    top: clamp(285px, 75.73vw, 310px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    z-index: 4;
+  }
+
+  .c9__content {
+    position: relative;
+    z-index: 1;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 50px 20px 0;
+    gap: 0;
+  }
+
+  .c9__col--left  { order: 1; }
+  .c9__col--center {
+    order: 2;
+    display: block;
+    padding: 0;
+    align-self: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .c9__col--right { order: 3; }
+
+  /* Deco--3 et deco--4 dans le flux du contenu */
+  .c9__deco--3 {
+    position: relative;
+    width: clamp(180px, 48vw, 370px);
+    aspect-ratio: 229 / 143;
+    left: 0; top: auto;
+    margin: 40px 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+
+  .c9__deco--4 {
+    position: relative;
+    order: 4;
+    width: clamp(80px, 21.33vw, 164px);
+    aspect-ratio: 1;
+    left: auto; top: auto; bottom: auto;
+    margin: 50% 0 0 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Portrait en bas, flux normal, après le contenu */
+  .c9__portrait {
+    position: relative;
+    order: 3;
+    left: auto; right: auto; top: auto; bottom: auto;
+    transform: none;
+    width: 50%;
+    height: auto;
+    margin: -58% auto 0 auto;
+    z-index: 0;
+  }
+
+  .c9__portrait img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .c9__dropcap {
+    font-size: clamp(80px, 30.53vw, 120px);
+    margin-right: 15px;
+    margin-top: -20px;
+    margin-left:0;
+  }
+
+  .c9__body { font-size: 16px; }
+
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .c9__hero    { padding-left: 40px; padding-right: 40px; }
+  .c9__content { padding-left: 40px; padding-right: 40px; }
+  /* Ajuste la fonte pour compenser les 40px de padding (sinon wrap à 441-480px) */
+  .c9__title-mobile { font-size: clamp(48px, calc(16.8vw - 14px), 148px); }
+}
+
+@media (max-width: 440px) {
+  .c9__hero { padding-top: 140px; }
+  .c9__deco--2 { left: 10px; }
+}
