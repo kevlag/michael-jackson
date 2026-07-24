@@ -260,6 +260,15 @@
 
 /* ── ≤ 440px — gap réduit à 10px ────────────────────────── */
 @media (max-width: 440px) {
+  .hero__dates-paren {
+    font-size: 12px;
+  }
+
+  .hero__dates-text,
+  .hero__dates-text p {
+    font-size: 12px;
+  }
+
   .hero__chapters {
     gap: 10px;
   }
