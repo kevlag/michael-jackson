@@ -401,7 +401,7 @@
   .c7__dropcap {
     font-size: clamp(156px, 40vw, 220px);
     margin-left: 35px;
-    margin-right: 15px;
+    margin-right: 20px;
     margin-top: 0;
   }
   .c7__body { font-size: 16px; }
@@ -444,7 +444,7 @@
   .c7b__dropcap {
     font-size: clamp(156px, 40vw, 220px);
     margin-left: 35px;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-top: 0;
   }
   .c7b__body { font-size: 16px; }
