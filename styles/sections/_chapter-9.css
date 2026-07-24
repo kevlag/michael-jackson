@@ -223,7 +223,7 @@
   font-family: var(--font-primary);
   font-size: clamp(100px, 10.42vw, 200px);
   font-weight: 400;
-  line-height: 0.78;
+  line-height: 1;
   color: #000;
   margin-left: clamp(30px, 3.125vw, 60px);
   margin-right: clamp(17px, 1.823vw, 35px);

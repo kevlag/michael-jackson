@@ -81,7 +81,7 @@
   font-family: var(--font-primary);
   font-size: clamp(132px, calc(113px + 4.26vw), 195px);
   font-weight: 400;
-  line-height: 0.78;
+  line-height: 1;
   color: #000;
   margin-right: 40px;
   margin-top: -15px;

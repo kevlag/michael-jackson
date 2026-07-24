@@ -75,7 +75,7 @@
   font-family: var(--font-primary);
   font-size: clamp(80px, 13.02vw, 250px);
   font-weight: 400;
-  line-height: 0.82; /* crops excess whitespace above glyph */
+  line-height: 1;
   color: #000;
   margin-top: -40px;
   margin-left: -40px;

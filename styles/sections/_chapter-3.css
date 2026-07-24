@@ -91,7 +91,7 @@
   float: left;
   font-family: var(--font-primary);
   font-size: clamp(80px, 13.28vw, 255px); /* 255/1920 */
-  line-height: 0.82;
+  line-height: 1;
   color: #000;
   margin-top: -40px;
   margin-left: -40px;
