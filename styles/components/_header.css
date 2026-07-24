@@ -116,6 +116,10 @@
 
 @media (max-width: 1439px) {
   .site-header__chapter-title {
+    font-size: 24px;
+  }
+
+  .site-header__chapter-num {
     font-size: 14px;
   }
 }
