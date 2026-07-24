@@ -168,6 +168,9 @@
     font-size: clamp(30px, 9.16vw, 36px);
     text-indent: 2.7em;
     margin-bottom: 0;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .c6__intro + .c6__body { margin-top: 40px; }
