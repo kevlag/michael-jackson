@@ -64,7 +64,7 @@
 
 /* ── Drop cap ────────────────────────────────────────────── */
 
-.c1__right::after {
+.c1__intro::after {
   content: '';
   display: table;
   clear: both;
