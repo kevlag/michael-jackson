@@ -83,6 +83,10 @@
 
 /* ── Body text ───────────────────────────────────────────── */
 
+.c1__intro {
+  text-align: justify;
+}
+
 .c1__intro p {
   display: inline;
 }
