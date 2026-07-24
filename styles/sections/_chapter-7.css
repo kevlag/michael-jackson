@@ -385,7 +385,10 @@
   }
   .c7__header { padding-top: 138px; }
   .c7__subtitle { font-size: 32px; }
-  .c7__title { font-size: max(55px, 22.9vw); }
+  .c7__title {
+    font-size: max(55px, 22.9vw);
+    white-space: normal;
+  }
   .c7__grid {
     grid-template-columns: 1fr;
     padding: 40px 20px 0;
