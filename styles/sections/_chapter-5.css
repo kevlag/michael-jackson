@@ -164,6 +164,7 @@
 
   .c5__body:has(.c5__dropcap) {
     padding-top: clamp(50px, 6.25vw, 80px);
+    margin-bottom: 0;
   }
 
   .c5__dropcap {
@@ -184,11 +185,7 @@
     text-align-last: left;
   }
 
-  .c5__body:has(.c5__dropcap) {
-    margin-bottom: 0;
-  }
-
-.c5__small-images {
+  .c5__small-images {
     clear: left;
     max-width: none;
     margin-left: 0;
