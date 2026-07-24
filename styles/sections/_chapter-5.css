@@ -163,7 +163,7 @@
   }
 
   .c5__body:has(.c5__dropcap) {
-    padding-top: clamp(50px, 6.25vw, 80px);
+    padding-top: 0;
     margin-bottom: 0;
   }
 
