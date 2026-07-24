@@ -186,11 +186,15 @@
   }
 
   .c2__dropcap {
-    font-size: clamp(80px, 30.5vw, 120px);
+    font-size: clamp(156px, 40vw, 220px);
     line-height: 1.2;
-    margin-top: -30px;
-    margin-left: 120px;
+    margin-top: 0;
+    margin-left: 35px;
     margin-right: 20px;
+  }
+
+  .c2__intro-body {
+    padding-top: clamp(50px, 6.25vw, 80px);
   }
 
   .c2__intro-body,
@@ -256,6 +260,11 @@
   .c2__bloc--inline:last-child { margin-bottom: 40px; }
 
   .c2__right { display: none; }
+}
+
+/* ── Tablet portrait (769px – 1024px) — padding 80px ────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c2__left { padding-left: 80px; padding-right: 80px; }
 }
 
 /* ── Mobile large (441px – 768px) — padding 40px ────────────── */

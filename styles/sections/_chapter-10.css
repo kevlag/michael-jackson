@@ -195,6 +195,13 @@
   }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c10__content {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════
    SECTION AWARDS (Grammy)
    Référence desktop : 1920 × 1430px
@@ -348,4 +355,12 @@
     margin-left: 40px;
     margin-right: 40px;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c10__awards-slider-wrap { scroll-padding-left: 80px; }
+  .c10__awards-slide       { width: calc(100vw - 160px); }
+  .c10__awards-slide--1    { margin-left: 80px; }
+  .c10__awards-slider::after { width: 80px; }
+  .c10__awards-body        { margin-left: 80px; margin-right: 80px; }
 }

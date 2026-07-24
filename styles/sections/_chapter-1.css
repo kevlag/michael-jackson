@@ -193,3 +193,8 @@
     padding: 20px 20px 80px 20px;
   }
 }
+
+/* ── Tablet portrait (769px – 1024px) — padding 80px ───── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c1 { padding-left: 80px; padding-right: 80px; }
+}

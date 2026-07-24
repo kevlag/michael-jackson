@@ -275,10 +275,14 @@
 
   /* Drop cap mobile */
   .c3__dropcap {
-    font-size: clamp(100px, 39.44vw, 155px); /* 155/393 */
+    font-size: clamp(156px, 40vw, 220px);
     margin-top: 0;
-    margin-left: 0;
+    margin-left: 35px;
     margin-right: 12px;
+  }
+
+  .c3__intro {
+    padding-top: clamp(50px, 6.25vw, 80px);
   }
 
   /* Corps mobile */
@@ -345,6 +349,12 @@
 @media (min-width: 441px) and (max-width: 1024px) {
   .c3__part1 { padding-left: 40px; padding-right: 40px; }
   .c3__album  { padding-left: 40px; padding-right: 40px; }
+}
+
+/* ── Tablet portrait (769px – 1024px) — padding 80px ────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c3__part1 { padding-left: 80px; padding-right: 80px; }
+  .c3__album  { padding-left: 80px; padding-right: 80px; }
 }
 
 /* ── Mobile strict (≤ 768px) ────────────────────────────── */

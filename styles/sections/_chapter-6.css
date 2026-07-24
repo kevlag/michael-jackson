@@ -172,9 +172,14 @@
 
   .c6__intro + .c6__body { margin-top: 40px; }
 
+  .c6__body:has(.c6__dropcap) {
+    padding-top: clamp(50px, 6.25vw, 80px);
+  }
+
   .c6__dropcap {
-    font-size: clamp(80px, 25.4vw, 100px);
+    font-size: clamp(156px, 40vw, 220px);
     margin-top: 0;
+    margin-left: 35px;
     margin-right: 15px;
   }
 
@@ -198,6 +203,12 @@
 @media (min-width: 441px) and (max-width: 1024px) {
   .c6__left    { padding-left: 40px; padding-right: 40px; }
   .c6__content { padding-left: 40px; padding-right: 40px; }
+}
+
+/* ── Tablet portrait (769px – 1024px) — padding 80px ────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c6__left    { padding-left: 80px; padding-right: 80px; }
+  .c6__content { padding-left: 80px; padding-right: 80px; }
 }
 
 /* ── Mobile strict (≤ 440px) ────────────────────────────── */
@@ -355,6 +366,10 @@
 
 @media (min-width: 441px) and (max-width: 1024px) {
   .c6__album { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c6__album { padding-left: 80px; padding-right: 80px; }
 }
 
 @media (max-width: 440px) {

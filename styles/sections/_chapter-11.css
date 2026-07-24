@@ -68,14 +68,14 @@
 
 /* ── Grande lettrine "T" ─────────────────────────────────── */
 
-.c11__t-cap {
+.c11__dropcap {
   float: left;
   font-family: var(--font-primary);
   font-size: clamp(160px, 13.02vw, 250px);
   font-weight: 400;
   line-height: 1;
   color: #000;
-  margin-right: clamp(6px, 0.52vw, 10px);
+  margin-right: clamp(20px, 0.52vw, 40px);
   margin-top: 0;
 }
 
@@ -248,9 +248,16 @@
   flex-direction: column;
 }
 
-.site-footer__credits > div span:last-child {
+.site-footer__credits > div span:last-child,
+.site-footer__credits > div a {
   font-weight: 400;
   text-transform: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer__credits > div a:hover {
+  text-decoration: underline;
 }
 
 .site-footer__credits-center {
@@ -266,6 +273,30 @@
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 1024px) {
+
+  .c11__hero {
+    padding: 0 20px;
+  }
+
+  .c11__subtitle {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .c11__body {
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .c11__dropcap {
+    font-size: clamp(156px, 40vw, 220px);
+    margin-top: clamp(50px, 6.25vw, 80px);
+    margin-left: 35px;
+  }
+
+  .c11__subtitle {
+    margin-top: 30px;
+  }
 
   .site-footer {
     min-height: 0;
@@ -327,10 +358,6 @@
     /* overflow:hidden et aspect-ratio:944/1344 conservés depuis les règles desktop */
   }
 
-  .c11__body {
-    text-align: justify;
-    text-align-last: center;
-  }
 
 }
 
@@ -341,8 +368,26 @@
   }
   .c11__col--right  { margin-top: 40px; }
   .c11__col--images { margin-top: 60px; }
+  .c11__hero {
+    padding: 0 40px;
+  }
+
+  .c11__subtitle {
+    padding: 0 40px;
+  }
+
   /* padding-top footer = H/2 + 40px de marge, colonnes à 80px de padding total */
   .site-footer__isit-wrapper {
     padding-top: calc((100vw - 80px) * 672 / 944 + 40px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c11__content  { padding-left: 80px; padding-right: 80px; }
+  .c11__hero     { padding: 0 80px; }
+  .c11__subtitle { padding: 0 80px; }
+  /* padding-top footer = H/2 + 40px de marge, colonnes à 160px de padding total */
+  .site-footer__isit-wrapper {
+    padding-top: calc((100vw - 160px) * 672 / 944 + 40px);
   }
 }

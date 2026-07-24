@@ -482,6 +482,14 @@
   .c7c__desc    { max-width: none; }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .c7__grid     { padding-left: 80px; padding-right: 80px; }
+  .c7__header   { padding-left: 80px; padding-right: 80px; }
+  .c7b__header  { padding-left: 80px; padding-right: 80px; }
+  .c7b__content { padding-left: 80px; padding-right: 80px; }
+  .c7c__content { padding-left: 80px; padding-right: 80px; }
+}
+
 /* ── Mobile strict (≤ 440px) ────────────────────────────────── */
 
 @media (max-width: 440px) {
