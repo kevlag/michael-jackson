@@ -183,6 +183,10 @@
     text-align-last: left;
   }
 
+  .c5__body:has(.c5__dropcap) {
+    margin-bottom: 0;
+  }
+
 .c5__small-images {
     clear: left;
     max-width: none;
