@@ -14,6 +14,7 @@
   justify-content: space-between;
   padding: 40px;
   pointer-events: none; /* laisse passer les clics sauf sur les éléments interactifs */
+  mix-blend-mode: difference;
 }
 
 .site-header__mj-logo,
@@ -32,6 +33,7 @@
   width: 100%;
   height: auto;
   display: block;
+  filter: invert(1);
 }
 
 /* ── Center block (menu + chapter indicator) ─────────────── */
@@ -57,7 +59,7 @@
   display: block;
   height: 1.5px;
   width: clamp(80px, 5.21vw, 100px);
-  background-color: #000;
+  background-color: #fff;
 }
 
 /* ── King of Pop Logo (top-right) ────────────────────────── */
@@ -70,6 +72,7 @@
   width: 100%;
   height: auto;
   display: block;
+  filter: invert(1);
 }
 
 /* ── Chapter indicator ───────────────────────────────────── */
@@ -93,7 +96,7 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 1;
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 4px;
@@ -104,7 +107,7 @@
   font-size: 30px;
   font-weight: 400;
   line-height: 1.2;
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
   display: -webkit-box;
   -webkit-line-clamp: 2;
