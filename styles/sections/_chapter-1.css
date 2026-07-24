@@ -83,6 +83,10 @@
 
 /* ── Body text ───────────────────────────────────────────── */
 
+.c1__intro p {
+  display: inline;
+}
+
 .c1__intro-body,
 .c1__body {
   font-family: var(--font-secondary);
