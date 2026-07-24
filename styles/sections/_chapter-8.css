@@ -129,6 +129,8 @@
 
 @media (max-width: 1024px) {
 
+  .c8 { padding-bottom: 80px; }
+
   .c8__header {
     padding-top: 140px;
     padding-left: 20px;
