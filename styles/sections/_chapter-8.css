@@ -163,7 +163,7 @@
   .c8__photo           { order: 2; }
   .c8__col:last-child  { order: 3; }
 
-  .c8__body { font-size: 16px; text-align: justify; text-align-last: left; }
+  .c8__body { font-size: 16px; text-align: justify; text-align-last: center; }
   .c8__br   { display: none; }
 
 }
@@ -181,7 +181,7 @@
 }
 
 @media (max-width: 768px) {
-  .c8__body { text-align: justify; text-align-last: left; }
+  .c8__body { text-align: justify; text-align-last: center; }
 }
 
 @media (max-width: 440px) {
