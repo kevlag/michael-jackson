@@ -184,6 +184,7 @@
   }
 
 .c5__small-images {
+    clear: left;
     max-width: none;
     margin-left: 0;
     margin-right: 0;
