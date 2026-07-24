@@ -1198,7 +1198,7 @@
 
         <!-- Colonne gauche : "T" lettrine + texte -->
         <div class="c11__col c11__col--left">
-          <span class="c11__t-cap" aria-hidden="true">T</span>
+          <span class="c11__dropcap" aria-hidden="true">T</span>
           <p class="c11__body">
             he film, which features a compilation of interviews, rehearsals, and backstage footage
             of its star, made <strong>$23 million</strong> in its opening weekend and went on to
@@ -1285,11 +1285,11 @@
         <div class="site-footer__credits">
           <div class="site-footer__credits-left">
             <span>Design</span>
-            <span>www.kevinlagier.com</span>
+            <a href="https://www.kevinlagier.com" target="_blank" rel="noopener">www.kevinlagier.com</a>
           </div>
           <div class="site-footer__credits-center">
             <span>Sources</span>
-            <span>www.biography.com</span>
+            <a href="https://www.biography.com" target="_blank" rel="noopener">www.biography.com</a>
           </div>
           <div class="site-footer__credits-right">
             <span>@2026</span>
@@ -1588,19 +1588,53 @@
         clone.style.cssText = [
           'position:fixed', 'top:-9999px', 'left:-9999px',
           'visibility:hidden', 'white-space:nowrap',
-          'font-size:100px', 'pointer-events:none'
+          'font-size:100px', 'padding:0', 'pointer-events:none'
         ].join(';');
         document.body.appendChild(clone);
         var textW = clone.getBoundingClientRect().width;
         document.body.removeChild(clone);
         if (!textW) return;
-        var targetW = Math.min(document.documentElement.clientWidth, 1840);
+        var cs = window.getComputedStyle(hero);
+        var targetW = Math.min(hero.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), 1840);
         hero.style.fontSize = (100 * targetW / textW) + 'px';
       }
 
       if (document.readyState === 'complete') { fitHero(); }
       else { window.addEventListener('load', fitHero); }
       window.addEventListener('resize', fitHero, { passive: true });
+    })();
+  </script>
+
+  <script>
+    /* c7__title — fit "Injustice" to full container width on mobile */
+    (function () {
+      var title = document.querySelector('.c7__title');
+      if (!title) return;
+
+      function fitTitle() {
+        if (window.innerWidth > 1024) {
+          title.style.fontSize = '';
+          return;
+        }
+        var clone = title.cloneNode(true);
+        clone.style.cssText = [
+          'position:fixed', 'top:-9999px', 'left:-9999px',
+          'visibility:hidden', 'white-space:nowrap',
+          'font-size:100px', 'padding:0', 'pointer-events:none'
+        ].join(';');
+        document.body.appendChild(clone);
+        var textW = clone.getBoundingClientRect().width;
+        document.body.removeChild(clone);
+        if (!textW) return;
+        var parent = title.parentElement;
+        var cs = window.getComputedStyle(parent);
+        var targetW = parent.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        title.style.fontSize = (100 * targetW / textW) + 'px';
+      }
+
+      if (document.readyState === 'complete') { fitTitle(); }
+      else { window.addEventListener('load', fitTitle); }
+      window.addEventListener('resize', fitTitle, { passive: true });
     })();
   </script>
 
@@ -1713,7 +1747,7 @@
           var scrollY   = window.scrollY;
           var vh        = window.innerHeight;
           var scrollMax = document.documentElement.scrollHeight - vh;
-          var animStart = colPageY - vh;
+          var animStart = colPageY - vh + 100;
           var animRange = Math.max(1, scrollMax - animStart);
           var progress  = Math.max(0, Math.min(1, (scrollY - animStart) / animRange));
           track.style.transform = 'translateY(' + (-progress * totalTranslate) + 'px)';

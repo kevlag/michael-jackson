@@ -386,7 +386,6 @@
   .c7__header { padding-top: 138px; }
   .c7__subtitle { font-size: 32px; }
   .c7__title {
-    font-size: clamp(40px, 15vw, 474px);
     white-space: nowrap;
   }
   .c7__grid {
