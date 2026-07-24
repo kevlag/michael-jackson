@@ -162,7 +162,7 @@
 
   .c1__dropcap {
     font-size: clamp(156px, 40vw, 220px);
-    margin-left: 0;
+    margin-left: 35px;
   }
 
   .c1__intro-body {
