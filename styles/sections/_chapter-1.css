@@ -64,20 +64,21 @@
 
 /* ── Drop cap ────────────────────────────────────────────── */
 
-.c1__intro {
-  display: flex;
-  align-items: flex-end;
-  gap: 40px;
+.c1__right::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 .c1__dropcap {
-  flex-shrink: 0;
+  float: left;
   font-family: var(--font-primary);
   font-size: clamp(80px, 13.02vw, 250px);
   font-weight: 400;
   line-height: 1;
   color: #000;
   margin-left: -40px;
+  margin-right: 20px;
 }
 
 /* ── Body text ───────────────────────────────────────────── */
@@ -156,17 +157,10 @@
     padding-right: 0;
   }
 
-  .c1__intro {
-    gap: 20px;
-  }
-
   .c1__dropcap {
     font-size: clamp(156px, 40vw, 220px);
     margin-left: 35px;
-  }
-
-  .c1__intro-body {
-    padding-top: 0;
+    margin-right: 20px;
   }
 
   .c1__intro-body,
@@ -176,10 +170,6 @@
 
   .c1__body + .c1__body {
     margin-top: 20px;
-  }
-
-  .c1__intro + .c1__body {
-    margin-top: 0;
   }
 
   .c1__photo--2 {
