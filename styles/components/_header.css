@@ -34,6 +34,16 @@
   display: block;
 }
 
+/* ── Center block (menu + chapter indicator) ─────────────── */
+
+.site-header__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: all;
+}
+
 /* ── Menu Icon (center) ──────────────────────────────────── */
 
 .site-header__menu {
@@ -62,7 +72,49 @@
   display: block;
 }
 
+/* ── Chapter indicator ───────────────────────────────────── */
+
+.site-header__chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: clamp(160px, 14.58vw, 280px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.site-header__chapter.is-visible {
+  opacity: 1;
+}
+
+.site-header__chapter-num {
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.site-header__chapter-title {
+  font-family: var(--font-primary);
+  font-size: clamp(14px, 0.94vw, 18px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  text-transform: uppercase;
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .site-header__chapter {
+    display: none;
+  }
+}
 
 @media (max-width: 768px) {
   .site-header {
