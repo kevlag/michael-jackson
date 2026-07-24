@@ -425,7 +425,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 337 / 461;
-    margin: -30px 0 0 0;
+    margin: -30px 0 40px 0;
   }
   .c7b__photo img { object-fit: cover; }
   .c7b__content {
