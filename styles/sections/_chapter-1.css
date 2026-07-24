@@ -64,22 +64,20 @@
 
 /* ── Drop cap ────────────────────────────────────────────── */
 
-.c1__intro::after {
-  content: '';
-  display: table;
-  clear: both;
+.c1__intro {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
 }
 
 .c1__dropcap {
-  float: left;
+  flex-shrink: 0;
   font-family: var(--font-primary);
   font-size: clamp(80px, 13.02vw, 250px);
   font-weight: 400;
   line-height: 1;
   color: #000;
-  margin-top: -40px;
   margin-left: -40px;
-  margin-right: 40px;
 }
 
 /* ── Body text ───────────────────────────────────────────── */
@@ -158,15 +156,17 @@
     padding-right:0;
   }
 
+  .c1__intro {
+    gap: 20px;
+  }
+
   .c1__dropcap {
     font-size: clamp(156px, 40vw, 220px);
-    margin-top: 0;
-    margin-left: 35px;
-    margin-right: 20px;
+    margin-left: 0;
   }
 
   .c1__intro-body {
-    padding-top: clamp(50px, 6.25vw, 80px);
+    padding-top: 0;
   }
 
   .c1__intro-body,
