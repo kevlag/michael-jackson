@@ -21,7 +21,6 @@
 .hero__center {
   flex: 1 1 0;
   min-height: 0;
-  overflow: hidden;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -53,7 +52,7 @@
 
 .hero__story-text {
   font-family: var(--font-primary);
-  font-size: clamp(24px, 1.5625vw, 30px);
+  font-size: min(clamp(24px, 1.5625vw, 30px), clamp(12px, 2.5vh, 30px));
   font-weight: 400;
   line-height: 1.2;
   color: #000;
@@ -66,14 +65,14 @@
 .hero__title {
   width: 100vw;
   font-family: var(--font-primary);
-  font-size: min(clamp(60px, 15.625vw, 500px), calc((max(100vh, 600px) - 360px) / 2));
+  font-size: min(clamp(60px, 15.625vw, 500px), calc((max(100vh, 600px) - 310px) / 2));
   font-weight: 400;
   line-height: 1;
   color: #000;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
-  margin-bottom: 30px;
+  margin-bottom: clamp(10px, 3vh, 30px);
 }
 
 /* ── Dates ───────────────────────────────────────────────── */
@@ -87,7 +86,7 @@
 
 .hero__dates-paren {
   font-family: var(--font-secondary);
-  font-size: clamp(16px, 1.25vw, 24px);
+  font-size: min(clamp(16px, 1.25vw, 24px), clamp(10px, 2vh, 24px));
   font-weight: 600;
   line-height: 1;
   color: #000;
@@ -97,7 +96,7 @@
 .hero__dates-text,
 .hero__dates-text p {
   font-family: var(--font-secondary);
-  font-size: clamp(12px, 1.04vw, 20px);
+  font-size: min(clamp(12px, 1.04vw, 20px), clamp(10px, 1.8vh, 20px));
   font-weight: 600;
   line-height: 1;
   color: #000;
