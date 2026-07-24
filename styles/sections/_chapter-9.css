@@ -367,7 +367,7 @@
   }
 
   .c9__body:has(.c9__dropcap) {
-    padding-top: clamp(50px, 6.25vw, 80px);
+    padding-top: 0;
   }
 
   .c9__dropcap {
