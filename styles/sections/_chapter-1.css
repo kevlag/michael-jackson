@@ -154,7 +154,7 @@
 
   .c1__right {
     max-width: none;
-    padding-top: clamp(40px, 15.3vw, 60px);
+    padding-top: clamp(20px, 3.9vw, 40px);
     padding-bottom: 0;
     padding-right:0;
   }
