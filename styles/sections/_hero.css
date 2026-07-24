@@ -64,7 +64,7 @@
 .hero__title {
   width: 100vw;
   font-family: var(--font-primary);
-  font-size: min(clamp(60px, 15.625vw, 500px), calc((100vh - 360px) / 2));
+  font-size: min(clamp(60px, 15.625vw, 500px), calc((max(100vh, 600px) - 360px) / 2));
   font-weight: 400;
   line-height: 1;
   color: #000;
