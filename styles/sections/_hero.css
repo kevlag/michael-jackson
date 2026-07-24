@@ -67,7 +67,7 @@
 
 .hero__story-text {
   font-family: var(--font-primary);
-  font-size: clamp(24px, 1.5625vw, 30px);
+  font-size: min(clamp(24px, 1.5625vw, 30px), clamp(24px, 2.78vh, 30px));
   font-weight: 400;
   line-height: 1.2;
   color: #000;
@@ -87,7 +87,7 @@
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
-  margin-bottom: min(clamp(10px, 2.08vw, 40px), clamp(10px, 3.33vh, 40px));
+  margin-bottom: clamp(20px, 2.78vh, 40px);
 }
 
 /* ── Dates ───────────────────────────────────────────────── */
@@ -101,7 +101,7 @@
 
 .hero__dates-paren {
   font-family: var(--font-secondary);
-  font-size: clamp(14px, 0.83vw, 16px);
+  font-size: clamp(16px, 2.22vh, 24px);
   font-weight: 600;
   line-height: 1;
   color: #000;
@@ -111,7 +111,7 @@
 .hero__dates-text,
 .hero__dates-text p {
   font-family: var(--font-secondary);
-  font-size: clamp(11px, 0.73vw, 14px);
+  font-size: clamp(14px, 1.85vh, 20px);
   font-weight: 600;
   line-height: 1;
   color: #000;
