@@ -300,7 +300,7 @@
   }
 
   .c3__album {
-    padding: 140px 20px 40px;
+    padding: 140px 20px 80px;
     gap: 0;
     min-height: clamp(760px, 100vh, 1080px);
     box-sizing: border-box;

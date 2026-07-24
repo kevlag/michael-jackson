@@ -127,7 +127,7 @@
 /* ── Tablet portrait & Mobile (≤ 1024px) ────────────────── */
 @media (max-width: 1024px) {
   .c1 {
-    padding: 40px 40px 80px 40px;
+    padding: 140px 40px 80px 40px;
   }
   .c1__layout {
     grid-template-columns: 1fr;
@@ -190,7 +190,7 @@
 /* ── Mobile (≤ 440px) ───────────────────────────────────── */
 @media (max-width: 440px) {
   .c1 {
-    padding: 20px 20px 80px 20px;
+    padding: 140px 20px 80px 20px;
   }
 }
 

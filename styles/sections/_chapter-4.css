@@ -552,7 +552,7 @@
 
   .c4__bloc-2 {
     background: var(--c4-red);
-    padding: 140px 20px 0;
+    padding: 140px 20px 80px;
     display: flex;
     flex-direction: column;
   }
@@ -607,7 +607,7 @@
 
   .c4__album {
     order: 1;
-    padding: 140px 20px 40px;
+    padding: 140px 20px 80px;
     min-height: clamp(760px, 100vh, 1080px);
     box-sizing: border-box;
     align-items: center;

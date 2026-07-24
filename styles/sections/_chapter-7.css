@@ -419,7 +419,7 @@
   /* Part 2 */
   .c7b { min-height: auto; overflow: visible; }
   .c7b__quote { font-size: max(28px, 10.18vw); top: 110px; left: calc(50% - 36.9vw); }
-  .c7b__header { padding-top: 110px; padding-left: 20px; padding-right: 20px; }
+  .c7b__header { padding-top: 140px; padding-left: 20px; padding-right: 20px; }
   .c7b__title-line { font-size: max(28px, 10.18vw); white-space: normal; }
   .c7b__photo {
     position: relative;
@@ -454,7 +454,7 @@
   .c7c { display: flex; flex-direction: column; }
   .c7c__content {
     order: 1;
-    padding: 110px 20px 40px;
+    padding: 140px 20px 80px;
     min-height: 100vh;
     box-sizing: border-box;
   }
@@ -496,7 +496,7 @@
 /* ── Mobile strict (≤ 440px) ────────────────────────────────── */
 
 @media (max-width: 440px) {
-  .c7__header  { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+  .c7__header  { padding-top: 140px; padding-left: 20px; padding-right: 20px; }
   .c7__grid    { gap: 20px; }
   .c7b__header { padding-top: 100px; }
 }
