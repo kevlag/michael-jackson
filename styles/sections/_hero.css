@@ -26,6 +26,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 32px; /* garantit 20px de marge sous le menu (header 40px + menu 12px + 20px gap) */
   padding-bottom: clamp(10px, 2vh, 30px);
 }
 
