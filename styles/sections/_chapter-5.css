@@ -178,6 +178,11 @@
     margin-bottom: 20px;
   }
 
+  .c5__col-left .c5__body {
+    text-align: justify;
+    text-align-last: left;
+  }
+
 .c5__small-images {
     margin-top: 40px;
     margin-bottom: 40px;
