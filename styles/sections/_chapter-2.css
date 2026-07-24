@@ -179,7 +179,7 @@
 
   .c2__left {
     max-width: none;
-    padding-top: 148px;
+    padding-top: 140px;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 0;
@@ -194,7 +194,7 @@
   }
 
   .c2__intro-body {
-    padding-top: clamp(50px, 6.25vw, 80px);
+    padding-top: 0;
   }
 
   .c2__intro-body,
