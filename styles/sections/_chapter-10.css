@@ -286,6 +286,7 @@
 @media (max-width: 1024px) {
   .c10__awards {
     padding-top: 0;
+    padding-bottom: 80px;
   }
 
   .c10__awards-slider-wrap {
