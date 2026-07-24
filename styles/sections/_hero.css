@@ -87,7 +87,7 @@
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
-  margin-bottom: clamp(10px, 2.08vw, 40px);
+  margin-bottom: min(clamp(10px, 2.08vw, 40px), clamp(10px, 3.33vh, 40px));
 }
 
 /* ── Dates ───────────────────────────────────────────────── */
