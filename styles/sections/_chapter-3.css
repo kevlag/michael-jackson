@@ -245,7 +245,7 @@
   /* Titre */
   .c3__title {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   /* Quote en flux inline — pas d'overlap avec le texte centré */
