@@ -495,7 +495,7 @@
 /* ── Mobile strict (≤ 440px) ────────────────────────────────── */
 
 @media (max-width: 440px) {
-  .c7__header  { padding-top: 100px; }
+  .c7__header  { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
   .c7__grid    { gap: 20px; }
   .c7b__header { padding-top: 100px; }
 }
