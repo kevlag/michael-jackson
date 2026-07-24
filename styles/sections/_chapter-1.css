@@ -175,9 +175,12 @@
     max-width: none;
   }
 
-  .c1__intro + .c1__body,
   .c1__body + .c1__body {
     margin-top: 20px;
+  }
+
+  .c1__intro + .c1__body {
+    margin-top: 0;
   }
 
   .c1__photo--2 {
