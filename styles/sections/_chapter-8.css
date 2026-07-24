@@ -288,9 +288,10 @@
 
   .c8b__content {
     order: 1;
-    padding: clamp(100px, 66vw, 260px) 20px 40px;
-    min-height: 100vh;
+    padding: 140px 20px 40px;
+    min-height: clamp(760px, 100vh, 1080px);
     box-sizing: border-box;
+    align-items: center;
   }
 
   .c8b__title {
