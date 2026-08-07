@@ -19,15 +19,16 @@
 
   /* Wrapper tall : crée le budget de scroll vertical */
   .c4__pin-wrapper {
+    margin-top: -100vh;
     /* height calculée par JS = 100vh + scrollDistance */
   }
 
-  /* Section : sticky, colle en haut pendant tout le défilement */
   .c4 {
     position: sticky;
     top: 0;
     height: 100vh;
     overflow: hidden;
+    z-index: 3;
   }
 
   /* Piste : flex-row, pleine hauteur, déplacée via translateX */
@@ -291,11 +292,21 @@
   --c4-gold: #F0D7A0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: #000;
 }
 
 @media (min-width: 1025px) {
-  .c4__part2 { min-height: 100vh; }
+  .c4__part2 {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 4; /* > c4 z-index:3 */
+    margin-top: -100vh; /* entre exactement pendant le freeze de c4 */
+  }
+
+  .c4__portrait,
+  .c4__album {
+    will-change: transform;
+  }
 }
 
 /* ── Colonne gauche : portrait ───────────────────────────── */
@@ -321,6 +332,7 @@
 .c4__album {
   display: flex;
   flex-direction: column;
+  background-color: #000;
   padding:
     clamp(40px, 8.96vw, 172px)
     clamp(20px, 2.08vw, 40px)
@@ -552,7 +564,7 @@
 
   .c4__bloc-2 {
     background: var(--c4-red);
-    padding: 140px 20px 80px;
+    padding: 140px 20px 0;
     display: flex;
     flex-direction: column;
   }

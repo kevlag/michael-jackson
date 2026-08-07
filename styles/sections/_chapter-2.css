@@ -10,6 +10,17 @@
   width: 100%;
 }
 
+@media (min-width: 1025px) {
+  .c2__pin-wrapper {
+    margin-top: -100vh;
+  }
+  .c2 {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+}
+
 /* ── Layout ─────────────────────────────────────────────── */
 
 .c2__layout {
@@ -24,7 +35,7 @@
   padding-top: clamp(60px, 11.04vw, 212px);
   padding-left: 40px;
   padding-right: 40px;
-  padding-bottom: clamp(60px, 6vw, 120px);
+  padding-bottom: max(clamp(60px, 6vw, 120px), 50vh);
 }
 
 /* ── Drop cap ────────────────────────────────────────────── */
@@ -128,12 +139,23 @@
 /* ── Blocs images (colonne droite) ───────────────────────── */
 
 .c2__right {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  align-self: start;
+}
+
+.c2__blocs-track {
   display: flex;
   flex-direction: column;
+  transition: transform 0.6s ease-in-out;
+  will-change: transform;
 }
 
 .c2__bloc {
   position: relative;
+  flex-shrink: 0;
   height: 100vh;
   overflow: hidden;
 }

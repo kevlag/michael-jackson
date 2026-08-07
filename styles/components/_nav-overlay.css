@@ -1,0 +1,154 @@
+/* ============================================================
+   NAV OVERLAY — Menu chapitres (slide depuis le haut)
+   Desktop: panel 23.44vw (450px à 1920px) | Mobile: panel 330px
+   ============================================================ */
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.nav-overlay.is-open {
+  pointer-events: all;
+}
+
+/* ── Backdrop sombre derrière le panel ───────────────────── */
+
+.nav-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.nav-overlay.is-open .nav-overlay__backdrop {
+  opacity: 1;
+}
+
+/* ── Panel blanc qui glisse du haut ──────────────────────── */
+
+.nav-overlay__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: max(330px, 23.44vw); /* 450px à 1920px, scale proportionnellement */
+  background: #fff;
+  display: flex;
+  align-items: flex-end;
+  transform: translateY(-100%);
+  transition: transform var(--duration-slow) var(--ease-expo-out);
+}
+
+.nav-overlay.is-open .nav-overlay__panel {
+  transform: translateY(0);
+}
+
+/* ── Liste des chapitres ─────────────────────────────────── */
+
+.nav-overlay__chapters {
+  display: flex;
+  gap: clamp(10px, 1.04vw, 20px);
+  padding: 0 clamp(20px, 2.08vw, 40px) clamp(10px, 1.04vw, 20px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nav-overlay__chapters::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Carte chapitre ──────────────────────────────────────── */
+
+.nav-overlay__chapter {
+  flex: 1;
+  min-width: 80px;
+  display: block;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-expo-out);
+}
+
+.nav-overlay__chapter:hover {
+  transform: translateY(-10px);
+}
+
+/* ── Image + gradient + label ────────────────────────────── */
+
+.nav-overlay__chapter-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 149 / 200; /* ≈ 3/4 — ratio Figma */
+  overflow: hidden;
+}
+
+.nav-overlay__chapter-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-overlay__chapter-gradient {
+  position: absolute;
+  inset: auto 0 0;
+  height: 35%; /* 70px / 200px à 1920px */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+.nav-overlay__chapter-label {
+  position: absolute;
+  bottom: clamp(8px, 0.73vw, 14px);
+  left: 0;
+  right: 0;
+  font-family: var(--font-secondary);
+  font-size: clamp(12px, 0.83vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .nav-overlay__panel {
+    height: 330px;
+  }
+
+  .nav-overlay__chapters {
+    gap: 10px;
+    padding: 0 20px 20px;
+  }
+
+  /* 3 cartes + 10px de la 4ème visible — même formule que hero */
+  .nav-overlay__chapter {
+    flex: 0 0 calc((100vw - 110px) / 3);
+  }
+
+  .nav-overlay__chapter-label {
+    font-size: 14px;
+    bottom: 8px;
+  }
+}
+
+@media (max-width: 440px) {
+  .nav-overlay__chapters {
+    gap: 10px;
+  }
+
+  /* (100vw - 40px padding - 30px gaps - 10px visible) / 3 */
+  .nav-overlay__chapter {
+    flex: 0 0 calc((100vw - 80px) / 3);
+  }
+}

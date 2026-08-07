@@ -9,6 +9,13 @@
   width: 100%;
 }
 
+@media (min-width: 1025px) {
+  .c1 {
+    position: relative;
+    z-index: 5;
+  }
+}
+
 /* ── Layout ─────────────────────────────────────────────── */
 
 .c1__layout {
@@ -30,7 +37,7 @@
 }
 
 .c1__photo--1 {
-  width: clamp(180px, 15.73vw, 302px);
+  width: clamp(180px, 15.73vw, 604px); /* 604px = 810px hauteur max × (302/405) */
   aspect-ratio: 302 / 405;
   overflow: hidden;
 }

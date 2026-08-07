@@ -236,11 +236,20 @@
   --c5-red: #F00A14;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: #000;
 }
 
 @media (min-width: 1025px) {
-  .c5__part2 { min-height: 100vh; }
+  .c5__part2 {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+
+  .c5__album,
+  .c5__portrait {
+    will-change: transform;
+  }
 }
 
 /* ── Colonne gauche : infos album ────────────────────────── */
@@ -248,6 +257,7 @@
 .c5__album {
   display: flex;
   flex-direction: column;
+  background-color: #000;
   padding:
     clamp(40px, 8.96vw, 172px)
     clamp(20px, 2.08vw, 40px)

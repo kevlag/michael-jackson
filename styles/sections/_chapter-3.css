@@ -9,6 +9,24 @@
   --c3-coral: #f58764;
 }
 
+@media (min-width: 1025px) {
+  .c3 {
+    padding-bottom: 100vh;
+  }
+
+  .c3__part2 {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .c3__album,
+  .c3__image-3 {
+    will-change: transform;
+  }
+}
+
 /* ───────────────────────────────────────────────────────────
    PART 1 — Fond coral
    ─────────────────────────────────────────────────────────── */
@@ -128,18 +146,21 @@
 .c3__part2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: #000;
 }
 
 @media (min-width: 1025px) {
-  .c3__part2 { min-height: 100vh; }
+  .c3__part2 {
+    min-height: 100vh;
+  }
 }
+
 
 /* ── Colonne gauche : infos album ────────────────────────── */
 
 .c3__album {
   display: flex;
   flex-direction: column;
+  background-color: #000;
   padding:
     clamp(40px, 8.96vw, 172px)  /* top  : 172/1920 */
     clamp(20px, 2.08vw, 40px)   /* sides: 40/1920  */
