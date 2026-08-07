@@ -2279,19 +2279,24 @@
       const titleEl    = document.querySelector('.site-header__chapter-title');
       if (!chapterEl) return;
 
-      /* Build flat sorted list of { el, wrapper, num, title } */
-      const CURTAIN_WRAPPERS = ['.c2__pin-wrapper', '.c4__pin-wrapper'];
+      /* Build flat sorted list of { el, wrapper, vhOffset, num, title } */
+      /* vhOffset : nb de vh à ajouter au wrapper.offsetTop avant d'activer le chapitre.
+         c2 = 1 (rideau déroule sur 1 écran), c4 = 0 (scroll horizontal démarre dès le début). */
+      const CURTAIN_WRAPPERS = [
+        { sel: '.c2__pin-wrapper', vhOffset: 1 },
+        { sel: '.c4__pin-wrapper', vhOffset: 0 },
+      ];
       const sections = [];
       CHAPTERS.forEach(function (ch) {
         ch.ids.forEach(function (id) {
           var el = document.getElementById(id);
           if (!el) return;
           var parent = el.parentElement;
-          var wrapper = null;
-          CURTAIN_WRAPPERS.forEach(function (sel) {
-            if (parent && parent.matches(sel)) wrapper = parent;
+          var wrapper = null, vhOffset = 0;
+          CURTAIN_WRAPPERS.forEach(function (cw) {
+            if (parent && parent.matches(cw.sel)) { wrapper = parent; vhOffset = cw.vhOffset; }
           });
-          sections.push({ el: el, wrapper: wrapper, num: ch.num, title: ch.title });
+          sections.push({ el: el, wrapper: wrapper, vhOffset: vhOffset, num: ch.num, title: ch.title });
         });
       });
       sections.sort(function (a, b) { return a.el.offsetTop - b.el.offsetTop; });
@@ -2304,10 +2309,8 @@
         var active = null;
         for (var i = 0; i < sections.length; i++) {
           var s = sections[i];
-          /* Pour les sections avec effet rideau (desktop uniquement) : le chapitre
-             devient actif après avoir scrollé une hauteur d'écran dans le rideau. */
           var threshold = (s.wrapper && isDesktop)
-            ? s.wrapper.offsetTop + window.innerHeight
+            ? s.wrapper.offsetTop + s.vhOffset * window.innerHeight
             : s.el.offsetTop;
           if (threshold <= scrollY) active = s;
         }
