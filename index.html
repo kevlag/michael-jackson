@@ -1586,7 +1586,7 @@
       makePinVolet('.c3__part1', '.c3__part2');
       makePinVolet('.c5',        '.c5__part2');
       makePinVolet('.c6',        '.c6__part2');
-      makePinVolet('.c7b',       '.c7__part2');
+      /* volet c7b→c7__part2 : géré dans l'IIFE c7→c7b (volet custom avec délai) */
       makePinVolet('.c8',        '.c8__part2');
 
       /* Slide-in animations                   part2         left            right */
@@ -1597,6 +1597,188 @@
       makeVoletAnim('.c7__part2', '.c7__album',    '.c7__portrait');
       makeVoletAnim('.c8__part2', '.c8__portrait', '.c8__album');
 
+    })();
+  </script>
+
+  <script>
+    /* ── Chapter 7 → 7b : c7 sticky + c7b monte et grossit (scroll-driven) ── */
+    (function () {
+      var c7  = document.querySelector('.c7');
+      var c7b = document.querySelector('.c7b');
+      if (!c7 || !c7b) return;
+
+      var ANIM_VH    = 1.0;
+      var animStartY = -1;
+      var active     = false;
+      var rafId      = null;
+
+      /* ── Volet custom c7b → c7__part2 (remplace makePinVolet) ── */
+      var c7bPart2     = document.querySelector('.c7__part2');
+      var voletPinned  = false;
+      var voletPinScrollY = 0;
+      var voletReadyY  = Infinity;   /* activé 300px après fin de l'anim scale */
+      var voletSH = 0, voletSW = 0;
+
+      function voletSetup() {
+        voletSH = c7b.offsetHeight;
+        voletSW = c7b.offsetWidth;
+      }
+      function voletPin() {
+        if (voletPinned) return;
+        if (!voletSH) voletSetup();
+        voletPinScrollY = window.scrollY;
+        voletPinned = true;
+        spacer.style.height = voletSH + 'px';
+        c7b.style.cssText = 'position:fixed;bottom:0;left:0;width:' + voletSW + 'px;z-index:1;';
+      }
+      function voletUnpin() {
+        if (!voletPinned) return;
+        voletPinned = false;
+        spacer.style.height = '0';
+        c7b.style.cssText = '';
+      }
+      function voletTick() {
+        if (active) return;
+        if (window.innerWidth <= 1024) { voletUnpin(); return; }
+        var sy = window.scrollY;
+        if (sy < voletReadyY) { if (voletPinned) voletUnpin(); return; }
+        if (!voletPinned) {
+          if (c7b.getBoundingClientRect().bottom <= window.innerHeight) voletPin();
+        } else {
+          if (sy < voletPinScrollY) voletUnpin();
+          else if (c7bPart2) c7b.style.visibility = c7bPart2.getBoundingClientRect().top <= 0 ? 'hidden' : '';
+        }
+      }
+
+      var spacerC7 = document.createElement('div');
+      spacerC7.setAttribute('aria-hidden', 'true');
+      spacerC7.style.cssText = 'pointer-events:none;height:0;';
+      c7.parentNode.insertBefore(spacerC7, c7);
+
+      var spacer = document.createElement('div');
+      spacer.setAttribute('aria-hidden', 'true');
+      spacer.style.cssText = 'pointer-events:none;height:0;';
+      c7b.parentNode.insertBefore(spacer, c7b);
+
+      function unpinC7() {
+        spacerC7.style.height = '0';
+        c7.style.position = '';
+        c7.style.bottom   = '';
+        c7.style.left     = '';
+        c7.style.right    = '';
+        c7.style.zIndex   = '';
+      }
+
+      function releaseC7b() {
+        c7b.style.position        = '';
+        c7b.style.top             = '';
+        c7b.style.bottom          = '';
+        c7b.style.left            = '';
+        c7b.style.right           = '';
+        c7b.style.zIndex          = '';
+        c7b.style.transform       = '';
+        c7b.style.transformOrigin = '';
+        c7b.style.willChange      = '';
+      }
+
+      function release() {
+        if (!active) return;
+        unpinC7();
+        releaseC7b();
+        active     = false;
+        animStartY = -1;
+      }
+
+      function setup() {
+        if (window.innerWidth <= 1024) {
+          spacer.style.height = '0';
+          release();
+          return;
+        }
+        release();
+        spacer.style.height = ((ANIM_VH - 1) * window.innerHeight) + 'px';
+      }
+
+      function tick() {
+        if (window.innerWidth <= 1024) { release(); return; }
+
+        var scrollY  = window.scrollY;
+        var vh       = window.innerHeight;
+        var progress;
+
+        if (!active) {
+          var c7BottomVP = c7.getBoundingClientRect().bottom;
+
+          if (c7BottomVP >= vh) { animStartY = -1; return; }  /* pas encore */
+          if (c7BottomVP <= 0)  { animStartY = -1; return; }  /* déjà passé */
+
+          /* Zone de déclenchement : 0 < c7BottomVP < vh → calcule animStartY */
+          if (animStartY === -1) {
+            animStartY = scrollY - (vh - c7BottomVP);
+          }
+
+          progress = (scrollY - animStartY) / (ANIM_VH * vh);
+          if (progress <= 0 || progress >= 1) return;
+
+          spacerC7.style.height = c7.offsetHeight + 'px';
+          active = true;
+
+        } else {
+          progress = (scrollY - animStartY) / (ANIM_VH * vh);
+          if (progress <= 0) { release(); return; }
+          if (progress >= 1) {
+            /* Animation terminée : release complet + active volet après 300px */
+            voletReadyY = scrollY + 300;
+            release();
+            return;
+          }
+        }
+
+        /* ── c7 : pinné en bas du viewport ── */
+        c7.style.position = 'fixed';
+        c7.style.bottom   = '0';
+        c7.style.left     = '0';
+        c7.style.right    = '0';
+        c7.style.zIndex   = '5';
+
+        /* ── c7b : phase 1 = monte et se centre dans le viewport (scale 0.25 fixe)
+                    phase 2 = scale 0.25→1 depuis le centre                     ── */
+        var SPLIT = 0.40;
+        var ty, scale;
+        var TY_END = -0.10 * vh;   /* position haute : légèrement au-dessus du centre */
+        if (progress <= SPLIT) {
+          /* Phase 1 : c7b monte depuis sous l'écran jusqu'au tiers supérieur */
+          var p1  = progress / SPLIT;
+          var p1e = p1 * p1 * (3 - 2 * p1);   /* ease in-out smooth */
+          ty      = (1 - p1e) * (vh * 0.50) + p1e * TY_END;
+          scale   = 0.15;
+        } else {
+          /* Phase 2 : scale 0.10→1, ty revient à 0 pour remplir le viewport */
+          var p2  = (progress - SPLIT) / (1 - SPLIT);
+          var p2e = p2 * p2 * (3 - 2 * p2);
+          ty     = TY_END * (1 - p2e);
+          scale  = 0.15 + 0.85 * p2e;
+        }
+        c7b.style.position        = 'fixed';
+        c7b.style.top             = '0';
+        c7b.style.bottom          = '0';
+        c7b.style.left            = '0';
+        c7b.style.right           = '0';
+        c7b.style.zIndex          = '110';
+        var rotate = (progress > SPLIT) ? ((progress - SPLIT) / (1 - SPLIT)) * 720 : 0;
+        c7b.style.transformOrigin = '50% 50%';
+        c7b.style.transform       = 'translateY(' + ty + 'px) scale(' + scale + ') rotate(' + rotate + 'deg)';
+        c7b.style.willChange      = 'transform';
+      }
+
+      setup();
+      voletSetup();
+
+      window.addEventListener('load',   function () { setup(); voletSetup(); });
+      window.addEventListener('scroll', function () {
+        if (!rafId) { rafId = requestAnimationFrame(function () { tick(); voletTick(); rafId = null; }); }
+      }, { passive: true });
+      window.addEventListener('resize', function () { setup(); voletSetup(); voletUnpin(); voletReadyY = Infinity; }, { passive: true });
     })();
   </script>
 
