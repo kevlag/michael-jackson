@@ -2901,6 +2901,8 @@
   (function () {
 
     /* ── Éléments ───────────────────────────────────────── */
+    document.documentElement.classList.add('is-loading');
+
     var bg         = document.getElementById('loader-bg');
     var group      = document.getElementById('loader-group');
     var story      = document.getElementById('loader-story');
@@ -3030,6 +3032,7 @@
           span.style.opacity    = '0';
         });
         document.body.classList.remove('is-loading');
+        document.documentElement.classList.remove('is-loading');
 
         /* 3. Après 1000ms (bg fade terminé) : burger staggeré */
         setTimeout(function () {
