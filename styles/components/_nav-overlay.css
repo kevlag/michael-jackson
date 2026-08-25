@@ -52,7 +52,7 @@
 .nav-overlay__chapters {
   display: flex;
   gap: clamp(10px, 1.04vw, 20px);
-  padding: 0 clamp(20px, 2.08vw, 40px) clamp(10px, 1.04vw, 20px);
+  padding: 14px clamp(20px, 2.08vw, 40px) clamp(10px, 1.04vw, 20px);
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -71,7 +71,7 @@
   min-width: 80px;
   display: block;
   text-decoration: none;
-  transition: transform 0.4s var(--ease-expo-out);
+  transition: transform 0.6s var(--ease-expo-out);
 }
 
 .nav-overlay__chapter:hover {

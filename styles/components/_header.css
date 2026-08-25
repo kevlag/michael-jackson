@@ -26,6 +26,10 @@
 
 .site-header__mj-logo {
   width: clamp(40px, 3.02vw, 58px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .site-header__mj-logo img {
@@ -147,6 +151,22 @@
 
 .site-header--on-light .site-header__chapter-num,
 .site-header--on-light .site-header__chapter-title {
+  color: #000;
+}
+
+/* ── Header quand le menu est ouvert : force le noir ──────── */
+
+.site-header--menu-open .site-header__menu span {
+  background-color: #000;
+}
+
+.site-header--menu-open .site-header__mj-logo img,
+.site-header--menu-open .site-header__kop-logo img {
+  filter: invert(0);
+}
+
+.site-header--menu-open .site-header__chapter-num,
+.site-header--menu-open .site-header__chapter-title {
   color: #000;
 }
 

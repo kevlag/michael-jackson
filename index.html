@@ -16,9 +16,9 @@
     HEADER — Fixed sur toute la page
   ======================================================= -->
   <header class="site-header" id="header">
-    <div class="site-header__mj-logo">
+    <button class="site-header__mj-logo" aria-label="Retour en haut">
       <img src="icons/michael-jackson-logo.svg" alt="Michael Jackson" />
-    </div>
+    </button>
     <div class="site-header__center">
       <div class="site-header__menu" aria-label="Menu">
         <span></span>
@@ -1498,9 +1498,44 @@
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+    /* Réinitialise immédiatement — avant que les scripts d'animation ne calculent
+       leur premier tick — pour éviter le flash d'état intermédiaire au refresh. */
+    window.scrollTo(0, 0);
     window.addEventListener('load', function () {
       window.scrollTo(0, 0);
+      /* Force tous les listeners passifs à recalculer leur état à scroll=0. */
+      requestAnimationFrame(function () {
+        window.dispatchEvent(new Event('scroll'));
+      });
     });
+
+    /* Au resize : repart du haut de page (comme au refresh) puis force un retick
+       de toutes les animations. Sur crossing du breakpoint 1024px, recharge la
+       page car certains scripts sont initialisés une seule fois par breakpoint. */
+    (function () {
+      var wasMobile = window.innerWidth <= 1024;
+      var resizeTimer = null;
+
+      window.addEventListener('resize', function () {
+        var isMobile = window.innerWidth <= 1024;
+
+        /* Crossing breakpoint → reload complet */
+        if (isMobile !== wasMobile) {
+          wasMobile = isMobile;
+          window.location.reload();
+          return;
+        }
+
+        /* Même breakpoint : scroll to top immédiat, retick debounced */
+        window.scrollTo(0, 0);
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          requestAnimationFrame(function () {
+            window.dispatchEvent(new Event('scroll'));
+          });
+        }, 150);
+      }, { passive: true });
+    })();
   </script>
 
   <script>
@@ -1597,6 +1632,143 @@
       makeVoletAnim('.c7__part2', '.c7__album',    '.c7__portrait');
       makeVoletAnim('.c8__part2', '.c8__portrait', '.c8__album');
 
+    })();
+  </script>
+
+  <script>
+    /* ── Dézoom scroll-driven (desktop + mobile) ── */
+    (function () {
+      var mobile = window.innerWidth <= 1024;
+
+      /* Descripteurs : { el, scale, origin?, horizontal? } */
+      var items = [];
+
+      function add(sel, opts, multi) {
+        var els = multi ? document.querySelectorAll(sel) : [document.querySelector(sel)];
+        els.forEach(function (el) {
+          if (el) items.push(Object.assign({ el: el }, opts));
+        });
+      }
+
+      if (mobile) {
+        /* c1 photos — zoom depuis le haut */
+        add('.c1__photo--1 img', { scale: 1.25, origin: 'center top' });
+        add('.c1__photo--2 img', { scale: 1.25, origin: 'center top' });
+        /* Toutes les autres images — zoom depuis le centre */
+        ['.c2__bloc-img', '.c5__small-img img', '.c5__col-img img', '.c6__small-img img']
+          .forEach(function (s) { add(s, { scale: 1.25 }, true); });
+        ['.c2__thumb--1 img', '.c2__thumb--2 img', '.c2__thumb--3 img', '.c2__image-solo img',
+         '.c3__image-1 img', '.c3__image-3 img',
+         '.c4__b1-img--1 img', '.c4__b1-img--2 img', '.c4__b2-image img', '.c4__portrait img',
+         '.c5__hero img', '.c5__portrait img',
+         '.c6__photo img', '.c6__portrait img',
+         '.c7__portrait img', '.c8__photo img', '.c8__portrait img', '.c10__image img']
+          .forEach(function (s) { add(s, { scale: 1.25 }); });
+      } else {
+        add('.c3__image-1 img', { scale: 1.15 });
+        add('.c4__b2-image img', { scale: 1.15, horizontal: true });
+        add('.c5__hero img',     { scale: 1.15 });
+        add('.c10__image img',   { scale: 1.15 });
+      }
+
+      if (!items.length) return;
+
+      /* cache l'anchor une fois pour éviter le closest() à chaque frame */
+      items.forEach(function (d) {
+        d.anchor = d.el.closest('figure') || d.el.closest('.c2__bloc') || d.el;
+        d.el.style.willChange = 'transform';
+        d.el.style.transformOrigin = d.origin || 'center center';
+      });
+
+      var rafId = null;
+      function tick() {
+        var vh = window.innerHeight;
+        var vw = window.innerWidth;
+        items.forEach(function (d) {
+          var rect = d.anchor.getBoundingClientRect();
+          var p = d.horizontal
+            ? Math.max(0, Math.min(1, (vw - rect.left) / rect.width))
+            : Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.7 + rect.height * 0.5)));
+          p = p * p * (3 - 2 * p); /* smoothstep */
+          d.el.style.transform = 'scale(' + (d.scale - (d.scale - 1) * p) + ') translateZ(0)';
+        });
+        rafId = null;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }, { passive: true });
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <script>
+    /* ── Chapter 9 : parallax c9__deco (desktop + mobile) ── */
+    (function () {
+      var c9 = document.querySelector('.c9');
+      if (!c9) return;
+
+      /* vitesse relative par élément : négatif = monte plus vite, positif = plus lent */
+      var decos = [
+        { sel: '.c9__deco--1', speedD:  0.12, speedM:  0.08 },
+        { sel: '.c9__deco--2', speedD: -0.18, speedM: -0.12 },
+        { sel: '.c9__deco--3', speedD:  0.10, speedM:  0.07 },
+        { sel: '.c9__deco--4', speedD:  0.14, speedM:  0.09 },
+      ].map(function (d) {
+        var el = document.querySelector(d.sel);
+        if (el) { el.style.willChange = 'transform'; el.style.backfaceVisibility = 'hidden'; }
+        return { el: el, speedD: d.speedD, speedM: d.speedM };
+      }).filter(function (d) { return d.el; });
+
+      var rafId = null;
+      function tick() {
+        var isMobile = window.innerWidth <= 1024;
+        var c9rect   = c9.getBoundingClientRect();
+        var vh       = window.innerHeight;
+        var center   = c9rect.top + c9rect.height / 2 - vh / 2;
+        decos.forEach(function (d) {
+          var speed = isMobile ? d.speedM : d.speedD;
+          d.el.style.transform = 'translateY(' + (center * speed) + 'px) translateZ(0)';
+        });
+        rafId = null;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }, { passive: true });
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <script>
+    /* ── Chapter 8 : parallax c8__photo (desktop uniquement) ── */
+    (function () {
+      if (window.innerWidth <= 1024) return;
+      var photo = document.querySelector('.c8__photo');
+      if (!photo) return;
+      var SPEED     = 0.35;
+      var OFFSET    = 140;
+      var rafId     = null;
+      var currentTY = 0;
+
+      function tick() {
+        var rect       = photo.getBoundingClientRect();
+        var vh         = window.innerHeight;
+        /* soustrait le transform actuel → position naturelle sans boucle de feedback */
+        var naturalTop = rect.top - currentTY;
+        var center     = naturalTop + rect.height / 2 - vh / 2;
+        currentTY      = -center * SPEED + OFFSET;
+        photo.style.transform = 'translateY(' + currentTY + 'px) translateZ(0)';
+        rafId = null;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }, { passive: true });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth <= 1024) photo.style.transform = '';
+      }, { passive: true });
+      requestAnimationFrame(tick);
     })();
   </script>
 
@@ -1779,6 +1951,12 @@
         if (!rafId) { rafId = requestAnimationFrame(function () { tick(); voletTick(); rafId = null; }); }
       }, { passive: true });
       window.addEventListener('resize', function () { setup(); voletSetup(); voletUnpin(); voletReadyY = Infinity; }, { passive: true });
+
+      window._c7Reset = function () {
+        release();
+        voletUnpin();
+        voletReadyY = Infinity;
+      };
     })();
   </script>
 
@@ -1808,6 +1986,8 @@
       var captionEl      = document.querySelector('.c4__video-caption');
       var bloc2El        = document.querySelector('.c4__bloc-2');
       var c4El           = document.querySelector('.c4');
+      var lyricsEl       = document.querySelector('.c4__lyrics');
+      var blocVideoEl    = document.querySelector('.c4__bloc-video');
       if (!wrapper || !track) return;
 
       var phase1Distance = 0;
@@ -1924,22 +2104,33 @@
         }
 
         /* Bloc-2 : apparaît pendant les derniers phase2Distance px du scroll horizontal */
+        var bloc2Start = 0;
         if (bloc2El) {
-          var bloc2Start    = Math.max(0, phase1Distance - phase2Distance);
+          bloc2Start    = Math.max(0, phase1Distance - phase2Distance);
           var bloc2Progress = Math.max(0, Math.min(1, (scrolled - bloc2Start) / phase2Distance));
           bloc2El.style.transform = 'translateX(' + ((1 - bloc2Progress) * 100) + '%)';
         }
-      }
 
-      var blocVideoEl = document.querySelector('.c4__bloc-video');
-      var lyricsEl    = document.querySelector('.c4__lyrics');
+        /* Lyrics : défile de droite à gauche pendant la phase 1 du scroll.
+           Cible : bord droit du dernier glyphe proéminent (SVG x≈128.55vw)
+           aligné sur 82.19vw (= 100 - margin 17.81vw). */
+        if (lyricsEl) {
+          var lyricsBase     = -(17.81 * 2 + 128.55 - 100) / 100 * window.innerWidth; /* ≈ -64.17vw */
+          var lyricsProgress = bloc2Start > 0
+            ? Math.max(0, Math.min(1, scrolled / bloc2Start))
+            : 1;
+          lyricsEl.style.transform = 'translateX(' + (lyricsBase * lyricsProgress) + 'px)';
+        }
+      }
 
       function updateLyricsMobile() {
         if (window.innerWidth > 1024 || !blocVideoEl || !lyricsEl) return;
-        var margin      = window.innerWidth <= 440 ? 20 : 40;
-        var lyricsW     = 2 * window.innerWidth;
-        var initialLeft = 30.5;
-        var targetX     = window.innerWidth - margin - initialLeft - lyricsW;
+        var margin  = window.innerWidth <= 440 ? 20 : 40;
+        var lyricsW = 2 * window.innerWidth;
+        /* mesure la position naturelle réelle (sans le transform courant) */
+        var curTX       = new DOMMatrix(window.getComputedStyle(lyricsEl).transform).m41 || 0;
+        var naturalLeft = lyricsEl.getBoundingClientRect().left - curTX;
+        var targetX     = window.innerWidth - margin - naturalLeft - lyricsW;
 
         var rect        = blocVideoEl.getBoundingClientRect();
         var vh          = window.innerHeight;
@@ -2066,63 +2257,36 @@
   </script>
 
   <script>
-    /* "THIS" — remplit exactement la largeur du viewport */
+    /* Fit-text : ajuste le font-size pour remplir exactement la largeur disponible */
     (function () {
-      var hero = document.querySelector('.c11__hero');
-      if (!hero) return;
-
-      function fitHero() {
-        var clone = hero.cloneNode(true);
-        clone.style.cssText = [
-          'position:fixed', 'top:-9999px', 'left:-9999px',
-          'visibility:hidden', 'white-space:nowrap',
-          'font-size:100px', 'padding:0', 'pointer-events:none'
-        ].join(';');
-        document.body.appendChild(clone);
-        var textW = clone.getBoundingClientRect().width;
-        document.body.removeChild(clone);
-        if (!textW) return;
-        var cs = window.getComputedStyle(hero);
-        var targetW = Math.min(hero.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), 1840);
-        hero.style.fontSize = (100 * targetW / textW) + 'px';
-      }
-
-      if (document.readyState === 'complete') { fitHero(); }
-      else { window.addEventListener('load', fitHero); }
-      window.addEventListener('resize', fitHero, { passive: true });
-    })();
-  </script>
-
-  <script>
-    /* c7__title — fit "Injustice" to full container width on mobile */
-    (function () {
-      var title = document.querySelector('.c7__title');
-      if (!title) return;
-
-      function fitTitle() {
-        if (window.innerWidth > 1024) {
-          title.style.fontSize = '';
-          return;
+      function fitText(el, getTargetW, mobileOnly) {
+        if (!el) return;
+        function fit() {
+          if (mobileOnly && window.innerWidth > 1024) { el.style.fontSize = ''; return; }
+          var clone = el.cloneNode(true);
+          clone.style.cssText = 'position:fixed;top:-9999px;left:-9999px;visibility:hidden;white-space:nowrap;font-size:100px;padding:0;pointer-events:none';
+          document.body.appendChild(clone);
+          var textW = clone.getBoundingClientRect().width;
+          document.body.removeChild(clone);
+          if (!textW) return;
+          el.style.fontSize = (100 * getTargetW(el) / textW) + 'px';
         }
-        var clone = title.cloneNode(true);
-        clone.style.cssText = [
-          'position:fixed', 'top:-9999px', 'left:-9999px',
-          'visibility:hidden', 'white-space:nowrap',
-          'font-size:100px', 'padding:0', 'pointer-events:none'
-        ].join(';');
-        document.body.appendChild(clone);
-        var textW = clone.getBoundingClientRect().width;
-        document.body.removeChild(clone);
-        if (!textW) return;
-        var parent = title.parentElement;
-        var cs = window.getComputedStyle(parent);
-        var targetW = parent.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-        title.style.fontSize = (100 * targetW / textW) + 'px';
+        if (document.readyState === 'complete') fit(); else window.addEventListener('load', fit);
+        window.addEventListener('resize', fit, { passive: true });
       }
 
-      if (document.readyState === 'complete') { fitTitle(); }
-      else { window.addEventListener('load', fitTitle); }
-      window.addEventListener('resize', fitTitle, { passive: true });
+      /* "THIS" — c11 hero, pleine largeur (max 1840px) */
+      fitText(document.querySelector('.c11__hero'), function (el) {
+        var cs = window.getComputedStyle(el);
+        return Math.min(el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), 1840);
+      });
+
+      /* "Injustice" — c7 title, mobile uniquement, largeur du conteneur */
+      fitText(document.querySelector('.c7__title'), function (el) {
+        var parent = el.parentElement;
+        var cs = window.getComputedStyle(parent);
+        return parent.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      }, true);
     })();
   </script>
 
@@ -2411,6 +2575,7 @@
     (function () {
       var overlay = document.getElementById('nav-overlay');
       var menuBtn = document.querySelector('.site-header__menu');
+      var header  = document.querySelector('.site-header');
       if (!overlay || !menuBtn) return;
 
       function openMenu() {
@@ -2418,6 +2583,7 @@
         menuBtn.classList.add('is-active');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        if (header) header.classList.add('site-header--menu-open');
       }
 
       function closeMenu() {
@@ -2425,6 +2591,7 @@
         menuBtn.classList.remove('is-active');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        if (header) header.classList.remove('site-header--menu-open');
       }
 
       menuBtn.addEventListener('click', function () {
@@ -2436,6 +2603,105 @@
       overlay.querySelectorAll('.nav-overlay__chapter').forEach(function (link) {
         link.addEventListener('click', closeMenu);
       });
+    })();
+  </script>
+
+  <script>
+    /* ── Voile blanc — transition au clic sur les chapitres ── */
+    (function () {
+      var veil = document.createElement('div');
+      veil.setAttribute('aria-hidden', 'true');
+      veil.style.cssText = [
+        'position:fixed', 'inset:0', 'z-index:9999',
+        'background:#fff', 'opacity:0', 'pointer-events:none',
+      ].join(';');
+      document.body.appendChild(veil);
+
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+      function animateScrollTo(targetY, duration, onDone) {
+        var startY = window.scrollY;
+        var dist   = targetY - startY;
+        var start  = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          window.scrollTo(0, startY + dist * easeInOut(p));
+          if (p < 1) requestAnimationFrame(step);
+          else { if (onDone) onDone(); }
+        }
+        requestAnimationFrame(step);
+      }
+
+      /* Retourne la position document d'un élément, même s'il est position:fixed
+         (dans ce cas, on lit le spacer qui le précède dans le DOM) */
+      function getDocumentTop(el) {
+        var pos = window.getComputedStyle(el).position;
+        if (pos === 'fixed') {
+          var prev = el.previousElementSibling;
+          if (prev) return prev.getBoundingClientRect().top + window.scrollY;
+        }
+        if (pos === 'sticky') {
+          return el.parentElement.getBoundingClientRect().top + window.scrollY;
+        }
+        return el.getBoundingClientRect().top + window.scrollY;
+      }
+
+      function fadeOut() {
+        window.dispatchEvent(new Event('scroll'));
+        requestAnimationFrame(function () {
+          window.dispatchEvent(new Event('scroll'));
+          requestAnimationFrame(function () {
+            document.documentElement.style.scrollBehavior = '';
+            veil.style.transition = 'opacity 400ms ease';
+            veil.style.opacity = '0';
+            setTimeout(function () {
+              veil.style.pointerEvents = 'none';
+              window.dispatchEvent(new Event('scroll'));
+            }, 400);
+          });
+        });
+      }
+
+      function goTo(targetId) {
+        var target  = targetId ? document.getElementById(targetId) : null;
+        var targetY = target ? getDocumentTop(target) : 0;
+        veil.style.transition = 'opacity 600ms ease';
+        veil.style.opacity = '1';
+        veil.style.pointerEvents = 'all';
+        document.documentElement.style.scrollBehavior = 'auto';
+        animateScrollTo(targetY, 1500, function () {
+          if (window._c7Reset) window._c7Reset();
+          var finalY = target ? getDocumentTop(target) : 0;
+          window.scrollTo(0, finalY);
+          /* RAF : attend que scrollY soit à jour avant de dispatcher les events */
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              fadeOut();
+            });
+          });
+        });
+      }
+
+      document.querySelectorAll('.nav-overlay__chapter, .hero__chapter').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var href = link.getAttribute('href');
+          if (!href || href[0] !== '#') return;
+          e.preventDefault();
+          goTo(href.slice(1));
+        });
+      });
+
+      var mjLogo = document.querySelector('.site-header__mj-logo');
+      if (mjLogo) {
+        mjLogo.addEventListener('click', function (e) {
+          e.preventDefault();
+          /* ferme le burger menu si ouvert */
+          var backdrop = document.querySelector('.nav-overlay__backdrop');
+          if (backdrop) backdrop.click();
+          goTo(null);
+        });
+      }
     })();
   </script>
 

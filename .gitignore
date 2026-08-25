@@ -1,3 +1,7 @@
+# Backups de travail
+*.backup*
+voile-blanc.js
+
 # OS
 .DS_Store
 Thumbs.db

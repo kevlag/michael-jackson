@@ -270,13 +270,6 @@
   margin: auto 0 clamp(20px, 2.08vw, 40px);
 }
 
-.c7__album-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 .c7__album-desc {
   font-family: var(--font-primary);
   font-size: clamp(16px, 1.56vw, 30px);
@@ -390,6 +383,7 @@
   .c7 {
     min-height: auto;
     overflow: visible;
+    overflow-x: clip;
     background-size: cover;
     background-position: top center;
   }
@@ -464,12 +458,12 @@
   .c7__part2 { display: flex; flex-direction: column; }
   .c7__album {
     order: 1;
-    padding: 140px 20px 80px;
+    padding: 110px 20px 20px !important;
     min-height: 100vh;
     box-sizing: border-box;
   }
-  .c7__album-subtitle { font-size: clamp(28px, 9.16vw, 36px); margin-bottom: auto; }
-  .c7__album-title { font-size: max(70px, 22.9vw); margin-bottom: 8px; }
+  .c7__album-subtitle { font-size: clamp(28px, 9.16vw, 36px); margin: 0 !important; }
+  .c7__album-title { font-size: max(70px, 22.9vw); margin-bottom: 8px !important; margin-top: 0 !important; }
   .c7__album-date { font-size: clamp(12px, 3.56vw, 14px); margin-bottom: auto; }
   .c7__album-cover { width: clamp(120px, 38.2vw, 150px); margin: auto 0 clamp(20px, 5.1vw, 20px); }
   .c7__album-desc { font-size: clamp(20px, 3.91vw, 30px); max-width: 100%; }
@@ -491,7 +485,7 @@
   .c7__header  { padding-left: 40px; padding-right: 40px; }
   .c7b__header { padding-left: 40px; padding-right: 40px; }
   .c7b__content { padding-left: 40px; padding-right: 40px; }
-  .c7__album { padding-left: 40px; padding-right: 40px; }
+  .c7__album { padding: 140px 80px 80px !important; }
   .c7__album-desc    { max-width: none; }
 }
 

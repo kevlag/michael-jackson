@@ -35,3 +35,17 @@
 @import './sections/_chapter-9.css';
 @import './sections/_chapter-10.css';
 @import './sections/_chapter-11.css';
+
+/* ── Shared chapter styles (dédupliqués) ──────────────────── */
+
+.c3__album-cover img,
+.c4__album-cover img,
+.c5__album-cover img,
+.c6__album-cover img,
+.c7__album-cover img,
+.c8__album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
