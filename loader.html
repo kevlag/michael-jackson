@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Jackson — Loading</title>
+  <link rel="icon" type="image/svg+xml" href="icons/michael-jackson-logo.svg" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+
+    /* ── Reset & fond ─────────────────────────────────────── */
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* ── Conteneur principal ──────────────────────────────── */
+
+    .loader {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+
+    .loader__header {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      right: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .loader__mj-logo {
+      width: clamp(40px, 3.02vw, 58px);
+      display: block;
+      filter: invert(1);
+    }
+
+    .loader__kop-logo {
+      width: clamp(56px, 4.43vw, 85px);
+      display: block;
+      filter: invert(1);
+    }
+
+    /* ── Bloc central : tagline + "00" ───────────────────── */
+
+    .loader__center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Tagline (même structure que hero__story, couleurs inversées) */
+
+    .hero__story {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      white-space: nowrap;
+      margin-bottom: 10px;
+    }
+
+    .hero__diamond {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: #fff;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .hero__story-br { display: none; }
+
+    .hero__story-text {
+      font-family: var(--font-primary);
+      font-size: min(clamp(24px, 1.5625vw, 30px), clamp(24px, 2.78vh, 30px));
+      font-weight: 400;
+      line-height: 1.2;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .hero__story {
+        gap: 10px;
+        white-space: normal;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .hero__story-text {
+        text-align: center;
+      }
+
+      .hero__story-br { display: block; }
+    }
+
+    /* ── Compteur "00" ────────────────────────────────────── */
+
+    .loader__counter {
+      font-family: var(--font-primary);
+      font-size: clamp(160px, 31.25vw, 600px);
+      font-weight: 400;
+      line-height: 0.9;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* ── "( Loading )" ────────────────────────────────────── */
+
+    .loader__label {
+      position: absolute;
+      bottom: clamp(120px, 17.81vw, 227px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--font-secondary);
+      font-weight: 600;
+      line-height: 1;
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .loader__label-paren {
+      font-size: clamp(18px, 1.25vw, 24px);
+    }
+
+    .loader__label-text {
+      font-size: clamp(14px, 1.04vw, 20px);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Animation PNG ────────────────────────────────────── */
+
+    .loader__animation {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #loader-canvas {
+      display: block;
+      width: 225px;
+      height: 75px;
+    }
+
+    /* ── Responsive mobile (≤ 768px) ─────────────────────── */
+
+    @media (max-width: 768px) {
+
+      .loader__header {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+      }
+
+      .loader__counter {
+        font-size: clamp(140px, 81vw, 320px);
+      }
+
+      .loader__label {
+        bottom: clamp(80px, 20vh, 160px);
+        gap: 14px;
+      }
+
+      .loader__label-paren { font-size: 18px; }
+      .loader__label-text  { font-size: 16px; }
+
+      .loader__animation {
+        bottom: 30px;
+      }
+
+      #loader-canvas {
+        width: 112px;
+        height: 37px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="loader">
+
+    <!-- Header -->
+    <header class="loader__header">
+      <img class="loader__mj-logo" src="icons/michael-jackson-logo.svg" alt="Michael Jackson" />
+      <img class="loader__kop-logo" src="icons/the-king-of-the-pop-logo.svg" alt="The King of Pop" />
+    </header>
+
+    <!-- Bloc central -->
+    <div class="loader__center">
+
+      <!-- Story subtitle (même structure que hero__story) -->
+      <div class="hero__story">
+        <span class="hero__diamond"></span>
+        <p class="hero__story-text">The story of<br class="hero__story-br"> the King of Pop</p>
+        <span class="hero__diamond"></span>
+      </div>
+
+      <!-- Compteur -->
+      <p class="loader__counter">00</p>
+
+    </div>
+
+    <!-- ( Loading ) -->
+    <div class="loader__label">
+      <span class="loader__label-paren">(</span>
+      <span class="loader__label-text">Loading</span>
+      <span class="loader__label-paren">)</span>
+    </div>
+
+    <!-- Séquence PNG animée -->
+    <div class="loader__animation">
+      <canvas id="loader-canvas" width="225" height="75" aria-hidden="true"></canvas>
+    </div>
+
+    <script>
+      (function () {
+        var TOTAL  = 276;
+        var FPS    = 24;
+        var PREFIX = 'images/loader/LoadeBoucle-Claude';
+        var EXT    = '.png';
+
+        var canvas  = document.getElementById('loader-canvas');
+        var ctx     = canvas.getContext('2d');
+        var frames  = [];
+        var loaded  = 0;
+        var current = 0;
+        var interval = null;
+
+        function pad(n) {
+          return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n;
+        }
+
+        function tick() {
+          if (frames[current]) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(frames[current], 0, 0);
+          }
+          current = (current + 1) % TOTAL;
+        }
+
+        function startAnimation() {
+          interval = setInterval(tick, 1000 / FPS);
+        }
+
+        for (var i = 0; i < TOTAL; i++) {
+          (function (index) {
+            var img = new Image();
+            img.onload = function () {
+              loaded++;
+              if (loaded === TOTAL) startAnimation();
+            };
+            img.onerror = function () { loaded++; if (loaded === TOTAL) startAnimation(); };
+            img.src = PREFIX + pad(index) + EXT;
+            frames[index] = img;
+          })(i);
+        }
+      })();
+    </script>
+
+  </div>
+
+</body>
+</html>

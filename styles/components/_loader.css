@@ -1,0 +1,178 @@
+/* ============================================================
+   LOADER OVERLAY — Écran de chargement
+   Couvre la page au-dessus du contenu, sous le site-header (z-index 501)
+   ============================================================ */
+
+/* ── Fond noir ───────────────────────────────────────────── */
+
+.loader-overlay__bg {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: #000;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.loader-overlay__bg.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Groupe centré : hero__story + counter + label + anim ─ */
+
+.loader-overlay__group {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 301;
+  pointer-events: none;
+}
+
+/* ── Story (même styles que hero__story mais couleurs blanc) */
+
+.loader-overlay__story {
+  /* couleur white — overrides hero__story black */
+  color: #fff !important;
+  margin-bottom: 10px;
+  transition: color 0.4s ease;
+}
+
+.loader-overlay__story .hero__diamond {
+  background-color: #fff !important;
+  transition: background-color 0.4s ease;
+}
+
+.loader-overlay__story .hero__story-text {
+  color: #fff !important;
+  transition: color 0.4s ease;
+}
+
+/* Quand story devient noire (pendant la révélation) */
+.loader-overlay__story.is-dark .hero__diamond {
+  background-color: #000 !important;
+}
+
+.loader-overlay__story.is-dark .hero__story-text {
+  color: #000 !important;
+}
+
+/* ── Counter "00" → "99" ─────────────────────────────────── */
+
+.loader-overlay__counter {
+  font-family: var(--font-primary);
+  font-size: clamp(160px, 31.25vw, 600px);
+  font-weight: 400;
+  line-height: 0.9;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ── ( Loading ) ─────────────────────────────────────────── */
+
+.loader-overlay__label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-top: clamp(80px, 10vw, 160px);
+  transition: opacity 0.3s ease;
+}
+
+.loader-overlay__label-paren {
+  font-size: clamp(18px, 1.25vw, 24px);
+}
+
+.loader-overlay__label-text {
+  font-size: clamp(14px, 1.04vw, 20px);
+  letter-spacing: 0.05em;
+}
+
+/* ── Animation PNG ───────────────────────────────────────── */
+
+.loader-overlay__animation {
+  position: fixed;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 301;
+  transition: opacity 0.3s ease;
+}
+
+#loader-canvas {
+  display: block;
+  width: 225px;
+  height: 75px;
+}
+
+/* ── Éléments qui disparaissent au reveal ────────────────── */
+
+.loader-overlay__counter.is-hidden,
+.loader-overlay__label.is-hidden,
+.loader-overlay__animation.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Story en mode fixed lors de l'animation de sortie ───── */
+
+.loader-overlay__story.is-animating {
+  position: fixed !important;
+  transition: top 0.6s var(--ease-expo-out), left 0.6s var(--ease-expo-out), color 0.4s ease;
+  margin: 0;
+}
+
+/* ── Header forcé blanc pendant le loading ───────────────── */
+
+body.is-loading .site-header__mj-logo img,
+body.is-loading .site-header__kop-logo img {
+  filter: invert(1) !important;
+}
+
+body.is-loading .site-header__menu span {
+  background-color: #fff !important;
+  transform: scaleX(0) !important;
+}
+
+body.is-loading .site-header__chapter-num,
+body.is-loading .site-header__chapter-title {
+  color: #fff !important;
+}
+
+/* ── Responsive mobile ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .loader-overlay__counter {
+    font-size: clamp(140px, 81vw, 320px);
+  }
+
+  .loader-overlay__label {
+    gap: 14px;
+    margin-top: clamp(60px, 15vw, 100px);
+  }
+
+  .loader-overlay__label-paren { font-size: 18px; }
+  .loader-overlay__label-text  { font-size: 16px; }
+
+  .loader-overlay__animation {
+    bottom: 30px;
+  }
+
+  #loader-canvas {
+    width: 112px;
+    height: 37px;
+  }
+}

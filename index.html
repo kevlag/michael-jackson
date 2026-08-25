@@ -6,11 +6,46 @@
   <meta name="description" content="Michael Jackson — The Story of the King of Pop" />
   <meta name="theme-color" content="#ffffff" />
 
+  <link rel="icon" type="image/svg+xml" href="icons/michael-jackson-logo.svg" />
   <link rel="stylesheet" href="styles/main.css" />
 
   <title>Michael Jackson — The Story of the King of Pop</title>
 </head>
-<body>
+<body class="is-loading">
+
+  <!-- ======================================================
+    LOADER OVERLAY — Écran de chargement
+  ======================================================= -->
+
+  <!-- Fond noir -->
+  <div class="loader-overlay__bg" id="loader-bg" style="position:fixed;inset:0;z-index:300;background:#000;transition:opacity 0.6s ease;pointer-events:none;"></div>
+
+  <!-- Groupe centré : story + counter -->
+  <div class="loader-overlay__group" id="loader-group" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;z-index:301;pointer-events:none;">
+
+    <!-- Story tagline (copie du hero__story, démarre en blanc) -->
+    <div class="hero__story loader-overlay__story" id="loader-story" style="color:#fff;margin-bottom:10px;">
+      <span class="hero__diamond" id="loader-diamond-l" style="background-color:#fff;"></span>
+      <p class="hero__story-text" id="loader-story-text" style="color:#fff;">The story of<br class="hero__story-br"> the King of Pop</p>
+      <span class="hero__diamond" id="loader-diamond-r" style="background-color:#fff;"></span>
+    </div>
+
+    <!-- Compteur 00 → 99 -->
+    <p class="loader-overlay__counter" id="loader-counter" style="margin:0;font-family:var(--font-primary);font-size:clamp(160px,31.25vw,600px);font-weight:400;line-height:0.9;color:#fff;white-space:nowrap;user-select:none;">00</p>
+
+  </div>
+
+  <!-- ( Loading ) — positionné séparément -->
+  <div class="loader-overlay__label" id="loader-label" style="position:fixed;bottom:clamp(120px,17.81vw,227px);left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:20px;font-family:var(--font-secondary);font-weight:600;color:#fff;text-transform:uppercase;white-space:nowrap;z-index:301;pointer-events:none;transition:opacity 0.3s ease;">
+    <span style="font-size:clamp(18px,1.25vw,24px);">(</span>
+    <span style="font-size:clamp(14px,1.04vw,20px);letter-spacing:0.05em;">Loading</span>
+    <span style="font-size:clamp(18px,1.25vw,24px);">)</span>
+  </div>
+
+  <!-- Séquence PNG animée -->
+  <div class="loader-overlay__animation" id="loader-animation" style="position:fixed;bottom:35px;left:50%;transform:translateX(-50%);z-index:301;transition:opacity 0.3s ease;pointer-events:none;">
+    <canvas id="loader-canvas" width="225" height="75" aria-hidden="true" style="display:block;width:225px;height:75px;"></canvas>
+  </div>
 
   <!-- ======================================================
     HEADER — Fixed sur toute la page
@@ -154,8 +189,8 @@
       <!-- Story + Title + Dates — wrapper flex column -->
       <div class="hero__center">
 
-        <!-- Story subtitle -->
-        <div class="hero__story">
+        <!-- Story subtitle — masquée pendant le loader, révélée après -->
+        <div class="hero__story" id="hero-story">
           <span class="hero__diamond"></span>
           <p class="hero__story-text">The story of<br class="hero__story-br"> the King of Pop</p>
           <span class="hero__diamond"></span>
@@ -2579,18 +2614,20 @@
       if (!overlay || !menuBtn) return;
 
       function openMenu() {
+        /* overflow:hidden sur <html> bloque le scroll sans changer scrollY
+           ni casser les éléments position:sticky (contrairement à body:fixed). */
+        document.documentElement.style.overflow = 'hidden';
         overlay.classList.add('is-open');
         menuBtn.classList.add('is-active');
         overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
         if (header) header.classList.add('site-header--menu-open');
       }
 
       function closeMenu() {
+        document.documentElement.style.overflow = '';
         overlay.classList.remove('is-open');
         menuBtn.classList.remove('is-active');
         overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
         if (header) header.classList.remove('site-header--menu-open');
       }
 
@@ -2853,6 +2890,169 @@
 
       window.addEventListener('load', function () { currentStep = 0; tick(); });
     })();
+  </script>
+
+  <!-- ======================================================
+    LOADER — Animation + séquence de révélation
+  ======================================================= -->
+  <script>
+  (function () {
+
+    /* ── Éléments ───────────────────────────────────────── */
+    var bg         = document.getElementById('loader-bg');
+    var group      = document.getElementById('loader-group');
+    var story      = document.getElementById('loader-story');
+    var counter    = document.getElementById('loader-counter');
+    var label      = document.getElementById('loader-label');
+    var animation  = document.getElementById('loader-animation');
+    var menuSpans  = Array.from(document.querySelectorAll('.site-header__menu span'));
+
+    /* Les spans du burger sont masqués via CSS body.is-loading — pas besoin de JS ici */
+
+    /* ── PNG animation (276 frames) ─────────────────────── */
+    var canvas     = document.getElementById('loader-canvas');
+    var ctx        = canvas.getContext('2d');
+    var frames     = [];
+    var frameIdx   = 0;
+    var frameTimer = null;
+    var TOTAL_FRAMES = 276;
+
+    function pad(n) { return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n; }
+
+    frameTimer = setInterval(function () {
+      if (frames[frameIdx] && frames[frameIdx].complete) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(frames[frameIdx], 0, 0);
+      }
+      frameIdx = (frameIdx + 1) % TOTAL_FRAMES;
+    }, 1000 / 24);
+
+    for (var fi = 0; fi < TOTAL_FRAMES; fi++) {
+      (function (i) {
+        var img = new Image();
+        img.src = 'images/loader/LoadeBoucle-Claude' + pad(i) + '.png';
+        frames[i] = img;
+      })(fi);
+    }
+
+    /* ── Compteur : progression réelle + animation sur MIN_MS ── */
+    var MIN_MS     = 1000;
+    var startTs    = Date.now();
+    var pageLoaded = false;
+    var revealDone = false;
+
+    var allImgs = Array.from(document.querySelectorAll('img'));
+    var total   = allImgs.length || 1;
+    var loaded  = 0;
+
+    /* Anime le compteur de 0 à 99 :
+       - si les images sont lentes  : progression réelle plafonne le temps
+       - si les images sont rapides : la durée MIN_MS pilote l'animation  */
+    function rafCounter() {
+      if (revealDone) return;
+      var elapsed  = Date.now() - startTs;
+      var timePct  = Math.min(elapsed / MIN_MS, 1);       /* 0→1 sur MIN_MS */
+      var loadPct  = Math.min(loaded / total, 1);         /* 0→1 selon le chargement */
+      var pct      = Math.min(Math.floor(Math.min(timePct, loadPct) * 99), 99);
+      counter.textContent = pct < 10 ? '0' + pct : '' + pct;
+      requestAnimationFrame(rafCounter);
+    }
+    requestAnimationFrame(rafCounter);
+
+    function onImageLoaded() {
+      loaded = Math.min(loaded + 1, total);
+      checkReady();
+    }
+
+    allImgs.forEach(function (img) {
+      if (img.complete && img.naturalWidth > 0) { onImageLoaded(); }
+      else {
+        img.addEventListener('load',  onImageLoaded);
+        img.addEventListener('error', onImageLoaded);
+      }
+    });
+
+    /* Gère aussi le cas où window.load est déjà déclenché (cache) */
+    if (document.readyState === 'complete') {
+      pageLoaded = true;
+      loaded = total;
+      checkReady();
+    } else {
+      window.addEventListener('load', function () {
+        pageLoaded = true;
+        loaded = total;
+        checkReady();
+      });
+    }
+
+    function checkReady() {
+      if (revealDone) return;
+      if (!pageLoaded) return;
+      var elapsed = Date.now() - startTs;
+      if (elapsed >= MIN_MS) {
+        revealDone = true;
+        startReveal();
+      } else {
+        setTimeout(function () {
+          if (!revealDone) { revealDone = true; startReveal(); }
+        }, MIN_MS - elapsed);
+      }
+    }
+
+    /* ── Séquence de révélation ─────────────────────────── */
+    function startReveal() {
+      counter.textContent = '99';
+
+      /* 1. Fade out counter + story + label + animation (500ms) */
+      counter.style.transition = 'opacity 0.5s ease';
+      counter.style.opacity    = '0';
+      story.style.transition   = 'opacity 0.5s ease';
+      story.style.opacity      = '0';
+      label.style.transition   = 'opacity 0.5s ease';
+      label.style.opacity      = '0';
+      animation.style.transition = 'opacity 0.5s ease';
+      animation.style.opacity  = '0';
+
+      setTimeout(function () {
+        clearInterval(frameTimer);
+
+        /* 2. Fade du fond noir + header en synchro (1s) */
+        bg.style.transition = 'opacity 1s ease';
+        bg.style.opacity    = '0';
+
+        menuSpans.forEach(function (span) {
+          span.style.transition = 'none';
+          span.style.transform  = 'scaleX(0)';
+          span.style.opacity    = '0';
+        });
+        document.body.classList.remove('is-loading');
+
+        /* 3. Après 1000ms (bg fade terminé) : burger staggeré */
+        setTimeout(function () {
+
+          menuSpans.forEach(function (span, i) {
+            setTimeout(function () {
+              span.style.transition = 'transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.9s ease';
+              span.style.transform  = '';
+              span.style.opacity    = '';
+            }, i * 100);
+          });
+
+          window.dispatchEvent(new Event('scroll'));
+
+          setTimeout(function () {
+            if (bg.parentNode)        bg.parentNode.removeChild(bg);
+            if (group.parentNode)     group.parentNode.removeChild(group);
+            if (label.parentNode)     label.parentNode.removeChild(label);
+            if (animation.parentNode) animation.parentNode.removeChild(animation);
+          }, 100);
+
+        }, 1000);
+
+      }, 500);
+    }
+
+  })();
   </script>
 
 </body>

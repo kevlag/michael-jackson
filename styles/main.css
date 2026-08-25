@@ -19,6 +19,7 @@
 
 /* 4. Components — ajoutés au fur et à mesure */
 /* @import './components/_button.css'; */
+@import './components/_loader.css';
 @import './components/_header.css';
 @import './components/_nav-overlay.css';
 
