@@ -17,34 +17,36 @@
     LOADER OVERLAY — Écran de chargement
   ======================================================= -->
 
-  <!-- Fond noir -->
-  <div class="loader-overlay__bg" id="loader-bg" style="position:fixed;inset:0;z-index:300;background:#000;transition:opacity 0.6s ease;pointer-events:none;"></div>
+  <!-- Fond noir (seul élément fixed — contient tous les éléments du loader) -->
+  <div class="loader-overlay__bg" id="loader-bg">
 
-  <!-- Groupe centré : story + counter -->
-  <div class="loader-overlay__group" id="loader-group" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;z-index:301;pointer-events:none;">
+    <!-- Groupe centré : story + counter -->
+    <div class="loader-overlay__group" id="loader-group">
 
-    <!-- Story tagline (copie du hero__story, démarre en blanc) -->
-    <div class="hero__story loader-overlay__story" id="loader-story" style="color:#fff;margin-bottom:10px;">
-      <span class="hero__diamond" id="loader-diamond-l" style="background-color:#fff;"></span>
-      <p class="hero__story-text" id="loader-story-text" style="color:#fff;">The story of<br class="hero__story-br"> the King of Pop</p>
-      <span class="hero__diamond" id="loader-diamond-r" style="background-color:#fff;"></span>
+      <!-- Story tagline (copie du hero__story, démarre en blanc) -->
+      <div class="hero__story loader-overlay__story" id="loader-story">
+        <span class="hero__diamond" id="loader-diamond-l"></span>
+        <p class="hero__story-text" id="loader-story-text">The story of<br class="hero__story-br"> the King of Pop</p>
+        <span class="hero__diamond" id="loader-diamond-r"></span>
+      </div>
+
+      <!-- Compteur 00 → 99 -->
+      <p class="loader-overlay__counter" id="loader-counter">00</p>
+
     </div>
 
-    <!-- Compteur 00 → 99 -->
-    <p class="loader-overlay__counter" id="loader-counter" style="margin:0;font-family:var(--font-primary);font-size:clamp(160px,31.25vw,600px);font-weight:400;line-height:0.9;color:#fff;white-space:nowrap;user-select:none;">00</p>
+    <!-- ( Loading ) -->
+    <div class="loader-overlay__label" id="loader-label">
+      <span class="loader-overlay__label-paren">(</span>
+      <span class="loader-overlay__label-text">Loading</span>
+      <span class="loader-overlay__label-paren">)</span>
+    </div>
 
-  </div>
+    <!-- Séquence PNG animée -->
+    <div class="loader-overlay__animation" id="loader-animation">
+      <canvas id="loader-canvas" width="225" height="75" aria-hidden="true"></canvas>
+    </div>
 
-  <!-- ( Loading ) — positionné séparément -->
-  <div class="loader-overlay__label" id="loader-label" style="position:fixed;bottom:clamp(120px,20vh,220px);left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:20px;font-family:var(--font-secondary);font-weight:600;color:#fff;text-transform:uppercase;white-space:nowrap;z-index:301;pointer-events:none;transition:opacity 0.5s ease;">
-    <span style="font-size:clamp(18px,1.25vw,24px);">(</span>
-    <span style="font-size:clamp(14px,1.04vw,20px);letter-spacing:0.05em;">Loading</span>
-    <span style="font-size:clamp(18px,1.25vw,24px);">)</span>
-  </div>
-
-  <!-- Séquence PNG animée -->
-  <div class="loader-overlay__animation" id="loader-animation" style="position:fixed;bottom:35px;left:50%;transform:translateX(-50%);z-index:301;transition:opacity 0.3s ease;pointer-events:none;">
-    <canvas id="loader-canvas" width="225" height="75" aria-hidden="true" style="display:block;width:225px;height:75px;"></canvas>
   </div>
 
   <!-- ======================================================
@@ -2907,29 +2909,6 @@
     var animation  = document.getElementById('loader-animation');
     var menuSpans  = Array.from(document.querySelectorAll('.site-header__menu span'));
 
-    /* Sur mobile : positionner story et counter indépendamment via le viewport.
-       Le groupe a transform en inline style → il devient containing block pour
-       les enfants position:fixed. On le neutralise directement en JS. */
-    if (window.innerWidth <= 768) {
-      group.style.top       = '0';
-      group.style.left      = '0';
-      group.style.transform = 'none';
-
-      story.style.position  = 'fixed';
-      story.style.top       = '50%';
-      story.style.left      = '50%';
-      story.style.transform = 'translate(-50%, -50%)';
-      story.style.margin    = '0';
-      story.style.width     = '90vw';
-      story.style.whiteSpace = 'normal';
-      story.style.zIndex    = '302';
-
-      counter.style.position  = 'fixed';
-      counter.style.top       = 'calc(50% + 60px)';
-      counter.style.left      = '50%';
-      counter.style.transform = 'translateX(-50%)';
-    }
-
     /* ── PNG animation (276 frames) ─────────────────────── */
     var canvas     = document.getElementById('loader-canvas');
     var ctx        = canvas.getContext('2d');
@@ -2961,7 +2940,7 @@
     }
 
     /* ── Compteur : progression réelle + animation sur MIN_MS ── */
-    var MIN_MS     = 999999;
+    var MIN_MS     = 1000;
     var startTs    = Date.now();
     var pageLoaded = false;
     var revealDone = false;

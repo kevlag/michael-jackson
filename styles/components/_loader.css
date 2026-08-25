@@ -1,9 +1,10 @@
 /* ============================================================
    LOADER OVERLAY — Écran de chargement
-   Couvre la page au-dessus du contenu, sous le site-header (z-index 501)
+   Seul loader-overlay__bg est position:fixed.
+   Tous les enfants utilisent position:absolute dans ce conteneur plein écran.
    ============================================================ */
 
-/* ── Fond noir ───────────────────────────────────────────── */
+/* ── Fond noir (le seul fixed) ───────────────────────────── */
 
 .loader-overlay__bg {
   position: fixed;
@@ -19,24 +20,21 @@
   pointer-events: none;
 }
 
-/* ── Groupe centré : hero__story + counter + label + anim ─ */
+/* ── Groupe centré : hero__story + counter ───────────────── */
 
 .loader-overlay__group {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 301;
-  pointer-events: none;
 }
 
-/* ── Story (même styles que hero__story mais couleurs blanc) */
+/* ── Story (couleurs blanc, overrides hero__story) ───────── */
 
 .loader-overlay__story {
-  /* couleur white — overrides hero__story black */
   color: #fff !important;
   margin-bottom: 10px;
   transition: color 0.4s ease;
@@ -50,15 +48,6 @@
 .loader-overlay__story .hero__story-text {
   color: #fff !important;
   transition: color 0.4s ease;
-}
-
-/* Quand story devient noire (pendant la révélation) */
-.loader-overlay__story.is-dark .hero__diamond {
-  background-color: #000 !important;
-}
-
-.loader-overlay__story.is-dark .hero__story-text {
-  color: #000 !important;
 }
 
 /* ── Counter "00" → "99" ─────────────────────────────────── */
@@ -79,6 +68,10 @@
 /* ── ( Loading ) ─────────────────────────────────────────── */
 
 .loader-overlay__label {
+  position: absolute;
+  bottom: clamp(120px, 20vh, 220px);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -88,7 +81,6 @@
   color: #fff;
   text-transform: uppercase;
   white-space: nowrap;
-  margin-top: clamp(80px, 10vw, 160px);
   transition: opacity 0.3s ease;
 }
 
@@ -104,11 +96,10 @@
 /* ── Animation PNG ───────────────────────────────────────── */
 
 .loader-overlay__animation {
-  position: fixed;
+  position: absolute;
   bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 301;
   transition: opacity 0.3s ease;
 }
 
@@ -125,14 +116,6 @@
 .loader-overlay__animation.is-hidden {
   opacity: 0;
   pointer-events: none;
-}
-
-/* ── Story en mode fixed lors de l'animation de sortie ───── */
-
-.loader-overlay__story.is-animating {
-  position: fixed !important;
-  transition: top 0.6s var(--ease-expo-out), left 0.6s var(--ease-expo-out), color 0.4s ease;
-  margin: 0;
 }
 
 /* ── Header forcé blanc pendant le loading ───────────────── */
@@ -161,47 +144,14 @@ body.is-loading .site-header__chapter-title {
 
   .loader-overlay__label {
     gap: 14px;
-    margin-top: clamp(60px, 15vw, 100px);
+    bottom: clamp(40px, 10vh, 80px);
   }
 
   .loader-overlay__label-paren { font-size: 18px; }
   .loader-overlay__label-text  { font-size: 16px; }
 
-  .loader-overlay__animation {
-    bottom: 30px;
-  }
-
   /* Cache l'animation PNG sur mobile */
   .loader-overlay__animation {
     display: none;
-  }
-
-  /* Le groupe a transform: translate(-50%,-50%) en inline qui empêche les enfants
-     position:fixed de se positionner par rapport au viewport — on le neutralise */
-  .loader-overlay__group {
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-  }
-
-  /* Sur mobile : story et counter sont positionnés indépendamment
-     par rapport au viewport (maintenant que le groupe n'a plus de transform) */
-  .loader-overlay__story {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
-    width: 90vw;
-    white-space: normal;
-    z-index: 302;
-  }
-
-  /* Counter positionné sous la story (story ~80px, donc +60px depuis le centre) */
-  .loader-overlay__counter {
-    position: fixed !important;
-    top: calc(50% + 60px) !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
   }
 }
