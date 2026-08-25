@@ -176,13 +176,6 @@ body.is-loading .site-header__chapter-title {
     display: none;
   }
 
-  /* Sur mobile, on repositionne le groupe pour que la story (pas le groupe entier)
-     soit centrée à 50vh. La story fait ~80px (2 lignes), donc top = 50vh - 40px. */
-  .loader-overlay__group {
-    top: calc(50vh - 40px) !important;
-    transform: translateX(-50%) !important;
-  }
-
   /* Story : autorise le retour à la ligne */
   .loader-overlay__story {
     width: 90vw;
