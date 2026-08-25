@@ -2901,8 +2901,6 @@
   (function () {
 
     /* ── Éléments ───────────────────────────────────────── */
-    document.documentElement.classList.add('is-loading');
-
     function preventTouchScroll(e) { e.preventDefault(); }
     document.addEventListener('touchmove', preventTouchScroll, { passive: false });
 
@@ -3035,7 +3033,6 @@
           span.style.opacity    = '0';
         });
         document.body.classList.remove('is-loading');
-        document.documentElement.classList.remove('is-loading');
         document.removeEventListener('touchmove', preventTouchScroll);
 
         /* 3. Après 1000ms (bg fade terminé) : burger staggeré */

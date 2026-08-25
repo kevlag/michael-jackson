@@ -120,8 +120,7 @@
 
 /* ── Bloque le scroll pendant le loading ────────────────── */
 
-body.is-loading,
-html.is-loading {
+body.is-loading {
   overflow: hidden;
 }
 
