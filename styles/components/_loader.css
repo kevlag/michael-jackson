@@ -123,7 +123,6 @@
 body.is-loading,
 html.is-loading {
   overflow: hidden;
-  touch-action: none;
 }
 
 /* ── Header forcé blanc pendant le loading ───────────────── */

@@ -2903,6 +2903,9 @@
     /* ── Éléments ───────────────────────────────────────── */
     document.documentElement.classList.add('is-loading');
 
+    function preventTouchScroll(e) { e.preventDefault(); }
+    document.addEventListener('touchmove', preventTouchScroll, { passive: false });
+
     var bg         = document.getElementById('loader-bg');
     var group      = document.getElementById('loader-group');
     var story      = document.getElementById('loader-story');
@@ -3033,6 +3036,7 @@
         });
         document.body.classList.remove('is-loading');
         document.documentElement.classList.remove('is-loading');
+        document.removeEventListener('touchmove', preventTouchScroll);
 
         /* 3. Après 1000ms (bg fade terminé) : burger staggeré */
         setTimeout(function () {
