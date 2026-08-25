@@ -155,14 +155,6 @@ body.is-loading .site-header__chapter-title {
 /* ── Responsive mobile ───────────────────────────────────── */
 
 @media (max-width: 768px) {
-  /* Loader story : pas de retour à la ligne — pas de contrainte de largeur ici */
-  .loader-overlay__story {
-    white-space: nowrap !important;
-  }
-  .loader-overlay__story .hero__story-br {
-    display: none !important;
-  }
-
   .loader-overlay__counter {
     font-size: clamp(140px, 81vw, 320px);
   }
