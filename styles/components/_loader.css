@@ -176,14 +176,15 @@ body.is-loading .site-header__chapter-title {
     display: none;
   }
 
-  /* Le groupe doit être au moins assez large pour que la story tienne sur 2 lignes */
-  .loader-overlay__group {
-    width: 90vw;
-  }
-
-  /* Story : autorise le retour à la ligne, prend toute la largeur du groupe */
+  /* Story extraite du groupe sur mobile : centrée indépendamment */
   .loader-overlay__story {
-    width: 100%;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    width: 90vw;
     white-space: normal;
+    text-align: center;
   }
 }
