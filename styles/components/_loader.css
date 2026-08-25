@@ -158,7 +158,7 @@ body.is-loading .site-header__chapter-title {
 
   .loader-overlay__label {
     gap: 14px;
-    bottom: clamp(40px, 10vh, 80px);
+    bottom: 20px;
   }
 
   .loader-overlay__label-paren { font-size: 18px; }
@@ -167,5 +167,11 @@ body.is-loading .site-header__chapter-title {
   /* Cache l'animation PNG sur mobile */
   .loader-overlay__animation {
     display: none;
+  }
+}
+
+@media (min-width: 441px) and (max-width: 1024px) {
+  .loader-overlay__label {
+    bottom: 40px;
   }
 }
