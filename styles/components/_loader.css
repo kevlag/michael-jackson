@@ -176,9 +176,14 @@ body.is-loading .site-header__chapter-title {
     display: none;
   }
 
-  /* Contraint la story pour qu'elle passe sur 2 lignes (pas 3) */
+  /* Le groupe doit être au moins assez large pour que la story tienne sur 2 lignes */
+  .loader-overlay__group {
+    width: 90vw;
+  }
+
+  /* Story : autorise le retour à la ligne, prend toute la largeur du groupe */
   .loader-overlay__story {
-    max-width: 90vw;
+    width: 100%;
     white-space: normal;
   }
 }
