@@ -176,8 +176,16 @@ body.is-loading .site-header__chapter-title {
     display: none;
   }
 
+  /* Le groupe a transform: translate(-50%,-50%) en inline qui empêche les enfants
+     position:fixed de se positionner par rapport au viewport — on le neutralise */
+  .loader-overlay__group {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
   /* Sur mobile : story et counter sont positionnés indépendamment
-     pour que la story soit exactement centrée à 50vh */
+     par rapport au viewport (maintenant que le groupe n'a plus de transform) */
   .loader-overlay__story {
     position: fixed !important;
     top: 50% !important;
