@@ -176,9 +176,24 @@ body.is-loading .site-header__chapter-title {
     display: none;
   }
 
-  /* Story : autorise le retour à la ligne */
+  /* Sur mobile : story et counter sont positionnés indépendamment
+     pour que la story soit exactement centrée à 50vh */
   .loader-overlay__story {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
     width: 90vw;
     white-space: normal;
+    z-index: 302;
+  }
+
+  /* Counter positionné sous la story (story ~80px, donc +60px depuis le centre) */
+  .loader-overlay__counter {
+    position: fixed !important;
+    top: calc(50% + 60px) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 }
