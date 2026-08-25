@@ -1789,6 +1789,7 @@
     (function () {
       if (window.innerWidth <= 1024) return;
       var photo = document.querySelector('.c8__photo');
+      var col   = document.querySelector('.c8__col');
       if (!photo) return;
       var SPEED     = 0.35;
       var OFFSET    = 140;
@@ -1801,7 +1802,16 @@
         /* soustrait le transform actuel → position naturelle sans boucle de feedback */
         var naturalTop = rect.top - currentTY;
         var center     = naturalTop + rect.height / 2 - vh / 2;
-        currentTY      = -center * SPEED + OFFSET;
+        var targetTY   = -center * SPEED + OFFSET;
+
+        /* Clamp : le haut de la photo ne doit pas remonter au-dessus du haut de c8__col */
+        if (col) {
+          var colNaturalTop = col.getBoundingClientRect().top;
+          var minTY = colNaturalTop - naturalTop;
+          targetTY = Math.max(targetTY, minTY);
+        }
+
+        currentTY = targetTY;
         photo.style.transform = 'translateY(' + currentTY + 'px) translateZ(0)';
         rafId = null;
       }
