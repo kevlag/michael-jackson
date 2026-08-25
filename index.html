@@ -2913,14 +2913,9 @@
     var canvas     = document.getElementById('loader-canvas');
     var ctx        = canvas.getContext('2d');
 
-    /* Ajuste la résolution du buffer canvas selon le viewport */
-    if (window.innerWidth <= 768) {
-      canvas.width  = 112;
-      canvas.height = 37;
-    } else {
-      canvas.width  = 225;
-      canvas.height = 75;
-    }
+    /* Buffer canvas à résolution native — CSS gère l'affichage */
+    canvas.width  = 225;
+    canvas.height = 75;
     var frames     = [];
     var frameIdx   = 0;
     var frameTimer = null;

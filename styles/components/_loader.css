@@ -172,7 +172,13 @@ body.is-loading .site-header__chapter-title {
   }
 
   #loader-canvas {
-    width: 112px;
-    height: 37px;
+    width: 112.5px;
+    height: 37.5px;
+  }
+
+  /* Contraint la story pour qu'elle puisse passer sur 2 lignes */
+  .loader-overlay__story {
+    max-width: 80vw;
+    white-space: normal;
   }
 }
