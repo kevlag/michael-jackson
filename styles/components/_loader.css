@@ -171,14 +171,14 @@ body.is-loading .site-header__chapter-title {
     bottom: 30px;
   }
 
-  #loader-canvas {
-    width: 112.5px;
-    height: 37.5px;
+  /* Cache l'animation PNG sur mobile */
+  .loader-overlay__animation {
+    display: none;
   }
 
-  /* Contraint la story pour qu'elle puisse passer sur 2 lignes */
+  /* Contraint la story pour qu'elle passe sur 2 lignes (pas 3) */
   .loader-overlay__story {
-    max-width: 80vw;
+    max-width: 90vw;
     white-space: normal;
   }
 }
