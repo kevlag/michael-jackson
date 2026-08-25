@@ -118,6 +118,12 @@
   pointer-events: none;
 }
 
+/* ── Bloque le scroll pendant le loading ────────────────── */
+
+body.is-loading {
+  overflow: hidden;
+}
+
 /* ── Header forcé blanc pendant le loading ───────────────── */
 
 body.is-loading .site-header__mj-logo img,
