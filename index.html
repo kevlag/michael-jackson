@@ -1551,10 +1551,17 @@
        page car certains scripts sont initialisés une seule fois par breakpoint. */
     (function () {
       var wasMobile = window.innerWidth <= 1024;
+      var lastWidth = window.innerWidth;
       var resizeTimer = null;
 
       window.addEventListener('resize', function () {
         var isMobile = window.innerWidth <= 1024;
+        var newWidth = window.innerWidth;
+
+        /* Ignore les resize purement verticaux (barre d'adresse mobile qui
+           se rétracte) — seul un changement de largeur compte. */
+        if (newWidth === lastWidth) return;
+        lastWidth = newWidth;
 
         /* Crossing breakpoint → reload complet */
         if (isMobile !== wasMobile) {
