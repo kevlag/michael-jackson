@@ -138,8 +138,15 @@ body.is-loading .site-header__chapter-title {
 /* ── Responsive mobile ───────────────────────────────────── */
 
 @media (max-width: 768px) {
+  /* Largeur fixe pour éviter que le groupe rétrécisse selon les chiffres du counter */
+  .loader-overlay__group {
+    width: 90vw;
+  }
+
   .loader-overlay__counter {
     font-size: clamp(140px, 81vw, 320px);
+    width: 100%;
+    text-align: center;
   }
 
   .loader-overlay__label {
