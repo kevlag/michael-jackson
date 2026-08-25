@@ -12,7 +12,7 @@
   z-index: 300;
   background: #000;
   transition: opacity 0.6s ease;
-  pointer-events: none;
+  pointer-events: all;
 }
 
 .loader-overlay__bg.is-hidden {
@@ -116,12 +116,6 @@
 .loader-overlay__animation.is-hidden {
   opacity: 0;
   pointer-events: none;
-}
-
-/* ── Bloque le scroll pendant le loading ────────────────── */
-
-body.is-loading {
-  overflow: hidden;
 }
 
 /* ── Header forcé blanc pendant le loading ───────────────── */
