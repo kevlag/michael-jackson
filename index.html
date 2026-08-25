@@ -2907,7 +2907,28 @@
     var animation  = document.getElementById('loader-animation');
     var menuSpans  = Array.from(document.querySelectorAll('.site-header__menu span'));
 
-    /* Les spans du burger sont masqués via CSS body.is-loading — pas besoin de JS ici */
+    /* Sur mobile : positionner story et counter indépendamment via le viewport.
+       Le groupe a transform en inline style → il devient containing block pour
+       les enfants position:fixed. On le neutralise directement en JS. */
+    if (window.innerWidth <= 768) {
+      group.style.top       = '0';
+      group.style.left      = '0';
+      group.style.transform = 'none';
+
+      story.style.position  = 'fixed';
+      story.style.top       = '50%';
+      story.style.left      = '50%';
+      story.style.transform = 'translate(-50%, -50%)';
+      story.style.margin    = '0';
+      story.style.width     = '90vw';
+      story.style.whiteSpace = 'normal';
+      story.style.zIndex    = '302';
+
+      counter.style.position  = 'fixed';
+      counter.style.top       = 'calc(50% + 60px)';
+      counter.style.left      = '50%';
+      counter.style.transform = 'translateX(-50%)';
+    }
 
     /* ── PNG animation (276 frames) ─────────────────────── */
     var canvas     = document.getElementById('loader-canvas');
