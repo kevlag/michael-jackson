@@ -1518,11 +1518,13 @@
       }
 
       function hasMediaBelow(x, y) {
-        /* Vérifie si un img/video visible figure parmi tous les éléments à ce point */
+        /* Vérifie si un img/video visible (hors header) figure parmi les éléments à ce point */
         var els = document.elementsFromPoint(x, y);
         for (var i = 0; i < els.length; i++) {
-          var tag = els[i].tagName;
-          if ((tag === 'IMG' || tag === 'VIDEO') && isVisible(els[i])) return true;
+          var el = els[i];
+          if (header.contains(el)) continue;
+          var tag = el.tagName;
+          if ((tag === 'IMG' || tag === 'VIDEO') && isVisible(el)) return true;
         }
         return false;
       }
