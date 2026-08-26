@@ -1501,20 +1501,26 @@
         return document.body;
       }
 
+      var mjLogo    = header.querySelector('.site-header__mj-logo');
+      var kopLogo   = header.querySelector('.site-header__kop-logo');
+      var menuEl    = header.querySelector('.site-header__menu');
+      var chapterEl = header.querySelector('.site-header__chapter');
+
+      function sampleAt(el) {
+        if (!el) return;
+        var rect = el.getBoundingClientRect();
+        var cx   = rect.left + rect.width  / 2;
+        var cy   = rect.top  + rect.height / 2;
+        var behind = topElementBehindHeader(cx, cy);
+        var rgb    = effectiveBg(behind);
+        el.classList.toggle('is-on-light', luminance(rgb[0], rgb[1], rgb[2]) > 0.179);
+      }
+
       function update() {
-        var y  = 30;
-        /* 3 points horizontaux : logo gauche, centre, logo droit */
-        var xs = [window.innerWidth * 0.07, window.innerWidth * 0.5, window.innerWidth * 0.93];
-        var lightVotes = 0;
-
-        xs.forEach(function (x) {
-          var el  = topElementBehindHeader(x, y);
-          var rgb = effectiveBg(el);
-          if (luminance(rgb[0], rgb[1], rgb[2]) > 0.179) lightVotes++;
-        });
-
-        /* Majorité des 3 points */
-        header.classList.toggle('site-header--on-light', lightVotes >= 2);
+        sampleAt(mjLogo);
+        sampleAt(kopLogo);
+        sampleAt(menuEl);
+        sampleAt(chapterEl);
       }
 
       window.addEventListener('scroll', function () {

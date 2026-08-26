@@ -139,19 +139,19 @@
   transition: color 0.3s ease;
 }
 
-/* ── Header sur fond clair : bascule en noir ─────────────── */
+/* ── Par élément : bascule noir si fond clair derrière lui ── */
 
-.site-header--on-light .site-header__menu span {
-  background-color: #000;
-}
-
-.site-header--on-light .site-header__mj-logo img,
-.site-header--on-light .site-header__kop-logo img {
+.site-header__mj-logo.is-on-light img,
+.site-header__kop-logo.is-on-light img {
   filter: invert(0);
 }
 
-.site-header--on-light .site-header__chapter-num,
-.site-header--on-light .site-header__chapter-title {
+.site-header__menu.is-on-light span {
+  background-color: #000;
+}
+
+.site-header__chapter.is-on-light .site-header__chapter-num,
+.site-header__chapter.is-on-light .site-header__chapter-title {
   color: #000;
 }
 
