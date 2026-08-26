@@ -1506,14 +1506,12 @@
       var menuEl    = header.querySelector('.site-header__menu');
       var chapterEl = header.querySelector('.site-header__chapter');
 
-      function isMediaEl(el) {
-        /* Remonte jusqu'à trouver un img/video ou un conteneur qui en wrappe un */
-        var cur = el;
-        while (cur && cur !== document.documentElement) {
-          var tag = cur.tagName;
+      function hasMediaBelow(x, y) {
+        /* Vérifie si un img/video figure parmi tous les éléments à ce point */
+        var els = document.elementsFromPoint(x, y);
+        for (var i = 0; i < els.length; i++) {
+          var tag = els[i].tagName;
           if (tag === 'IMG' || tag === 'VIDEO' || tag === 'CANVAS') return true;
-          if (tag === 'FIGURE' && cur.querySelector('img, video')) return true;
-          cur = cur.parentElement;
         }
         return false;
       }
@@ -1523,13 +1521,13 @@
         var rect   = el.getBoundingClientRect();
         var cx     = rect.left + rect.width  / 2;
         var cy     = rect.top  + rect.height / 2;
-        var behind = topElementBehindHeader(cx, cy);
         var onLight;
-        if (isMediaEl(behind)) {
+        if (hasMediaBelow(cx, cy)) {
           onLight = true;
         } else {
-          var rgb = effectiveBg(behind);
-          onLight = luminance(rgb[0], rgb[1], rgb[2]) > 0.179;
+          var behind = topElementBehindHeader(cx, cy);
+          var rgb    = effectiveBg(behind);
+          onLight    = luminance(rgb[0], rgb[1], rgb[2]) > 0.179;
         }
         el.classList.toggle('is-on-light', onLight);
       }
