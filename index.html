@@ -2925,6 +2925,10 @@
 
     /* ── Éléments ───────────────────────────────────────── */
     var bg         = document.getElementById('loader-bg');
+
+    /* Bloque le scroll natif iOS sur le bg — pointer-events:none au reveal
+       empêche automatiquement ce listener de se déclencher après la fin du loader */
+    bg.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
     var group      = document.getElementById('loader-group');
     var story      = document.getElementById('loader-story');
     var counter    = document.getElementById('loader-counter');
