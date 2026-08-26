@@ -3058,6 +3058,7 @@
           span.style.opacity    = '0';
         });
         document.body.classList.remove('is-loading');
+        window.dispatchEvent(new Event('scroll'));
 
         /* 3. Après 1000ms (bg fade terminé) : burger staggeré */
         setTimeout(function () {
