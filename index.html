@@ -1536,7 +1536,7 @@
         var cy     = rect.top  + rect.height / 2;
         var onLight;
         if (hasMediaBelow(cx, cy)) {
-          onLight = true;
+          onLight = false;
         } else {
           var behind = topElementBehindHeader(cx, cy);
           var rgb    = effectiveBg(behind);
