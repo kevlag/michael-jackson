@@ -1506,12 +1506,23 @@
       var menuEl    = header.querySelector('.site-header__menu');
       var chapterEl = header.querySelector('.site-header__chapter');
 
+      function isVisible(el) {
+        /* Vérifie que l'élément et ses ancêtres ne sont pas cachés */
+        var cur = el;
+        while (cur && cur !== document.documentElement) {
+          var cs = getComputedStyle(cur);
+          if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) return false;
+          cur = cur.parentElement;
+        }
+        return true;
+      }
+
       function hasMediaBelow(x, y) {
-        /* Vérifie si un img/video figure parmi tous les éléments à ce point */
+        /* Vérifie si un img/video visible figure parmi tous les éléments à ce point */
         var els = document.elementsFromPoint(x, y);
         for (var i = 0; i < els.length; i++) {
           var tag = els[i].tagName;
-          if (tag === 'IMG' || tag === 'VIDEO' || tag === 'CANVAS') return true;
+          if ((tag === 'IMG' || tag === 'VIDEO') && isVisible(els[i])) return true;
         }
         return false;
       }
