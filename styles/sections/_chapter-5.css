@@ -176,13 +176,9 @@
 
   .c5__body {
     font-size: 16px;
-    text-align: left;
-    margin-bottom: 20px;
-  }
-
-  .c5__col-left .c5__body {
     text-align: justify;
     text-align-last: left;
+    margin-bottom: 20px;
   }
 
   .c5__small-images {
