@@ -37,6 +37,19 @@
 @import './sections/_chapter-10.css';
 @import './sections/_chapter-11.css';
 
+/* ── Fade-in figures mobile (scroll-driven désactivé sur mobile) ── */
+
+.img-fade {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.img-fade.img-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Shared chapter styles (dédupliqués) ──────────────────── */
 
 .c3__album-cover img,
