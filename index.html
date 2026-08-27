@@ -2052,7 +2052,7 @@
       /* Fade-in des figures/images sur mobile — les animations scroll-driven
          sont désactivées sur mobile, les images apparaissent sinon d'un coup */
       if (window.innerWidth <= 1024) {
-        var excluded = ['c9__portrait', 'c7b__photo', 'c7__photo'];
+        var excluded = ['c9__portrait', 'c7b__photo', 'c7__photo', 'c10__deco-o'];
         var figures = document.querySelectorAll('section figure, section .c10__image');
         var figObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
