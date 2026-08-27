@@ -2052,6 +2052,7 @@
       /* Fade-in des figures/images sur mobile — les animations scroll-driven
          sont désactivées sur mobile, les images apparaissent sinon d'un coup */
       if (window.innerWidth <= 1024) {
+        var excluded = ['c9__portrait', 'c7b__photo', 'c7__photo'];
         var figures = document.querySelectorAll('section figure, section .c10__image');
         var figObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -2062,6 +2063,7 @@
           });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         figures.forEach(function (el) {
+          if (excluded.some(function (cls) { return el.classList.contains(cls); })) return;
           el.classList.add('img-fade');
           figObserver.observe(el);
         });
