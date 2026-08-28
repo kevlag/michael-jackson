@@ -2671,6 +2671,8 @@
       var header  = document.querySelector('.site-header');
       if (!overlay || !menuBtn) return;
 
+      var chapterWasVisible = false;
+
       function openMenu() {
         /* overflow:hidden sur <html> bloque le scroll sans changer scrollY
            ni casser les éléments position:sticky (contrairement à body:fixed). */
@@ -2679,6 +2681,11 @@
         menuBtn.classList.add('is-active');
         overlay.setAttribute('aria-hidden', 'false');
         if (header) header.classList.add('site-header--menu-open');
+        var chapterEl = header && header.querySelector('.site-header__chapter');
+        if (chapterEl) {
+          chapterWasVisible = chapterEl.classList.contains('is-visible');
+          if (chapterWasVisible) chapterEl.classList.remove('is-visible');
+        }
       }
 
       function closeMenu() {
@@ -2687,6 +2694,8 @@
         menuBtn.classList.remove('is-active');
         overlay.setAttribute('aria-hidden', 'true');
         if (header) header.classList.remove('site-header--menu-open');
+        var chapterEl = header && header.querySelector('.site-header__chapter');
+        if (chapterEl && chapterWasVisible) chapterEl.classList.add('is-visible');
       }
 
       menuBtn.addEventListener('click', function () {
